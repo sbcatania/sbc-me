@@ -100,16 +100,14 @@ export function getStockWeight(
 }
 
 /**
- * Get display weight for a flow (0..1), applying valve multiplier
+ * Get display weight for a flow (0..1)
  */
 export function getFlowWeight(
   flow: Flow,
-  allFlows: Flow[],
-  valvePosition?: number
+  allFlows: Flow[]
 ): number {
-  const effectiveRate = getEffectiveRate(flow, valvePosition);
-  const values = allFlows.map((f) => getEffectiveRate(f, 0.5));
-  return weight(effectiveRate, flow.displayDomain, values);
+  const values = allFlows.map((f) => f.rate);
+  return weight(flow.rate, flow.displayDomain, values);
 }
 
 /**
@@ -128,10 +126,9 @@ export function getStockSize(
  */
 export function getFlowThickness(
   flow: Flow,
-  allFlows: Flow[],
-  valvePosition?: number
+  allFlows: Flow[]
 ): number {
-  const w = getFlowWeight(flow, allFlows, valvePosition);
+  const w = getFlowWeight(flow, allFlows);
   return edgeThickness(w);
 }
 

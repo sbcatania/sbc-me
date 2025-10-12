@@ -59,35 +59,43 @@ export function Canvas() {
     };
   }, [viewTransform, setViewTransform]);
 
-  // Handle zoom
+  // Handle zoom and pan with trackpad gestures
   useEffect(() => {
     const svg = svgRef.current;
     if (!svg) return;
 
     const handleWheel = (e: WheelEvent) => {
-      if (!e.ctrlKey && !e.metaKey) return;
-      
       e.preventDefault();
 
       const rect = svg.getBoundingClientRect();
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
 
-      // Zoom factor
-      const delta = -e.deltaY;
-      const zoomFactor = 1 + delta * 0.001;
-      const newScale = clamp(viewTransform.scale * zoomFactor, 0.5, 3.0);
+      // Detect pinch-to-zoom (ctrlKey is set on Mac trackpad pinch)
+      if (e.ctrlKey) {
+        // Pinch to zoom
+        const delta = -e.deltaY;
+        const zoomFactor = 1 + delta * 0.01; // Smooth zoom
+        const newScale = clamp(viewTransform.scale * zoomFactor, 0.05, 5.0);
 
-      // Zoom toward mouse position
-      const scaleDelta = newScale - viewTransform.scale;
-      const worldX = (mouseX - viewTransform.x) / viewTransform.scale;
-      const worldY = (mouseY - viewTransform.y) / viewTransform.scale;
+        // Zoom toward mouse position
+        const scaleDelta = newScale - viewTransform.scale;
+        const worldX = (mouseX - viewTransform.x) / viewTransform.scale;
+        const worldY = (mouseY - viewTransform.y) / viewTransform.scale;
 
-      setViewTransform({
-        x: viewTransform.x - worldX * scaleDelta,
-        y: viewTransform.y - worldY * scaleDelta,
-        scale: newScale,
-      });
+        setViewTransform({
+          x: viewTransform.x - worldX * scaleDelta,
+          y: viewTransform.y - worldY * scaleDelta,
+          scale: newScale,
+        });
+      } else {
+        // Two-finger pan (no modifier keys)
+        setViewTransform({
+          x: viewTransform.x - e.deltaX,
+          y: viewTransform.y - e.deltaY,
+          scale: viewTransform.scale,
+        });
+      }
     };
 
     svg.addEventListener("wheel", handleWheel, { passive: false });

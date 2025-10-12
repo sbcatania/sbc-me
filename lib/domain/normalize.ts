@@ -1,13 +1,13 @@
 import { Stock, Flow } from "./types";
 import { clamp01, quantile, lerp, easeOutQuad } from "@/lib/util/math";
 
-// Node size constants (px)
-export const NODE_MIN = 54;
-export const NODE_MAX = 110;
+// Node size constants (px) - increased 2-3x for better visibility
+export const NODE_MIN = 140;
+export const NODE_MAX = 320;
 
-// Edge thickness constants (px)
-export const EDGE_MIN = 1.0;
-export const EDGE_MAX = 6.0;
+// Edge thickness constants (px) - wide range for dramatic variation
+export const EDGE_MIN = 0.5;
+export const EDGE_MAX = 20.0;
 
 /**
  * Compute normalized weight (0..1) for a value given a domain
@@ -47,10 +47,13 @@ export function weight(
 }
 
 /**
- * Map a normalized weight to a node size (px)
+ * Map a normalized weight to a node size (px) with more variability
+ * Uses a power curve to emphasize differences
  */
 export function nodeSize(w: number): number {
-  return NODE_MIN + w * (NODE_MAX - NODE_MIN);
+  // Apply power curve for more dramatic size differences
+  const curved = Math.pow(w, 0.7);
+  return NODE_MIN + curved * (NODE_MAX - NODE_MIN);
 }
 
 /**

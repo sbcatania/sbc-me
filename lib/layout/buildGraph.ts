@@ -7,8 +7,7 @@ import { runElkLayout, LayoutResult } from "./elk";
  */
 export async function buildGraph(
   data: SystemData,
-  snapshotIndex: number,
-  valves: Record<string, number>
+  snapshotIndex: number
 ): Promise<LayoutResult> {
   const activeStocks = getActiveStocks(data, snapshotIndex);
   const activeFlows = getActiveFlows(data, snapshotIndex, activeStocks);
@@ -17,21 +16,12 @@ export async function buildGraph(
   // Compute node sizes
   const nodes = activeStocks.map((stock) => {
     const size = getStockSize(stock, activeStocks);
-    
-    // Find which objective this stock belongs to (if any)
-    let group: string | undefined;
-    for (const obj of activeObjectives) {
-      if (obj.stocks.includes(stock.id)) {
-        group = obj.id;
-        break;
-      }
-    }
 
     return {
       id: stock.id,
       width: size,
       height: size * 0.7, // Slightly rectangular
-      group,
+      // No grouping - objectives are just overlays
     };
   });
 

@@ -23,6 +23,26 @@ export function formatValue(value: number, unit: Unit): string {
 }
 
 /**
+ * Format a value with high precision for ticker display
+ */
+export function formatValueDetailed(value: number, unit: Unit): string {
+  const decimals = 6; // Always show 6 decimals for animation visibility
+  
+  switch (unit.format) {
+    case "percent":
+      return `${(value * 100).toFixed(decimals)}%`;
+    
+    case "integer":
+      return value.toFixed(decimals);
+    
+    case "decimal":
+    case "number":
+    default:
+      return value.toFixed(decimals);
+  }
+}
+
+/**
  * Format a metric with confidence interval
  */
 export function formatMetric(key: string, value: number, unit?: Unit, ci?: number): string {

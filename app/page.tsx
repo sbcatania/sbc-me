@@ -3,15 +3,16 @@
 import { Canvas } from "./(components)/Canvas"
 import { Timebar } from "./(components)/Timebar"
 import { ObjectivesChips } from "./(components)/ObjectivesChips"
-import { RightDrawer } from "./(components)/RightDrawer"
-import { CursorOverlay } from "./(components)/CursorOverlay"
-import { useEffect } from "react"
+import { SettingsPanel } from "./(components)/SettingsPanel"
+import { StockModal } from "./(components)/StockModal"
+import { useEffect, useState } from "react"
 import { useStore } from "@/lib/state/store"
 import { loadSystemData } from "@/lib/io/load"
 
 export default function Home() {
   const setSystemData = useStore((state) => state.setSystemData)
   const setSnapshotIndex = useStore((state) => state.setSnapshotIndex)
+  const [settingsOpen, setSettingsOpen] = useState(false)
 
   useEffect(() => {
     // Load data on mount
@@ -33,10 +34,10 @@ export default function Home() {
         </div>
         <div className="flex gap-4 text-sm pointer-events-auto">
           <button
-            onClick={() => useStore.getState().resetValves()}
+            onClick={() => setSettingsOpen(!settingsOpen)}
             className="hover:opacity-60 transition-opacity"
           >
-            Reset
+            Settings
           </button>
           <span className="opacity-30">·</span>
           <button
@@ -59,11 +60,11 @@ export default function Home() {
       {/* Timebar (bottom) */}
       <Timebar />
 
-      {/* Drawer */}
-      <RightDrawer />
+      {/* Settings panel */}
+      <SettingsPanel isOpen={settingsOpen} onToggle={() => setSettingsOpen(!settingsOpen)} />
 
-      {/* Custom cursor */}
-      <CursorOverlay />
+      {/* Stock modal */}
+      <StockModal />
     </main>
   )
 }

@@ -18,11 +18,6 @@ export type SessionState = {
   setSelectedItem: (item: ItemSelection) => void;
   setHoveredItem: (item: ItemSelection) => void;
 
-  // Valve positions keyed by Flow.id (0..1, 0.5 = neutral)
-  valves: Record<string, number>;
-  setValve: (flowId: string, val: number) => void;
-  resetValves: () => void;
-
   // Time
   snapshotIndex: number;
   setSnapshotIndex: (i: number) => void;
@@ -30,6 +25,17 @@ export type SessionState = {
   // Preferences
   reducedMotion: boolean;
   setReducedMotion: (val: boolean) => void;
+
+  // Visibility toggles
+  showStocks: boolean;
+  showFlows: boolean;
+  setShowStocks: (val: boolean) => void;
+  setShowFlows: (val: boolean) => void;
+
+  // Stock positions (overrides from dragging)
+  stockPositions: Record<string, { x: number; y: number }>;
+  setStockPosition: (stockId: string, x: number, y: number) => void;
+  resetStockPositions: () => void;
 
   // Pan/Zoom
   viewTransform: { x: number; y: number; scale: number };
@@ -57,17 +63,6 @@ export const useStore = create<SessionState>()(
         state.hoveredItem = item;
       }),
 
-    // Valves
-    valves: {},
-    setValve: (flowId, val) =>
-      set((state) => {
-        state.valves[flowId] = val;
-      }),
-    resetValves: () =>
-      set((state) => {
-        state.valves = {};
-      }),
-
     // Time
     snapshotIndex: 0,
     setSnapshotIndex: (i) =>
@@ -80,6 +75,29 @@ export const useStore = create<SessionState>()(
     setReducedMotion: (val) =>
       set((state) => {
         state.reducedMotion = val;
+      }),
+
+    // Visibility toggles
+    showStocks: true,
+    showFlows: true,
+    setShowStocks: (val) =>
+      set((state) => {
+        state.showStocks = val;
+      }),
+    setShowFlows: (val) =>
+      set((state) => {
+        state.showFlows = val;
+      }),
+
+    // Stock positions
+    stockPositions: {},
+    setStockPosition: (stockId, x, y) =>
+      set((state) => {
+        state.stockPositions[stockId] = { x, y };
+      }),
+    resetStockPositions: () =>
+      set((state) => {
+        state.stockPositions = {};
       }),
 
     // Pan/Zoom
