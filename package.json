@@ -1,0 +1,42 @@
+{
+  "name": "sbc-me",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "pull:notion": "node ./scripts/notion-pull.ts"
+  },
+  "dependencies": {
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "zustand": "^4.5.2",
+    "immer": "^10.0.4",
+    "elkjs": "^0.9.1",
+    "framer-motion": "^11.0.0",
+    "pixi.js": "^8.0.0",
+    "d3-path": "^3.1.0",
+    "clsx": "^2.1.0",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "tailwind-merge": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/d3-path": "^3.1.0",
+    "typescript": "^5",
+    "tailwindcss": "^3.4.0",
+    "tailwindcss-animate": "^1.0.7",
+    "postcss": "^8",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "^14.2.0"
+  }
+}
+

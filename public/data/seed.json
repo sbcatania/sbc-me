@@ -1,0 +1,123 @@
+{
+  "stocks": [
+    {"id":"sleep","title":"Sleep","unit":{"key":"hours/night","format":"decimal","decimals":2},"value":7.2,"displayDomain":[4,9],"driftPerSec":0.002,"active":{"start":"2020-01-01"}},
+    {"id":"health","title":"Physical Health","unit":{"key":"score","format":"decimal","decimals":2},"value":0.75,"displayDomain":[0,1],"driftPerSec":0.001,"active":{}},
+    {"id":"nutrition","title":"Nutrition","unit":{"key":"quality","format":"decimal","decimals":2},"value":0.64,"displayDomain":[0,1],"driftPerSec":0.0008,"active":{}},
+    {"id":"energy","title":"Energy","unit":{"key":"arbUnits","format":"decimal","decimals":2},"value":0.58,"displayDomain":[0,1],"driftPerSec":0.0015,"active":{}},
+    {"id":"focus","title":"Focus","unit":{"key":"arbUnits","format":"decimal","decimals":2},"value":0.66,"displayDomain":[0,1],"driftPerSec":0.0012,"active":{}},
+    {"id":"creativity","title":"Creativity","unit":{"key":"arbUnits","format":"decimal","decimals":2},"value":0.55,"displayDomain":[0,1],"driftPerSec":0.0013,"active":{}},
+    {"id":"learning","title":"Learning & R&D","unit":{"key":"hours/week","format":"number","decimals":1},"value":10.5,"displayDomain":[0,20],"driftPerSec":0.002,"active":{}},
+    {"id":"reflection","title":"Reflection / Writing","unit":{"key":"hours/week","format":"number","decimals":1},"value":3.5,"displayDomain":[0,10],"driftPerSec":0.001,"active":{}},
+    {"id":"work_marketplace","title":"Work – Notion Marketplace","unit":{"key":"arbUnits","format":"decimal"},"value":0.82,"displayDomain":[0,1],"driftPerSec":0.0014,"active":{}},
+    {"id":"side_projects","title":"Side Projects","unit":{"key":"arbUnits","format":"decimal"},"value":0.42,"displayDomain":[0,1],"driftPerSec":0.0011,"active":{}},
+    {"id":"finance","title":"Capital / Savings","unit":{"key":"USD x10³","format":"number","decimals":1},"value":210.5,"displayDomain":[0,500],"driftPerSec":0.002,"active":{}},
+    {"id":"friendship","title":"Friendship","unit":{"key":"score","format":"decimal"},"value":0.68,"displayDomain":[0,1],"driftPerSec":0.001,"active":{}},
+    {"id":"family","title":"Family","unit":{"key":"score","format":"decimal"},"value":0.74,"displayDomain":[0,1],"driftPerSec":0.001,"active":{}},
+    {"id":"romance","title":"Romantic Connection","unit":{"key":"probability","format":"percent","decimals":0},"value":42,"displayDomain":[0,100],"driftPerSec":0.0012,"active":{}},
+    {"id":"community","title":"Community / Mentorship","unit":{"key":"hours/month","format":"number"},"value":14,"displayDomain":[0,30],"driftPerSec":0.001,"active":{}},
+    {"id":"play","title":"Play & Exploration","unit":{"key":"arbUnits","format":"decimal"},"value":0.49,"displayDomain":[0,1],"driftPerSec":0.0015,"active":{}},
+    {"id":"travel","title":"Travel / Environment","unit":{"key":"trips/year","format":"number","decimals":1},"value":4.0,"displayDomain":[0,10],"driftPerSec":0.001,"active":{}},
+    {"id":"public_presence","title":"Public Presence","unit":{"key":"followers (×1000)","format":"number","decimals":1},"value":8.3,"displayDomain":[0,20],"driftPerSec":0.002,"active":{}},
+    {"id":"curiosity","title":"Curiosity","unit":{"key":"arbUnits","format":"decimal"},"value":0.83,"displayDomain":[0,1],"driftPerSec":0.0012,"active":{}},
+    {"id":"mental_space","title":"Mental Space","unit":{"key":"score","format":"decimal"},"value":0.61,"displayDomain":[0,1],"driftPerSec":0.001,"active":{}}
+  ],
+
+  "flows": [
+    {"id":"f1","from":"sleep","to":"energy","rate":0.7,"displayDomain":[0,1]},
+    {"id":"f2","from":"nutrition","to":"energy","rate":0.5,"displayDomain":[0,1]},
+    {"id":"f3","from":"health","to":"focus","rate":0.4,"displayDomain":[0,1]},
+    {"id":"f4","from":"energy","to":"focus","rate":0.45,"displayDomain":[0,1]},
+    {"id":"f5","from":"focus","to":"work_marketplace","rate":0.6,"displayDomain":[0,1]},
+    {"id":"f6","from":"focus","to":"side_projects","rate":0.25,"displayDomain":[0,1]},
+    {"id":"f7","from":"learning","to":"creativity","rate":0.3,"displayDomain":[0,1]},
+    {"id":"f8","from":"creativity","to":"side_projects","rate":0.35,"displayDomain":[0,1]},
+    {"id":"f9","from":"reflection","to":"mental_space","rate":0.3,"displayDomain":[0,1]},
+    {"id":"f10","from":"play","to":"creativity","rate":0.4,"displayDomain":[0,1]},
+    {"id":"f11","from":"community","to":"friendship","rate":0.3,"displayDomain":[0,1]},
+    {"id":"f12","from":"friendship","to":"mental_space","rate":0.3,"displayDomain":[0,1]},
+    {"id":"f13","from":"family","to":"mental_space","rate":0.25,"displayDomain":[0,1]},
+    {"id":"f14","from":"mental_space","to":"focus","rate":0.25,"displayDomain":[0,1]},
+    {"id":"f15","from":"work_marketplace","to":"finance","rate":0.5,"displayDomain":[0,1]},
+    {"id":"f16","from":"side_projects","to":"public_presence","rate":0.4,"displayDomain":[0,1]},
+    {"id":"f17","from":"public_presence","to":"romance","rate":0.2,"displayDomain":[0,1]},
+    {"id":"f18","from":"finance","to":"travel","rate":0.35,"displayDomain":[0,1]},
+    {"id":"f19","from":"travel","to":"curiosity","rate":0.4,"displayDomain":[0,1]},
+    {"id":"f20","from":"curiosity","to":"learning","rate":0.45,"displayDomain":[0,1]},
+    {"id":"f21","from":"learning","to":"reflection","rate":0.3,"displayDomain":[0,1]},
+    {"id":"f22","from":"play","to":"friendship","rate":0.25,"displayDomain":[0,1]},
+    {"id":"f23","from":"health","to":"sleep","rate":0.2,"displayDomain":[0,1]},
+    {"id":"f24","from":"romance","to":"mental_space","rate":0.25,"displayDomain":[0,1]},
+    {"id":"f25","from":"community","to":"public_presence","rate":0.25,"displayDomain":[0,1]},
+    {"id":"f26","from":"focus","to":"reflection","rate":0.15,"displayDomain":[0,1]},
+    {"id":"f27","from":"creativity","to":"work_marketplace","rate":0.15,"displayDomain":[0,1]},
+    {"id":"f28","from":"sleep","to":"mental_space","rate":0.3,"displayDomain":[0,1]},
+    {"id":"f29","from":"finance","to":"family","rate":0.25,"displayDomain":[0,1]},
+    {"id":"f30","from":"learning","to":"work_marketplace","rate":0.2,"displayDomain":[0,1]}
+  ],
+
+  "objectives": [
+    {"id":"o1","title":"Get Promoted at Work","metric":{"key":"PromotionLikelihood","value":0.37,"unit":{"key":"probability","format":"percent","decimals":0},"ci":0.12},"stocks":["focus","work_marketplace","reflection"],"flows":["f5","f26"],"active":{}},
+    {"id":"o2","title":"Get a Girlfriend","metric":{"key":"P(girlfriend)","value":0.45,"unit":{"key":"probability","format":"percent","decimals":0},"ci":0.20},"stocks":["romance","play","public_presence"],"flows":["f17"],"active":{}},
+    {"id":"o3","title":"Stay Healthy","metric":{"key":"HealthScore","value":0.78,"unit":{"key":"score","format":"decimal"},"ci":0.05},"stocks":["sleep","health","nutrition","energy"],"flows":["f1","f2","f23"],"active":{}},
+    {"id":"o4","title":"Build Wealth","metric":{"key":"NetWorthGrowth","value":0.62,"unit":{"key":"rate","format":"percent","decimals":1},"ci":0.10},"stocks":["finance","work_marketplace","side_projects"],"flows":["f15","f16"],"active":{}},
+    {"id":"o5","title":"Grow Public Influence","metric":{"key":"AudienceGrowth","value":0.71,"unit":{"key":"probability","format":"percent"},"ci":0.08},"stocks":["public_presence","community","side_projects"],"flows":["f16","f25"],"active":{}},
+    {"id":"o6","title":"Deepen Friendships","metric":{"key":"FriendshipDepth","value":0.66,"unit":{"key":"score","format":"decimal"},"ci":0.09},"stocks":["friendship","play","community"],"flows":["f11","f22"],"active":{}},
+    {"id":"o7","title":"Increase Creativity","metric":{"key":"CreativityFlux","value":0.53,"unit":{"key":"index","format":"decimal"},"ci":0.07},"stocks":["creativity","learning","play"],"flows":["f7","f10"],"active":{}},
+    {"id":"o8","title":"Enhance Mental Clarity","metric":{"key":"ClarityScore","value":0.59,"unit":{"key":"score","format":"decimal"},"ci":0.06},"stocks":["mental_space","reflection","sleep"],"flows":["f9","f14","f28"],"active":{}},
+    {"id":"o9","title":"Explore the World","metric":{"key":"ExplorationRate","value":0.44,"unit":{"key":"trips/year","format":"number"},"ci":0.15},"stocks":["travel","curiosity","finance"],"flows":["f18","f19"],"active":{}}
+  ],
+
+  "artifacts": [
+    {"id":"a1","title":"Thinking in Systems – Annotated Notes","type":"Doc","url":"https://example.com/notes","date":"2023-03-15","summary":"Personal highlights and reflections from Donella Meadows' classic.","stockIds":["learning","reflection"],"objectiveIds":["o7","o8"]},
+    {"id":"a2","title":"Marketplace Growth Strategy Memo","type":"Doc","url":"https://example.com/memo","date":"2025-01-10","summary":"Internal strategy memo about Marketplace 2025 growth levers.","stockIds":["work_marketplace"],"objectiveIds":["o1","o4"]},
+    {"id":"a3","title":"Personal Finance Dashboard","type":"Project","url":"https://example.com/finance-dashboard","date":"2024-09-22","summary":"Interactive Notion dashboard tracking capital allocation and passive income streams.","stockIds":["finance"],"objectiveIds":["o4"]},
+    {"id":"a4","title":"AI Server Prototype","type":"Project","url":"https://example.com/aiserver","date":"2024-02-10","summary":"Prototype for hosting MCP servers; bridges AI context protocols.","stockIds":["side_projects","learning"],"objectiveIds":["o4","o7"]},
+    {"id":"a5","title":"Trip to Japan 2023","type":"Image","url":"https://example.com/travel/japan","date":"2023-11-05","summary":"Photo set and reflections from Kyoto and Tokyo.","stockIds":["travel","curiosity"],"objectiveIds":["o9"]},
+    {"id":"a6","title":"Notion Marketplace Launch Retrospective","type":"Essay","url":"https://example.com/retrospective","date":"2024-10-01","summary":"Essay on lessons from the Marketplace launch and growth loops.","stockIds":["work_marketplace","reflection"],"objectiveIds":["o1","o4"]},
+    {"id":"a7","title":"Blog: Systems Thinking in Personal Life","type":"Essay","url":"https://example.com/blog-systems-life","date":"2025-03-18","summary":"Explores how feedback loops govern motivation and burnout.","stockIds":["reflection","mental_space"],"objectiveIds":["o8"]},
+    {"id":"a8","title":"Mentorship Circle Template","type":"Doc","url":"https://example.com/mentorship","date":"2025-05-01","summary":"Template for monthly peer-learning groups.","stockIds":["community","friendship"],"objectiveIds":["o6"]},
+    {"id":"a9","title":"Fitness Tracker CSV","type":"Doc","url":"https://example.com/fitness","date":"2025-07-15","summary":"Weekly strength and cardio performance tracking dataset.","stockIds":["health","nutrition"],"objectiveIds":["o3"]},
+    {"id":"a10","title":"Photo Journal – Friends & Family 2025","type":"Image","url":"https://example.com/friends","date":"2025-02-11","summary":"Moments that capture connection and gratitude.","stockIds":["friendship","family"],"objectiveIds":["o6"]}
+  ],
+
+  "snapshots": [
+    {
+      "date":"2024-06",
+      "stockOverrides":{
+        "learning":{"value":13.2},
+        "focus":{"value":0.58},
+        "creativity":{"value":0.48},
+        "finance":{"value":165.0},
+        "public_presence":{"value":5.2},
+        "romance":{"value":30}
+      },
+      "flowOverrides":{
+        "f5":{"rate":0.5},
+        "f7":{"rate":0.25},
+        "f15":{"rate":0.4},
+        "f17":{"rate":0.15}
+      },
+      "objectiveActive":{"o1":false,"o2":true,"o3":true,"o4":false,"o5":true,"o6":true,"o7":true,"o8":true,"o9":false},
+      "milestones":[{"id":"m1","label":"Started AI Server Prototype"},{"id":"m2","label":"Japan Trip"}]
+    },
+    {
+      "date":"2025-10",
+      "stockOverrides":{
+        "learning":{"value":10.5},
+        "focus":{"value":0.66},
+        "creativity":{"value":0.55},
+        "finance":{"value":210.5},
+        "public_presence":{"value":8.3},
+        "romance":{"value":42}
+      },
+      "flowOverrides":{
+        "f5":{"rate":0.6},
+        "f7":{"rate":0.3},
+        "f15":{"rate":0.5},
+        "f17":{"rate":0.2}
+      },
+      "objectiveActive":{"o1":true,"o2":true,"o3":true,"o4":true,"o5":true,"o6":true,"o7":true,"o8":true,"o9":true},
+      "milestones":[{"id":"m3","label":"Promotion Achieved"},{"id":"m4","label":"Launched Mentorship Circle"}]
+    }
+  ]
+}

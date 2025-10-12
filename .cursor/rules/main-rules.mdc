@@ -1,0 +1,213 @@
+---
+alwaysApply: true
+---
+
+# Cursor Rules — Sam Catania — Life as a System
+# Spec of record: spec.md (single source of truth; this file operationalizes it)
+# Owner: Sam Catania
+
+###############################################################################
+# 0) PRIME DIRECTIVE
+###############################################################################
+- Implement exactly what spec.md describes. If instructions conflict, spec.md wins.
+- Prefer the simplest solution that passes the Acceptance Checklist in spec.md §21.
+- No hidden state. No surprise side-effects. No silent magic.
+- Black/white minimalist aesthetic; fast, accessible, offline-resilient.
+
+###############################################################################
+# 1) ARCHITECTURE CONTRACTS
+###############################################################################
+- Next.js (App Router) + React + TypeScript (strict). 
+- SVG for nodes/edges; optional Pixi.js underlay for particles (respect reduced-motion).
+- Auto-layout with elkjs (layered). No alternative engines unless spec.md changes.
+- State: zustand + immer. Avoid Context for global state unless it’s purely read-only.
+- UI: Tailwind + shadcn/ui.
+- Data: /public/data/seed.json (required), /public/data/synced.json (optional at build).
+- No runtime Notion/API calls. Build-time sync only (scripts/notion-pull.ts if used).
+
+###############################################################################
+# 2) FILE & FOLDER GUARANTEES (DO NOT RENAME)
+###############################################################################
+app/
+  layout.tsx, page.tsx
+  (components)/Canvas.tsx, GraphView.tsx, StocksLayer.tsx, FlowsLayer.tsx,
+  ValvesLayer.tsx, ObjectivesChips.tsx, ObjectiveSpotlightOverlay.tsx,
+  ParticlesLayer.tsx, RightDrawer.tsx, Timebar.tsx, CursorOverlay.tsx
+lib/
+  domain/types.ts, domain/normalize.ts, domain/merge.ts,
+  layout/elk.ts, layout/buildGraph.ts,
+  anim/ticker.ts, anim/particles.ts,
+  a11y/aria.ts, util/format.ts, util/math.ts,
+  state/store.ts, state/selectors.ts, io/load.ts
+public/data/seed.json, public/data/synced.json
+scripts/notion-pull.ts
+
+- If a file is missing, create it. Keep responsibilities contained per filename.
+
+###############################################################################
+# 3) LLM EXECUTION & IMPLEMENTATION ORDER
+###############################################################################
+- Read spec.md fully before coding. Mirror the exact types & constants.
+- Build in vertical slices per spec.md §24 (scaffold → layout → interactions → polish).
+- If you must invent a missing helper, put it in the correct lib/ module with a docstring.
+
+###############################################################################
+# 4) MODULARITY & REFACTOR HEURISTICS (LLM-FRIENDLY)
+###############################################################################
+Create a NEW component/module when ANY of these is true:
+- File > 250 lines OR component > 200 lines OR function > 60 lines.
+- JSX branchiness/complexity > 10 (eslint complexity rule).
+- Component receives > 8 props OR > 3 callback props.
+- Component renders more than one conceptual layer (e.g., both nodes AND edges).
+- Module mixes concerns (layout + drawing, state + rendering, formatting + IO).
+
+Refactor TRIGGERS:
+- Duplicate logic in 2+ places → extract helper to lib/util or lib/domain.
+- Conditional UI paths ≥ 3 variants → split into subcomponents.
+- Reused styles across 3+ components → extract Tailwind class helpers or small UI atom.
+- Performance: Re-renders > 3/frame on interaction OR layout > 50ms → memoize/split.
+
+Naming:
+- Components: PascalCase nouns (StocksLayer, ObjectiveChips).
+- Hooks: useThing. Pure helpers: verbNoun (buildPath).
+- Selectors: selectThing; store setters: setThing.
+
+Props:
+- Prefer explicit props over “...rest” for interactive components.
+- For data-heavy props, pass stable IDs & selectors instead of large objects.
+
+###############################################################################
+# 5) STATE & DATA RULES
+###############################################################################
+- domain/types.ts is canonical. Never diverge from those contracts.
+- Never mutate canonical Stock.value or Flow.rate for drift/valves; store session-only tweaks in zustand.
+- Keep derived data OUT of the store; compute via selectors (memoize with shallow equality).
+- No prop drilling > 2 levels for global data; use selectors in leaf components.
+- Snapshot application order: seed → synced → snapshot overrides → session (valves).
+
+###############################################################################
+# 6) RENDERING & LAYOUT RULES
+###############################################################################
+- Use ELK clusters for active objectives per snapshot (grouped stocks).
+- Provide ELK width/height from normalized node size (see spec.md §5, §11).
+- Edge routing: orthogonal; round corners; build SVG path once; memoize.
+- Pan/zoom: single <g> transform; clamp zoom [0.5, 3.0]; fit with 40px margin.
+- Hover/selection dim unrelated items to 30% opacity. Follow spec.md §8 exactly.
+
+###############################################################################
+# 7) ANIMATION & PERFORMANCE BUDGETS
+###############################################################################
+- rAF work < 2ms/frame average. Avoid allocations in hot loops.
+- Ticker drift: only affects DISPLAYED values; ease toward a sinusoidal target; no canonical changes.
+- Particles: cadence & speed derived from normalized thickness; skip entirely if prefers-reduced-motion.
+- Re-render budgets:
+  - StocksLayer: O(visible stocks) memoized by id & display weight.
+  - FlowsLayer: O(visible flows) memoized by id, route points, thickness.
+  - ParticlesLayer: isolated; never triggers React re-renders.
+- If ELK layout p95 > 8ms → move ELK to a Web Worker (keep API in lib/layout/elk.ts).
+
+###############################################################################
+# 8) ACCESSIBILITY, KEYBOARD, REDUCED MOTION
+###############################################################################
+- Every interactive element focusable; aria-labels fully descriptive.
+- Keyboard:
+  - Tab/Shift+Tab: focus cycle; Enter: open drawer; Esc: close; Arrow L/R: snapshot prev/next.
+- prefers-reduced-motion:
+  - Disable particles; reduce drift amplitude to 20%; limit transitions ≤ 120ms.
+- High contrast: inherit system; ensure 4.5:1 contrast for text, 3:1 for large icons.
+
+###############################################################################
+# 9) ERROR HANDLING & EMPTY STATES
+###############################################################################
+- Missing synced.json → continue with seed.json silently.
+- No snapshots → create implicit “current” snapshot in-memory.
+- ELK failure → log once with context; fallback to d3-force ≤ 500ms then freeze.
+- Zero data → centered overlay “No data” with a Reload button.
+
+###############################################################################
+# 10) TEST STRATEGY (REQUIRED MINIMUM)
+###############################################################################
+- Unit (vitest):
+  - domain/normalize: domain handling, quantile fallback, clamp behavior.
+  - domain/merge: precedence & diffs (seed+synced+snapshot+session).
+  - state/selectors: active entities, valve multipliers, spotlight resolution.
+- Component tests (RTL):
+  - Drawer opens with correct content; metric chip toggles number↔whisker.
+  - Timebar snaps to snapshots; milestones show tooltip.
+  - Valve drag updates thickness visually; Reset clears session.
+- Visual smoke (Storybook; manual CI run acceptable):
+  - Canvas with 6 stocks/5 flows; spotlight overlay; reduced motion on/off.
+- Code coverage target: functions 70%+ for lib/; critical paths > 80%.
+
+###############################################################################
+# 11) LOGGING & DIAGNOSTICS (DEV-ONLY)
+###############################################################################
+- Use `console.debug` behind a `__DEV__` guard for layout timings and snapshot diffs.
+- Do not log user interactions in production. No PII. No analytics in v1.
+
+###############################################################################
+# 12) PERFORMANCE & SIZE BUDGETS
+###############################################################################
+- Bundle increase > 50 kB gzip requires justification in PR description.
+- Avoid large polyfills; prefer modern APIs with progressive fallback.
+- Memoize heavy SVG paths and label measurements. Avoid re-measuring on hover.
+- rAF: store animation state outside React where possible (e.g., refs or Pixi ticker).
+
+###############################################################################
+# 13) UI/UX NON-NEGOTIABLES (FROM spec.md)
+###############################################################################
+- Node outline: 1.5px; Flow thickness: 1.0–6.0px (easeOutQuad).
+- Chevrons: 6px length, 12px spacing. Spotlight ~12% black fill, no border.
+- Objective chips: 11px text, 20px height, 8px padding; bg black/15% (light), white/15% (dark).
+- Timebar: 44px height; handle 12px; milestone 6px.
+- Fonts: Inter/Space Grotesk; labels 12/16; tickers mono 12/16.
+
+###############################################################################
+# 14) DEPENDENCIES & SECURITY
+###############################################################################
+- Only these new deps allowed unless justified: elkjs, zustand, immer, framer-motion,
+  @radix-ui (via shadcn), pixi.js (optional), d3-path, clsx.
+- Pin versions; no postinstall scripts. No dynamic eval. No DOM injection from data.
+- Sanitize URLs on Artifact links; always `rel="noopener noreferrer"`; target=_blank.
+
+###############################################################################
+# 15) DOCUMENTATION & COMMENTS
+###############################################################################
+- Each public function/module exports a short TSDoc comment: purpose, inputs, outputs, side-effects (if any).
+- Complex algorithms (ELK mapping, path building, drift) get a top-of-file comment with a 2–4 step summary.
+- Inlined constants reference spec.md section (e.g., “// spec.md §11 UI sizes”).
+
+###############################################################################
+# 16) GIT, PRS & REVIEW CHECKLIST
+###############################################################################
+- Conventional commits: feat:/fix:/refactor:/perf:/docs:/test:/chore:.
+- One concern per PR (≤ 400 lines diff). Include screenshots/GIFs for any visual change.
+- If touching layout (lib/layout/*), include a GIF: same data, before/after, different snapshots.
+- Reviewer checklist:
+  - [ ] Matches spec.md behavior & sizes.
+  - [ ] No mutation of canonical values for drift/valves.
+  - [ ] Keyboard + reduced-motion verified.
+  - [ ] Tests updated/added; stories render.
+  - [ ] Bundle impact acceptable; perf budgets respected.
+
+###############################################################################
+# 17) WHAT NOT TO DO
+###############################################################################
+- No color palettes beyond black/white + opacity.
+- No new global singletons; keep state in zustand or component scope.
+- No hidden localStorage/sessionStorage writes for v1.
+- No reflow-heavy measurements in hover handlers; precompute or cache.
+- No mixing layout calculation with rendering; keep in lib/layout/*.
+
+###############################################################################
+# 18) ESCALATION & AMBIGUITY
+###############################################################################
+- If spec.md is ambiguous, open a small draft PR with 2–3 screenshots/GIFs proposing options.
+- Prefer the option that reduces code size and moves toward Acceptance Checklist in §21.
+- Add a short note in the PR why the choice aligns with spec.md goals (clarity, minimalism, playfulness).
+
+###############################################################################
+# 19) FINAL ALIGNMENT WITH SPEC.MD
+###############################################################################
+- If any rule here conflicts with spec.md, follow spec.md and add a one-line comment in code:
+  // Exception to .cursorrules: follows spec.md §X.Y requirement <reason>.
