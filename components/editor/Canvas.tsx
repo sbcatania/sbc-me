@@ -412,12 +412,19 @@ export function Canvas() {
   // Keyboard handlers
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === "Space" && !e.repeat) {
+      // Don't capture keys when user is typing in an input field
+      const target = e.target as HTMLElement;
+      const isTyping =
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.isContentEditable;
+
+      if (e.code === "Space" && !e.repeat && !isTyping) {
         setSpaceHeld(true);
         e.preventDefault();
       }
 
-      if (editingNodeId || editingEdgeId) return;
+      if (editingNodeId || editingEdgeId || isTyping) return;
 
       if (e.key === "Delete" || e.key === "Backspace") {
         if (!editingNodeId && !editingEdgeId) {

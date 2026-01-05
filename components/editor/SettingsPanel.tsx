@@ -30,7 +30,7 @@ export function SettingsPanel({ open, onClose: _onClose }: SettingsPanelProps) {
   };
 
   return (
-    <div className="absolute right-0 top-12 bottom-0 z-10 w-72 border-l border-border bg-background shadow-lg overflow-y-auto">
+    <div className="absolute right-0 top-0 bottom-0 z-10 w-72 border-l border-border bg-background shadow-lg overflow-y-auto">
       <div className="p-4 space-y-6">
         {/* Label Mode */}
         <div className="space-y-2">

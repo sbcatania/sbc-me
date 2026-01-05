@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { Node } from "@/lib/model/schema";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { Node, DEFAULT_NODE_WIDTH, DEFAULT_NODE_HEIGHT } from "@/lib/model/schema";
 import { useDiagramStore } from "@/lib/store/diagrams";
 
 interface NodeStockProps {
@@ -12,6 +12,12 @@ interface NodeStockProps {
   onEditEnd: () => void;
 }
 
+const MIN_NODE_WIDTH = DEFAULT_NODE_WIDTH;
+const MIN_NODE_HEIGHT = DEFAULT_NODE_HEIGHT;
+const PADDING = 16;
+const LINE_HEIGHT = 20;
+const FONT_SIZE = 13;
+
 export function NodeStock({
   node,
   selected,
@@ -19,12 +25,43 @@ export function NodeStock({
   onEditStart,
   onEditEnd,
 }: NodeStockProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const [editValue, setEditValue] = useState(node.label);
   const [hovered, setHovered] = useState(false);
   const { updateNode } = useDiagramStore();
 
   const isExternal = node.kind === "external";
+
+  // Calculate required node size based on text content
+  const calculateNodeSize = useCallback((text: string) => {
+    // Create a temporary element to measure text
+    const measureDiv = document.createElement("div");
+    measureDiv.style.cssText = `
+      position: absolute;
+      visibility: hidden;
+      width: ${MIN_NODE_WIDTH - PADDING * 2}px;
+      font-size: ${FONT_SIZE}px;
+      line-height: ${LINE_HEIGHT}px;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    `;
+    measureDiv.textContent = text || "Stock";
+    document.body.appendChild(measureDiv);
+
+    const textHeight = measureDiv.scrollHeight;
+    document.body.removeChild(measureDiv);
+
+    const requiredHeight = Math.max(MIN_NODE_HEIGHT, textHeight + PADDING * 2);
+    return { width: MIN_NODE_WIDTH, height: requiredHeight };
+  }, []);
+
+  // Update node size when label changes
+  useEffect(() => {
+    const { height } = calculateNodeSize(node.label);
+    if (height !== node.height) {
+      updateNode(node.id, { height });
+    }
+  }, [node.label, node.id, node.height, calculateNodeSize, updateNode]);
 
   useEffect(() => {
     if (editing && inputRef.current) {
@@ -42,7 +79,7 @@ export function NodeStock({
     onEditStart();
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setEditValue(e.target.value);
   };
 
@@ -52,7 +89,8 @@ export function NodeStock({
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
       updateNode(node.id, { label: editValue });
       onEditEnd();
     } else if (e.key === "Escape") {
@@ -95,34 +133,46 @@ export function NodeStock({
       {/* Label or edit input */}
       {editing ? (
         <foreignObject
-          x={4}
-          y={4}
-          width={node.width - 8}
-          height={node.height - 8}
+          x={PADDING / 2}
+          y={PADDING / 2}
+          width={node.width - PADDING}
+          height={node.height - PADDING}
         >
-          <input
+          <textarea
             ref={inputRef}
-            type="text"
             value={editValue}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             onKeyDown={handleInputKeyDown}
-            className="inline-edit-input h-full text-sm"
-            style={{ fontSize: "13px" }}
+            className="inline-edit-input h-full w-full resize-none border-none bg-transparent p-0 text-center outline-none"
+            style={{
+              fontSize: `${FONT_SIZE}px`,
+              lineHeight: `${LINE_HEIGHT}px`,
+            }}
           />
         </foreignObject>
       ) : (
-        <text
-          x={node.width / 2}
-          y={node.height / 2}
-          textAnchor="middle"
-          dominantBaseline="central"
-          className="pointer-events-none select-none fill-current"
-          style={{ fontSize: "13px" }}
+        <foreignObject
+          x={PADDING / 2}
+          y={PADDING / 2}
+          width={node.width - PADDING}
+          height={node.height - PADDING}
           onDoubleClick={handleDoubleClick}
+          className="pointer-events-auto"
         >
-          {node.label || "Stock"}
-        </text>
+          <div
+            className="flex h-full w-full items-center justify-center text-center"
+            style={{
+              fontSize: `${FONT_SIZE}px`,
+              lineHeight: `${LINE_HEIGHT}px`,
+              wordWrap: "break-word",
+              overflowWrap: "break-word",
+              whiteSpace: "pre-wrap",
+            }}
+          >
+            {node.label || "Stock"}
+          </div>
+        </foreignObject>
       )}
 
       {/* Connector handle dots on all four sides */}

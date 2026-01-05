@@ -12,6 +12,15 @@ A local-first, beautiful systems diagram editor with stocks and flows, Muse-like
 | `/docs/testing.md` | Playwright test suite, fixtures, helpers | Running tests, adding test cases |
 | `CLAUDE.md` (this file) | Project overview, architecture, constraints | Starting work, major changes |
 
+### Development Workflow
+
+**IMPORTANT**: This project requires E2E testing of all changes:
+
+1. **Always E2E test changes**: Before considering any change complete, verify it works in the browser
+2. **Use Playwright for automated testing**: Run `npm test` to execute the full test suite
+3. **Manual verification**: After making UI changes, navigate to `http://localhost:4000` and test the feature
+4. **Test edge cases**: Try different inputs, long text, special characters, etc.
+
 ### Documentation Workflow
 
 **IMPORTANT**: This project uses a self-documenting approach:
