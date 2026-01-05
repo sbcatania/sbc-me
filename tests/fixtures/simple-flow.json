@@ -1,0 +1,48 @@
+{
+  "id": "test-simple-flow",
+  "version": 1,
+  "title": "Simple Flow",
+  "createdAt": 1704067200000,
+  "updatedAt": 1704067200000,
+  "viewport": { "x": 0, "y": 0, "zoom": 1 },
+  "ui": {
+    "labelMode": "always",
+    "theme": "light",
+    "gridSnap": false,
+    "hasRunInitialAutoLayout": true
+  },
+  "nodes": {
+    "stock-source": {
+      "id": "stock-source",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Source",
+      "x": 100,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    },
+    "stock-sink": {
+      "id": "stock-sink",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Sink",
+      "x": 400,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    }
+  },
+  "edges": {
+    "flow-1": {
+      "id": "flow-1",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "stock-source",
+      "targetId": "stock-sink",
+      "label": "transfer"
+    }
+  },
+  "frames": {},
+  "notes": {}
+}

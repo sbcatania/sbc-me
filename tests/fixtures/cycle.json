@@ -1,0 +1,74 @@
+{
+  "id": "test-cycle",
+  "version": 1,
+  "title": "Feedback Cycle",
+  "createdAt": 1704067200000,
+  "updatedAt": 1704067200000,
+  "viewport": { "x": 0, "y": 0, "zoom": 1 },
+  "ui": {
+    "labelMode": "always",
+    "theme": "light",
+    "gridSnap": false,
+    "hasRunInitialAutoLayout": true
+  },
+  "nodes": {
+    "stock-1": {
+      "id": "stock-1",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Population",
+      "x": 300,
+      "y": 50,
+      "width": 120,
+      "height": 60
+    },
+    "stock-2": {
+      "id": "stock-2",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Resources",
+      "x": 500,
+      "y": 200,
+      "width": 120,
+      "height": 60
+    },
+    "stock-3": {
+      "id": "stock-3",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Waste",
+      "x": 100,
+      "y": 200,
+      "width": 120,
+      "height": 60
+    }
+  },
+  "edges": {
+    "flow-12": {
+      "id": "flow-12",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "stock-1",
+      "targetId": "stock-2",
+      "label": "consume"
+    },
+    "flow-23": {
+      "id": "flow-23",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "stock-2",
+      "targetId": "stock-3",
+      "label": "produce"
+    },
+    "flow-31": {
+      "id": "flow-31",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "stock-3",
+      "targetId": "stock-1",
+      "label": "recycle"
+    }
+  },
+  "frames": {},
+  "notes": {}
+}

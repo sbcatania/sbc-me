@@ -1,0 +1,18 @@
+{
+  "id": "test-empty",
+  "version": 1,
+  "title": "Empty Diagram",
+  "createdAt": 1704067200000,
+  "updatedAt": 1704067200000,
+  "viewport": { "x": 0, "y": 0, "zoom": 1 },
+  "ui": {
+    "labelMode": "hover",
+    "theme": "light",
+    "gridSnap": false,
+    "hasRunInitialAutoLayout": false
+  },
+  "nodes": {},
+  "edges": {},
+  "frames": {},
+  "notes": {}
+}

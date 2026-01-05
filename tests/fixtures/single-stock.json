@@ -1,0 +1,29 @@
+{
+  "id": "test-single-stock",
+  "version": 1,
+  "title": "Single Stock",
+  "createdAt": 1704067200000,
+  "updatedAt": 1704067200000,
+  "viewport": { "x": 0, "y": 0, "zoom": 1 },
+  "ui": {
+    "labelMode": "hover",
+    "theme": "light",
+    "gridSnap": false,
+    "hasRunInitialAutoLayout": false
+  },
+  "nodes": {
+    "stock-1": {
+      "id": "stock-1",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Inventory",
+      "x": 200,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    }
+  },
+  "edges": {},
+  "frames": {},
+  "notes": {}
+}

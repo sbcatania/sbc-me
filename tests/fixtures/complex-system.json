@@ -1,0 +1,136 @@
+{
+  "id": "test-complex",
+  "version": 1,
+  "title": "Complex System",
+  "createdAt": 1704067200000,
+  "updatedAt": 1704067200000,
+  "viewport": { "x": 0, "y": 0, "zoom": 0.8 },
+  "ui": {
+    "labelMode": "hover",
+    "theme": "light",
+    "gridSnap": false,
+    "hasRunInitialAutoLayout": true
+  },
+  "nodes": {
+    "backlog": {
+      "id": "backlog",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Backlog",
+      "x": 50,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    },
+    "in-progress": {
+      "id": "in-progress",
+      "type": "stock",
+      "kind": "internal",
+      "label": "In Progress",
+      "x": 250,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    },
+    "review": {
+      "id": "review",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Review",
+      "x": 450,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    },
+    "done": {
+      "id": "done",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Done",
+      "x": 650,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    },
+    "bugs": {
+      "id": "bugs",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Bugs",
+      "x": 350,
+      "y": 300,
+      "width": 120,
+      "height": 60
+    },
+    "team": {
+      "id": "team",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Team",
+      "x": 150,
+      "y": 0,
+      "width": 120,
+      "height": 60
+    }
+  },
+  "edges": {
+    "flow-start": {
+      "id": "flow-start",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "backlog",
+      "targetId": "in-progress",
+      "label": "start work"
+    },
+    "flow-submit": {
+      "id": "flow-submit",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "in-progress",
+      "targetId": "review",
+      "label": "submit"
+    },
+    "flow-approve": {
+      "id": "flow-approve",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "review",
+      "targetId": "done",
+      "label": "approve"
+    },
+    "flow-reject": {
+      "id": "flow-reject",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "review",
+      "targetId": "in-progress",
+      "label": "reject"
+    },
+    "flow-bugs-found": {
+      "id": "flow-bugs-found",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "done",
+      "targetId": "bugs",
+      "label": "bugs found"
+    },
+    "flow-fix-bugs": {
+      "id": "flow-fix-bugs",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "bugs",
+      "targetId": "in-progress",
+      "label": "fix"
+    },
+    "flow-capacity": {
+      "id": "flow-capacity",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "team",
+      "targetId": "in-progress",
+      "label": "capacity"
+    }
+  },
+  "frames": {},
+  "notes": {}
+}

@@ -1,0 +1,120 @@
+{
+  "id": "test-hub",
+  "version": 1,
+  "title": "Hub Node Test",
+  "createdAt": 1704067200000,
+  "updatedAt": 1704067200000,
+  "viewport": { "x": 0, "y": 0, "zoom": 1 },
+  "ui": {
+    "labelMode": "always",
+    "theme": "light",
+    "gridSnap": false,
+    "hasRunInitialAutoLayout": false
+  },
+  "nodes": {
+    "hub": {
+      "id": "hub",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Central Hub",
+      "x": 300,
+      "y": 200,
+      "width": 120,
+      "height": 60
+    },
+    "input-1": {
+      "id": "input-1",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Input 1",
+      "x": 50,
+      "y": 50,
+      "width": 120,
+      "height": 60
+    },
+    "input-2": {
+      "id": "input-2",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Input 2",
+      "x": 50,
+      "y": 200,
+      "width": 120,
+      "height": 60
+    },
+    "input-3": {
+      "id": "input-3",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Input 3",
+      "x": 50,
+      "y": 350,
+      "width": 120,
+      "height": 60
+    },
+    "output-1": {
+      "id": "output-1",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Output 1",
+      "x": 550,
+      "y": 125,
+      "width": 120,
+      "height": 60
+    },
+    "output-2": {
+      "id": "output-2",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Output 2",
+      "x": 550,
+      "y": 275,
+      "width": 120,
+      "height": 60
+    }
+  },
+  "edges": {
+    "in-1": {
+      "id": "in-1",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "input-1",
+      "targetId": "hub",
+      "label": "in 1"
+    },
+    "in-2": {
+      "id": "in-2",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "input-2",
+      "targetId": "hub",
+      "label": "in 2"
+    },
+    "in-3": {
+      "id": "in-3",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "input-3",
+      "targetId": "hub",
+      "label": "in 3"
+    },
+    "out-1": {
+      "id": "out-1",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "hub",
+      "targetId": "output-1",
+      "label": "out 1"
+    },
+    "out-2": {
+      "id": "out-2",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "hub",
+      "targetId": "output-2",
+      "label": "out 2"
+    }
+  },
+  "frames": {},
+  "notes": {}
+}

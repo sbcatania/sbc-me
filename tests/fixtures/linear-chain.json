@@ -1,0 +1,84 @@
+{
+  "id": "test-linear-chain",
+  "version": 1,
+  "title": "Linear Chain (A to D)",
+  "createdAt": 1704067200000,
+  "updatedAt": 1704067200000,
+  "viewport": { "x": 0, "y": 0, "zoom": 1 },
+  "ui": {
+    "labelMode": "always",
+    "theme": "light",
+    "gridSnap": false,
+    "hasRunInitialAutoLayout": true
+  },
+  "nodes": {
+    "stock-a": {
+      "id": "stock-a",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Stage A",
+      "x": 50,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    },
+    "stock-b": {
+      "id": "stock-b",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Stage B",
+      "x": 250,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    },
+    "stock-c": {
+      "id": "stock-c",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Stage C",
+      "x": 450,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    },
+    "stock-d": {
+      "id": "stock-d",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Stage D",
+      "x": 650,
+      "y": 150,
+      "width": 120,
+      "height": 60
+    }
+  },
+  "edges": {
+    "flow-ab": {
+      "id": "flow-ab",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "stock-a",
+      "targetId": "stock-b",
+      "label": "A to B"
+    },
+    "flow-bc": {
+      "id": "flow-bc",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "stock-b",
+      "targetId": "stock-c",
+      "label": "B to C"
+    },
+    "flow-cd": {
+      "id": "flow-cd",
+      "type": "flow",
+      "kind": "flow",
+      "sourceId": "stock-c",
+      "targetId": "stock-d",
+      "label": "C to D"
+    }
+  },
+  "frames": {},
+  "notes": {}
+}

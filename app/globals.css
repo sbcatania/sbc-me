@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --border: 0 0% 89.8%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Canvas grid background */
+.canvas-grid {
+  background-image:
+    linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Animated flow direction - dotted line moving in flow direction */
+@keyframes flow-animation {
+  from {
+    stroke-dashoffset: 16;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.flow-animated {
+  stroke-dasharray: 4 4;
+  animation: flow-animation 1s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-animated {
+    animation: none;
+  }
+}
+
+/* Selection styles */
+.selection-rect {
+  fill: hsl(var(--accent));
+  fill-opacity: 0.1;
+  stroke: hsl(var(--foreground));
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+/* Node styles - thinner, more subtle */
+.node-stock {
+  fill: white;
+  stroke: hsl(var(--foreground));
+  stroke-width: 1;
+}
+
+.node-stock-external {
+  stroke-dasharray: 4 2;
+}
+
+.node-stock.selected {
+  stroke-width: 1.5;
+}
+
+/* Edge styles - just for hit testing, visual is the animated path */
+.edge-flow {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 1;
+}
+
+.edge-flow.selected {
+  stroke-width: 1;
+}
+
+/* Inline edit */
+.inline-edit-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: center;
+  width: 100%;
+}
+
+.inline-edit-input:focus {
+  outline: 2px solid hsl(var(--foreground));
+  outline-offset: 2px;
+}
+
+/* Node handle dots */
+.node-handle {
+  fill: hsl(var(--foreground));
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.node-handle:hover,
+.node-handle.visible {
+  opacity: 1;
+}
