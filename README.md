@@ -16,10 +16,10 @@ A local-first systems diagram editor for creating stocks and flows diagrams with
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Run development server
-npm run dev
+bun run dev
 
 # Open http://localhost:3000
 ```
@@ -40,13 +40,13 @@ npm run dev
 
 ```bash
 # Run all tests
-npm test
+bun test
 
 # Interactive UI mode
-npm run test:ui
+bun run test:ui
 
 # Run with visible browser
-npm run test:headed
+bun run test:headed
 ```
 
 ## Tech Stack

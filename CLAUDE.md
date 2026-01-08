@@ -17,7 +17,7 @@ A local-first, beautiful systems diagram editor with stocks and flows, Muse-like
 **IMPORTANT**: This project requires E2E testing of all changes:
 
 1. **Always E2E test changes**: Before considering any change complete, verify it works in the browser
-2. **Use Playwright for automated testing**: Run `npm test` to execute the full test suite
+2. **Use Playwright for automated testing**: Run `bun test` to execute the full test suite
 3. **Manual verification**: After making UI changes, navigate to `http://localhost:4000` and test the feature
 4. **Test edge cases**: Try different inputs, long text, special characters, etc.
 
@@ -62,16 +62,16 @@ Create new docs liberally in `/docs/` for:
 
 ```bash
 # Run all tests (starts dev server automatically)
-npm test
+bun test
 
 # Interactive UI mode (recommended for debugging)
-npm run test:ui
+bun run test:ui
 
 # Run with visible browser
-npm run test:headed
+bun run test:headed
 
 # Debug mode with step-through
-npm run test:debug
+bun run test:debug
 ```
 
 ### Test Fixtures
@@ -265,19 +265,19 @@ Key principles (see docs for full spec):
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Run development server
-npm run dev
+bun run dev
 
 # Run on specific port
-npm run dev -- -p 4000
+bun run dev -- -p 4000
 
 # Build for production
-npm run build
+bun run build
 
 # Run tests
-npm test
+bun test
 ```
 
 ## Data Storage

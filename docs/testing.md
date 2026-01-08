@@ -6,16 +6,16 @@ This document describes how to run tests and create new test scenarios for Syste
 
 ```bash
 # Run all tests
-npm test
+bun test
 
 # Run tests with UI (recommended for debugging)
-npm run test:ui
+bun run test:ui
 
 # Run tests with browser visible
-npm run test:headed
+bun run test:headed
 
 # Debug mode (step through tests)
-npm run test:debug
+bun run test:debug
 ```
 
 ## Test Architecture
@@ -231,8 +231,8 @@ const edgeCount = await page.locator("[data-edge-id]").count();
 
 ## Debugging Failed Tests
 
-1. **Use headed mode**: `npm run test:headed` shows the browser
-2. **Use UI mode**: `npm run test:ui` provides interactive debugging
+1. **Use headed mode**: `bun run test:headed` shows the browser
+2. **Use UI mode**: `bun run test:ui` provides interactive debugging
 3. **Add screenshots**: Playwright captures on failure automatically
 4. **Check traces**: Run `npx playwright show-report` after tests
 
@@ -241,12 +241,12 @@ const edgeCount = await page.locator("[data-edge-id]").count();
 For CI environments:
 - Set `CI=true` environment variable
 - Tests will run headless with retries
-- Use `npm test` for standard CI runs
+- Use `bun test` for standard CI runs
 
 ```yaml
 # Example GitHub Actions
 - name: Run tests
-  run: npm test
+  run: bun test
   env:
     CI: true
 ```
