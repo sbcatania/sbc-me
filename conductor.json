@@ -1,6 +1,6 @@
 {
   "scripts": {
     "setup": "bun install",
-    "run": "next dev -p $CONDUCTOR_PORT"
+    "run": "bun run dev -- -p $CONDUCTOR_PORT"
   }
 }
