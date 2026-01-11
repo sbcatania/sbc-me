@@ -2,6 +2,5 @@
   "scripts": {
     "setup": "bun install",
     "run": "next dev -p $CONDUCTOR_PORT"
-  },
-  "runScriptMode": "nonconcurrent"
+  }
 }
