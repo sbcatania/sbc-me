@@ -6,11 +6,15 @@ import {
   waitForCanvas,
   getNodeCount,
   getEdgeCount,
+  clearIndexedDB,
 } from "./helpers";
 
 test.describe("Import/Export", () => {
   test.beforeEach(async ({ page }) => {
+    // Clear IndexedDB to ensure clean test state
     await page.goto("/");
+    await clearIndexedDB(page);
+    await page.reload();
     await waitForCanvas(page);
   });
 

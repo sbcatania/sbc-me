@@ -180,6 +180,47 @@ Key principles (see docs for full spec):
 - Subtle grid background
 - Crisp typography
 
+### Undo/Redo Requirements
+
+**CRITICAL**: Every single user action that modifies any data must be undoable. No exceptions.
+
+1. **Never use confirmation dialogs** - All destructive actions must be reversible via undo (⌘Z) instead of showing "Are you sure?" dialogs.
+
+2. **ALL actions require undo/redo support**:
+
+   **System-level actions:**
+   - Creating a new system/diagram
+   - Deleting a system/diagram
+   - Renaming a system/diagram
+   - Duplicating a system/diagram
+   - Pinning/unpinning a system
+
+   **Canvas actions:**
+   - Node creation, deletion, and modification
+   - Edge creation, deletion, and modification
+   - Label changes (on nodes and edges)
+   - Position changes (drag operations)
+   - Selection changes (for multi-select operations)
+
+   **Property/Data actions:**
+   - Property schema changes (adding/removing/reordering columns)
+   - Property value changes (in database view or elsewhere)
+   - Any attribute modifications
+
+3. **Implementation pattern**:
+   - Store previous state before ANY modification
+   - Push to undo stack
+   - Clear redo stack on new action
+   - Redo pops from redo stack, pushes to undo
+   - For system-level actions, may need a separate undo stack or soft-delete pattern
+
+4. **Testing requirements**:
+   - Write E2E tests for undo/redo of EVERY action type
+   - Test that redo works after undo
+   - Test that new actions clear redo stack
+   - Test undo/redo across persistence (state should survive page reload)
+   - Test system-level undo (diagram deletion, etc.)
+
 ### Performance
 - Target smooth interaction at 50-100 nodes
 - SVG rendering for V1 (sufficient for target scale)
@@ -266,6 +307,10 @@ All import and export functionality is handled by a single unified `ImportExport
 | Select all | ⌘A |
 | Search | ⌘F |
 | Quick add | ⌘K |
+| Toggle sidebar | ⌘\ |
+| New system | ⇧⌘N |
+| System tab | ⌘1 |
+| Database tab | ⌘2 |
 | Settings | ⌘. |
 | Export + copy | ⌘E |
 | Import | ⌘I |

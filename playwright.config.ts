@@ -21,6 +21,8 @@ export default defineConfig({
     baseURL,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
+    // Clear storage state between tests to avoid IndexedDB persistence
+    storageState: undefined,
   },
 
   projects: [

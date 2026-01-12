@@ -10,6 +10,21 @@ import * as path from "path";
 const FIXTURES_DIR = path.join(__dirname, "fixtures");
 
 /**
+ * Clear IndexedDB to ensure clean test state.
+ * Call this at the start of each test to avoid cross-test data pollution.
+ */
+export async function clearIndexedDB(page: Page): Promise<void> {
+  await page.evaluate(async () => {
+    const databases = await indexedDB.databases();
+    for (const db of databases) {
+      if (db.name) {
+        indexedDB.deleteDatabase(db.name);
+      }
+    }
+  });
+}
+
+/**
  * Get the JSON content of a test fixture file.
  */
 export function getFixture(fixtureName: string): string {
@@ -57,7 +72,7 @@ export async function importFixture(page: Page, fixtureName: string): Promise<vo
   await page.waitForURL(/\/d\//);
 
   // Wait for canvas to be ready
-  await page.waitForSelector("svg", { timeout: 5000 });
+  await page.waitForSelector('[data-testid="canvas-svg"]', { timeout: 5000 });
 }
 
 /**
@@ -83,7 +98,7 @@ export async function exportDiagram(page: Page): Promise<string> {
  * Wait for the canvas to be fully loaded and interactive.
  */
 export async function waitForCanvas(page: Page): Promise<void> {
-  await page.waitForSelector("svg", { timeout: 10000 });
+  await page.waitForSelector('[data-testid="canvas-svg"]', { timeout: 10000 });
   // Small delay to ensure React hydration is complete
   await page.waitForTimeout(500);
 }
@@ -112,8 +127,7 @@ export async function createNodeAt(
   x: number,
   y: number
 ): Promise<void> {
-  // Use the main canvas SVG (the one with class h-full w-full)
-  const canvas = page.locator("svg.h-full.w-full");
+  const canvas = page.locator('[data-testid="canvas-svg"]');
   await canvas.dblclick({ position: { x, y } });
   // Wait for new node to appear
   await page.waitForTimeout(300);

@@ -15,6 +15,8 @@ interface PrefsState {
   setLabelMode: (mode: "hover" | "always") => void;
   setFontFamily: (font: "inter" | "ibm-plex-mono" | "system") => void;
   setGridStyle: (style: GridStyle) => void;
+  toggleSidebar: () => void;
+  setSidebarCollapsed: (collapsed: boolean) => void;
 }
 
 export const usePrefsStore = create<PrefsState>((set, get) => ({
@@ -65,6 +67,26 @@ export const usePrefsStore = create<PrefsState>((set, get) => ({
     const newPrefs = {
       ...prefs,
       grid: { ...prefs.grid, style },
+    };
+    set({ prefs: newPrefs });
+    idbSet(PREFS_KEY, newPrefs);
+  },
+
+  toggleSidebar: () => {
+    const { prefs } = get();
+    const newPrefs = {
+      ...prefs,
+      sidebarCollapsed: !prefs.sidebarCollapsed,
+    };
+    set({ prefs: newPrefs });
+    idbSet(PREFS_KEY, newPrefs);
+  },
+
+  setSidebarCollapsed: (collapsed: boolean) => {
+    const { prefs } = get();
+    const newPrefs = {
+      ...prefs,
+      sidebarCollapsed: collapsed,
     };
     set({ prefs: newPrefs });
     idbSet(PREFS_KEY, newPrefs);

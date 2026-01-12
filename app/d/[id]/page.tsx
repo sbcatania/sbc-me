@@ -10,6 +10,9 @@ import { Breadcrumb } from "@/components/editor/Breadcrumb";
 import { SettingsPanel } from "@/components/editor/SettingsPanel";
 import { QuickAddMenu } from "@/components/editor/QuickAddMenu";
 import { SearchPanel } from "@/components/editor/SearchPanel";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { DatabaseView } from "@/components/editor/DatabaseView";
+import { TabType } from "@/components/layout/TabBar";
 import { ImportExportModal } from "@/components/editor/ImportExportModal";
 
 interface PageProps {
@@ -40,12 +43,14 @@ export default function DiagramPage({ params }: PageProps) {
     initialized: prefsInitialized,
     initialize: initializePrefs,
     prefs,
+    toggleSidebar,
   } = usePrefsStore();
 
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [quickAddOpen, setQuickAddOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<TabType>("system");
 
   // Unified import/export modal state
   const [importExportModalOpen, setImportExportModalOpen] = useState(false);
@@ -104,40 +109,69 @@ export default function DiagramPage({ params }: PageProps) {
         return;
       }
 
+      const hasModifier = e.metaKey || e.ctrlKey;
+
       // Cmd/Ctrl + K: Quick add
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      if (hasModifier && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setQuickAddOpen((prev) => !prev);
         setSearchOpen(false);
       }
 
       // Cmd/Ctrl + F: Search
-      if ((e.metaKey || e.ctrlKey) && e.key === "f") {
+      if (hasModifier && e.key.toLowerCase() === "f") {
         e.preventDefault();
         setSearchOpen((prev) => !prev);
         setQuickAddOpen(false);
       }
 
+      // Cmd/Ctrl + \: Toggle sidebar
+      // Check multiple ways to detect the backslash key for cross-platform compatibility
+      if (hasModifier && (e.key === "\\" || e.code === "Backslash")) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleSidebar();
+      }
+
+      // Shift + Cmd/Ctrl + N: New system
+      if (e.shiftKey && hasModifier && e.key.toLowerCase() === "n") {
+        e.preventDefault();
+        const newId = createDiagram("New System");
+        router.push(`/d/${newId}`);
+      }
+
+      // Cmd/Ctrl + 1: System tab
+      if (hasModifier && e.key === "1") {
+        e.preventDefault();
+        setActiveTab("system");
+      }
+
+      // Cmd/Ctrl + 2: Database tab
+      if (hasModifier && e.key === "2") {
+        e.preventDefault();
+        setActiveTab("database");
+      }
+
       // Cmd/Ctrl + . : Toggle settings
-      if ((e.metaKey || e.ctrlKey) && e.key === ".") {
+      if (hasModifier && e.key === ".") {
         e.preventDefault();
         setSettingsOpen((prev) => !prev);
       }
 
       // Cmd/Ctrl + E: Export (single tab, auto-copy)
-      if ((e.metaKey || e.ctrlKey) && e.key === "e") {
+      if (hasModifier && e.key.toLowerCase() === "e") {
         e.preventDefault();
         openModal({ defaultTab: "export", showTabs: false, autoCopy: true });
       }
 
       // Cmd/Ctrl + I: Import (single tab)
-      if ((e.metaKey || e.ctrlKey) && e.key === "i") {
+      if (hasModifier && e.key.toLowerCase() === "i") {
         e.preventDefault();
         openModal({ defaultTab: "import", showTabs: false });
       }
 
       // Cmd/Ctrl + S or Cmd/Ctrl + Shift + S: Full import/export modal with tabs
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "s") {
+      if (hasModifier && e.key.toLowerCase() === "s") {
         e.preventDefault();
         openModal({ defaultTab: "export", showTabs: true });
       }
@@ -151,9 +185,10 @@ export default function DiagramPage({ params }: PageProps) {
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+    // Use capture phase to intercept before browser handles it
+    window.addEventListener("keydown", handleKeyDown, { capture: true });
+    return () => window.removeEventListener("keydown", handleKeyDown, { capture: true });
+  }, [toggleSidebar, createDiagram, router]);
 
   // Apply font preference
   useEffect(() => {
@@ -185,22 +220,38 @@ export default function DiagramPage({ params }: PageProps) {
   }
 
   return (
-    <div className="flex h-screen flex-col">
-      <TopBar
-        settingsOpen={settingsOpen}
-        onSettingsToggle={() => setSettingsOpen(!settingsOpen)}
-        onExportClick={() => openModal({ defaultTab: "export", showTabs: false, autoCopy: true })}
-        onImportClick={() => openModal({ defaultTab: "import", showTabs: false })}
-      />
-      <Breadcrumb />
+    <div className="flex h-screen">
+      {/* Sidebar - extends full height */}
+      <Sidebar onSearchOpen={() => setSearchOpen(true)} />
 
-      <div className="relative flex-1 overflow-hidden">
-        <Canvas />
-
-        <SettingsPanel
-          open={settingsOpen}
-          onClose={() => setSettingsOpen(false)}
+      {/* Right side - TopBar + content */}
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <TopBar
+          settingsOpen={settingsOpen}
+          onSettingsToggle={() => setSettingsOpen(!settingsOpen)}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          onExportClick={() => openModal({ defaultTab: "export", showTabs: false, autoCopy: true })}
+          onImportClick={() => openModal({ defaultTab: "import", showTabs: false })}
         />
+
+        {/* Main content area */}
+        <div className="relative flex-1 flex flex-col overflow-hidden">
+          {activeTab === "system" && <Breadcrumb />}
+
+          <div className="relative flex-1 overflow-hidden">
+            {activeTab === "system" ? (
+              <Canvas />
+            ) : (
+              <DatabaseView />
+            )}
+
+            <SettingsPanel
+              open={settingsOpen}
+              onClose={() => setSettingsOpen(false)}
+            />
+          </div>
+        </div>
       </div>
 
       <QuickAddMenu open={quickAddOpen} onClose={() => setQuickAddOpen(false)} />
