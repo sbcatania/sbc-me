@@ -13,9 +13,17 @@ import { SearchPanel } from "@/components/editor/SearchPanel";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { DatabaseView } from "@/components/editor/DatabaseView";
 import { TabType } from "@/components/layout/TabBar";
+import { ImportExportModal } from "@/components/editor/ImportExportModal";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+// Modal configuration for different use cases
+interface ModalConfig {
+  defaultTab: "export" | "import";
+  showTabs: boolean;
+  autoCopy: boolean;
 }
 
 export default function DiagramPage({ params }: PageProps) {
@@ -44,6 +52,14 @@ export default function DiagramPage({ params }: PageProps) {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<TabType>("system");
 
+  // Unified import/export modal state
+  const [importExportModalOpen, setImportExportModalOpen] = useState(false);
+  const [modalConfig, setModalConfig] = useState<ModalConfig>({
+    defaultTab: "export",
+    showTabs: true,
+    autoCopy: false,
+  });
+
   // Initialize stores
   useEffect(() => {
     initializeDiagrams();
@@ -69,6 +85,16 @@ export default function DiagramPage({ params }: PageProps) {
 
     load();
   }, [id, diagramsInitialized, loadDiagram, createDiagram, router]);
+
+  // Helper to open modal with specific config
+  const openModal = (config: Partial<ModalConfig>) => {
+    setModalConfig({
+      defaultTab: config.defaultTab ?? "export",
+      showTabs: config.showTabs ?? true,
+      autoCopy: config.autoCopy ?? false,
+    });
+    setImportExportModalOpen(true);
+  };
 
   // Global keyboard shortcuts
   useEffect(() => {
@@ -126,11 +152,36 @@ export default function DiagramPage({ params }: PageProps) {
         setActiveTab("database");
       }
 
+      // Cmd/Ctrl + . : Toggle settings
+      if (hasModifier && e.key === ".") {
+        e.preventDefault();
+        setSettingsOpen((prev) => !prev);
+      }
+
+      // Cmd/Ctrl + E: Export (single tab, auto-copy)
+      if (hasModifier && e.key.toLowerCase() === "e") {
+        e.preventDefault();
+        openModal({ defaultTab: "export", showTabs: false, autoCopy: true });
+      }
+
+      // Cmd/Ctrl + I: Import (single tab)
+      if (hasModifier && e.key.toLowerCase() === "i") {
+        e.preventDefault();
+        openModal({ defaultTab: "import", showTabs: false });
+      }
+
+      // Cmd/Ctrl + S or Cmd/Ctrl + Shift + S: Full import/export modal with tabs
+      if (hasModifier && e.key.toLowerCase() === "s") {
+        e.preventDefault();
+        openModal({ defaultTab: "export", showTabs: true });
+      }
+
       // Escape: Close panels
       if (e.key === "Escape") {
         setSettingsOpen(false);
         setQuickAddOpen(false);
         setSearchOpen(false);
+        setImportExportModalOpen(false);
       }
     };
 
@@ -180,6 +231,8 @@ export default function DiagramPage({ params }: PageProps) {
           onSettingsToggle={() => setSettingsOpen(!settingsOpen)}
           activeTab={activeTab}
           onTabChange={setActiveTab}
+          onExportClick={() => openModal({ defaultTab: "export", showTabs: false, autoCopy: true })}
+          onImportClick={() => openModal({ defaultTab: "import", showTabs: false })}
         />
 
         {/* Main content area */}
@@ -203,6 +256,14 @@ export default function DiagramPage({ params }: PageProps) {
 
       <QuickAddMenu open={quickAddOpen} onClose={() => setQuickAddOpen(false)} />
       <SearchPanel open={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      <ImportExportModal
+        open={importExportModalOpen}
+        onClose={() => setImportExportModalOpen(false)}
+        defaultTab={modalConfig.defaultTab}
+        showTabs={modalConfig.showTabs}
+        autoCopy={modalConfig.autoCopy}
+      />
     </div>
   );
 }

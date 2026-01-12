@@ -60,13 +60,13 @@ export async function importFixture(page: Page, fixtureName: string): Promise<vo
   await page.click('[data-testid="import-button"]');
 
   // Wait for modal to appear
-  await expect(page.locator('[data-testid="import-modal"]')).toBeVisible();
+  await expect(page.locator('[data-testid="import-export-modal"]')).toBeVisible();
 
-  // Paste the fixture JSON into the textarea (now directly visible)
-  await page.fill('[data-testid="import-paste-textarea"]', json);
+  // Paste the fixture JSON into the textarea
+  await page.fill('[data-testid="import-export-modal-import-textarea"]', json);
 
   // Click import button
-  await page.click('[data-testid="import-confirm-paste"]');
+  await page.click('[data-testid="import-export-modal-import-button"]');
 
   // Wait for navigation to new diagram
   await page.waitForURL(/\/d\//);
@@ -83,10 +83,10 @@ export async function exportDiagram(page: Page): Promise<string> {
   await page.click('[data-testid="export-button"]');
 
   // Wait for modal to appear
-  await expect(page.locator('[data-testid="export-modal"]')).toBeVisible();
+  await expect(page.locator('[data-testid="import-export-modal"]')).toBeVisible();
 
   // Get the JSON from the textarea
-  const json = await page.locator('[data-testid="export-json-textarea"]').inputValue();
+  const json = await page.locator('[data-testid="import-export-modal-export-textarea"]').inputValue();
 
   // Close the modal
   await page.keyboard.press("Escape");
@@ -105,9 +105,11 @@ export async function waitForCanvas(page: Page): Promise<void> {
 
 /**
  * Get the count of nodes visible on the canvas.
+ * Only counts main node elements, not handles.
  */
 export async function getNodeCount(page: Page): Promise<number> {
-  return page.locator("[data-node-id]").count();
+  // Exclude handles which also have data-node-id
+  return page.locator("[data-node-id]:not([data-handle])").count();
 }
 
 /**
@@ -135,7 +137,8 @@ export async function createNodeAt(
  * Select a node by its ID.
  */
 export async function selectNode(page: Page, nodeId: string): Promise<void> {
-  await page.click(`[data-node-id="${nodeId}"]`);
+  // Exclude handles to click on the main node group
+  await page.click(`[data-node-id="${nodeId}"]:not([data-handle])`);
 }
 
 /**
@@ -150,7 +153,7 @@ export async function deleteSelected(page: Page): Promise<void> {
  * Trigger auto-layout.
  */
 export async function autoLayout(page: Page): Promise<void> {
-  await page.click('[title="Auto Layout"]');
+  await page.click('[title*="Auto Layout"]');
   await page.waitForTimeout(500);
 }
 
@@ -158,7 +161,7 @@ export async function autoLayout(page: Page): Promise<void> {
  * Trigger zoom to fit.
  */
 export async function zoomToFit(page: Page): Promise<void> {
-  await page.click('[title="Zoom to Fit"]');
+  await page.click('[title*="Zoom to Fit"]');
   await page.waitForTimeout(300);
 }
 
@@ -166,7 +169,7 @@ export async function zoomToFit(page: Page): Promise<void> {
  * Open the settings panel.
  */
 export async function openSettings(page: Page): Promise<void> {
-  await page.click('[title="Settings"]');
+  await page.click('[title*="Settings"]:not([title*="Close"])');
   await page.waitForTimeout(200);
 }
 
@@ -174,7 +177,7 @@ export async function openSettings(page: Page): Promise<void> {
  * Close the settings panel.
  */
 export async function closeSettings(page: Page): Promise<void> {
-  await page.click('[title="Close Settings"]');
+  await page.click('[title*="Close Settings"]');
   await page.waitForTimeout(200);
 }
 
