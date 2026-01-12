@@ -9,8 +9,18 @@ A local-first, beautiful systems diagram editor with stocks and flows, Muse-like
 | Document | Purpose | When to Read/Update |
 |----------|---------|---------------------|
 | `/docs/edge-routing.md` | Edge/flow connection logic, bezier curves, collision avoidance | Modifying edge rendering, fixing connection bugs |
-| `/docs/testing.md` | Playwright test suite, fixtures, helpers | Running tests, adding test cases |
+| `/docs/testing.md` | Playwright test suite, fixtures, helpers, **config sync guide** | Running tests, adding test cases, **changing ANY testing config** |
 | `CLAUDE.md` (this file) | Project overview, architecture, constraints | Starting work, major changes |
+
+### Testing Configuration Changes
+
+**CRITICAL**: Testing config is spread across multiple files. When changing tests, commands, CI, or test tooling, you MUST read `/docs/testing.md` first - it contains a sync checklist of all files that need updates together. Files include:
+- `package.json` (scripts)
+- `playwright.config.ts` (runner config)
+- `.github/workflows/ci.yml` (CI jobs)
+- `docs/testing.md` (documentation)
+- `CLAUDE.md` (this file)
+- `tests/helpers.ts` (utilities)
 
 ### Development Workflow
 

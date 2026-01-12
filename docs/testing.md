@@ -2,6 +2,70 @@
 
 This document describes how to run tests and create new test scenarios for System Builder.
 
+---
+
+## IMPORTANT: Testing Configuration Sync
+
+**AI Agents (Claude Code, Codex, etc.): Read this section first when making any testing-related changes.**
+
+Testing configuration is spread across multiple files that must stay in sync. When you modify testing processes, commands, configuration, or CI, you MUST update ALL relevant files listed below.
+
+### Testing-Related Files Checklist
+
+When changing testing configuration, review and update ALL of these files:
+
+| File | Contains | Update When... |
+|------|----------|----------------|
+| `docs/testing.md` (this file) | Testing guide, commands, fixtures, helpers | Commands change, new helpers added, fixtures added |
+| `CLAUDE.md` | Testing section for AI context | Commands change, workflow changes |
+| `package.json` | `scripts.test*` entries | Test commands change |
+| `playwright.config.ts` | Playwright settings (browsers, timeouts, retries) | Test runner config changes |
+| `.github/workflows/ci.yml` | CI test job configuration | CI testing approach changes |
+| `tests/helpers.ts` | Shared test utilities | New helper patterns emerge |
+| `tests/fixtures/` | Test scenario JSON files | New test scenarios needed |
+
+### Sync Scenarios
+
+**Scenario: Adding a new test command**
+1. Add script to `package.json`
+2. Document in `docs/testing.md` Quick Start section
+3. Update `CLAUDE.md` Testing section if it's commonly used
+4. Update CI workflow if it should run in CI
+
+**Scenario: Changing test framework or runner**
+1. Update `playwright.config.ts` or replace config entirely
+2. Update ALL `package.json` test scripts
+3. Rewrite `docs/testing.md` Quick Start and relevant sections
+4. Update `CLAUDE.md` Testing section
+5. Update `.github/workflows/ci.yml` test job
+6. Update `tests/helpers.ts` if APIs changed
+
+**Scenario: Adding new test fixtures**
+1. Create fixture in `tests/fixtures/`
+2. Add to fixtures table in `docs/testing.md`
+3. Add to fixtures table in `CLAUDE.md` if notable
+
+**Scenario: Changing CI test behavior**
+1. Update `.github/workflows/ci.yml`
+2. Update `playwright.config.ts` CI-specific settings if needed
+3. Update CI Integration section in `docs/testing.md`
+
+**Scenario: Adding new test helper functions**
+1. Add to `tests/helpers.ts`
+2. Document in `docs/testing.md` Test Helpers section
+3. Add usage examples
+
+### Verification Checklist
+
+After making testing changes, verify:
+- [ ] `bun test` runs successfully locally
+- [ ] All documentation reflects current commands
+- [ ] `package.json` scripts match documentation
+- [ ] CI workflow uses same commands as local development
+- [ ] Any new fixtures are documented
+
+---
+
 ## Quick Start
 
 ```bash
