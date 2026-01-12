@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "id": "d_hg2uUJXpHYZe",
+  "title": "Simple loop",
+  "createdAt": 1768197169329,
+  "updatedAt": 1768197205599,
+  "viewport": {
+    "x": 487,
+    "y": 414.5,
+    "zoom": 1
+  },
+  "ui": {
+    "labelMode": "hover",
+    "hasRunInitialAutoLayout": true,
+    "hasManualLayoutEdits": true
+  },
+  "nodes": {
+    "n_jWUrOz00Y5Lg": {
+      "type": "stock",
+      "kind": "internal",
+      "label": "Stock 1",
+      "x": -232.78874536821954,
+      "y": -25.99999999999997,
+      "width": 160,
+      "height": 52,
+      "id": "n_jWUrOz00Y5Lg"
+    },
+    "n_AK5CfsEYL7iK": {
+      "type": "stock",
+      "kind": "internal",
+      "label": "Stock 2",
+      "x": -79.99999999999997,
+      "y": 126.78874536821954,
+      "width": 160,
+      "height": 52,
+      "id": "n_AK5CfsEYL7iK"
+    },
+    "n_F9W-r6u4i6mh": {
+      "type": "stock",
+      "kind": "internal",
+      "label": "Stock 3",
+      "x": 72.78874536821954,
+      "y": -26,
+      "width": 160,
+      "height": 52,
+      "id": "n_F9W-r6u4i6mh"
+    },
+    "n_SnC-vEKvi6Le": {
+      "type": "stock",
+      "kind": "internal",
+      "label": "Stock 4",
+      "x": -79.99999999999997,
+      "y": -178.78874536821954,
+      "width": 160,
+      "height": 52,
+      "id": "n_SnC-vEKvi6Le"
+    }
+  },
+  "edges": {
+    "e_VzP5wJQHnOUv": {
+      "type": "flow",
+      "sourceId": "n_jWUrOz00Y5Lg",
+      "targetId": "n_AK5CfsEYL7iK",
+      "label": "",
+      "id": "e_VzP5wJQHnOUv"
+    },
+    "e_m1g_h9_uIGP7": {
+      "type": "flow",
+      "sourceId": "n_AK5CfsEYL7iK",
+      "targetId": "n_F9W-r6u4i6mh",
+      "label": "",
+      "id": "e_m1g_h9_uIGP7"
+    },
+    "e_Rd7eV60wV-3e": {
+      "type": "flow",
+      "sourceId": "n_F9W-r6u4i6mh",
+      "targetId": "n_SnC-vEKvi6Le",
+      "label": "",
+      "id": "e_Rd7eV60wV-3e"
+    },
+    "e_0fs3RllivSOy": {
+      "type": "flow",
+      "sourceId": "n_SnC-vEKvi6Le",
+      "targetId": "n_jWUrOz00Y5Lg",
+      "label": "",
+      "id": "e_0fs3RllivSOy"
+    }
+  },
+  "frames": {},
+  "notes": {}
+}
