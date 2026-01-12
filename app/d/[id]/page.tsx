@@ -83,41 +83,45 @@ export default function DiagramPage({ params }: PageProps) {
         return;
       }
 
+      const hasModifier = e.metaKey || e.ctrlKey;
+
       // Cmd/Ctrl + K: Quick add
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      if (hasModifier && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setQuickAddOpen((prev) => !prev);
         setSearchOpen(false);
       }
 
       // Cmd/Ctrl + F: Search
-      if ((e.metaKey || e.ctrlKey) && e.key === "f") {
+      if (hasModifier && e.key.toLowerCase() === "f") {
         e.preventDefault();
         setSearchOpen((prev) => !prev);
         setQuickAddOpen(false);
       }
 
-      // Cmd/Ctrl + /: Toggle sidebar (check both key and code for cross-platform)
-      if ((e.metaKey || e.ctrlKey) && (e.key === "/" || e.code === "Slash")) {
+      // Cmd/Ctrl + /: Toggle sidebar
+      // Check multiple ways to detect the slash key for cross-platform compatibility
+      if (hasModifier && (e.key === "/" || e.code === "Slash" || e.code === "NumpadDivide")) {
         e.preventDefault();
+        e.stopPropagation();
         toggleSidebar();
       }
 
       // Shift + Cmd/Ctrl + N: New system
-      if (e.shiftKey && (e.metaKey || e.ctrlKey) && e.key === "n") {
+      if (e.shiftKey && hasModifier && e.key.toLowerCase() === "n") {
         e.preventDefault();
         const newId = createDiagram("New System");
         router.push(`/d/${newId}`);
       }
 
       // Cmd/Ctrl + 1: System tab
-      if ((e.metaKey || e.ctrlKey) && e.key === "1") {
+      if (hasModifier && e.key === "1") {
         e.preventDefault();
         setActiveTab("system");
       }
 
       // Cmd/Ctrl + 2: Database tab
-      if ((e.metaKey || e.ctrlKey) && e.key === "2") {
+      if (hasModifier && e.key === "2") {
         e.preventDefault();
         setActiveTab("database");
       }
@@ -130,8 +134,9 @@ export default function DiagramPage({ params }: PageProps) {
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    // Use capture phase to intercept before browser handles it
+    window.addEventListener("keydown", handleKeyDown, { capture: true });
+    return () => window.removeEventListener("keydown", handleKeyDown, { capture: true });
   }, [toggleSidebar, createDiagram, router]);
 
   // Apply font preference

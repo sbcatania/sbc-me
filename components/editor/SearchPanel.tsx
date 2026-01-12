@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
-import { Search, X } from "lucide-react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { Search, X, Pin } from "lucide-react";
 import { useDiagramStore } from "@/lib/store/diagrams";
-import { Node } from "@/lib/model/schema";
+import { cn } from "@/lib/utils";
 
 interface SearchPanelProps {
   open: boolean;
@@ -12,69 +13,46 @@ interface SearchPanelProps {
 
 interface SearchResult {
   id: string;
-  type: "node" | "edge";
-  label: string;
-  node?: Node;
+  title: string;
+  updatedAt: number;
+  pinned?: boolean;
 }
 
 export function SearchPanel({ open, onClose }: SearchPanelProps) {
+  const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<SearchResult[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const {
-    currentDiagram,
-    setSelectedNodeIds,
-    setSelectedEdgeIds,
-    clearSelection,
-    setViewport,
-  } = useDiagramStore();
+  const { diagrams, currentDiagramId } = useDiagramStore();
+
+  // Get all diagrams sorted by recency
+  const allDiagrams = useMemo(() => {
+    return Object.values(diagrams).sort((a, b) => b.updatedAt - a.updatedAt);
+  }, [diagrams]);
+
+  // Filter diagrams based on search query
+  const results = useMemo(() => {
+    if (!query.trim()) {
+      return allDiagrams;
+    }
+    const searchTerm = query.toLowerCase();
+    return allDiagrams.filter((d) =>
+      d.title.toLowerCase().includes(searchTerm)
+    );
+  }, [query, allDiagrams]);
 
   useEffect(() => {
     if (open) {
       setQuery("");
-      setResults([]);
       setSelectedIndex(0);
       setTimeout(() => inputRef.current?.focus(), 0);
     }
   }, [open]);
 
   useEffect(() => {
-    if (!currentDiagram || !query.trim()) {
-      setResults([]);
-      return;
-    }
-
-    const searchTerm = query.toLowerCase();
-    const newResults: SearchResult[] = [];
-
-    // Search nodes
-    Object.values(currentDiagram.nodes).forEach((node) => {
-      if (node.label.toLowerCase().includes(searchTerm)) {
-        newResults.push({
-          id: node.id,
-          type: "node",
-          label: node.label || "Untitled Stock",
-          node,
-        });
-      }
-    });
-
-    // Search edges
-    Object.values(currentDiagram.edges).forEach((edge) => {
-      if (edge.label.toLowerCase().includes(searchTerm)) {
-        newResults.push({
-          id: edge.id,
-          type: "edge",
-          label: edge.label || "Untitled Flow",
-        });
-      }
-    });
-
-    setResults(newResults);
     setSelectedIndex(0);
-  }, [query, currentDiagram]);
+  }, [query]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     switch (e.key) {
@@ -100,30 +78,7 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
   };
 
   const handleSelect = (result: SearchResult) => {
-    clearSelection();
-
-    if (result.type === "node") {
-      setSelectedNodeIds(new Set([result.id]));
-
-      // Pan to node
-      if (result.node && currentDiagram) {
-        const viewport = currentDiagram.viewport || { x: 0, y: 0, zoom: 1 };
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-
-        const nodeX = result.node.x + result.node.width / 2;
-        const nodeY = result.node.y + result.node.height / 2;
-
-        setViewport({
-          x: centerX - nodeX * viewport.zoom,
-          y: centerY - nodeY * viewport.zoom,
-          zoom: viewport.zoom,
-        });
-      }
-    } else {
-      setSelectedEdgeIds(new Set([result.id]));
-    }
-
+    router.push(`/d/${result.id}`);
     onClose();
   };
 
@@ -147,7 +102,7 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Search nodes and flows..."
+            placeholder="Search systems..."
             className="flex-1 text-sm bg-transparent outline-none"
           />
           <button onClick={onClose}>
@@ -160,24 +115,23 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
             {results.map((result, index) => (
               <button
                 key={result.id}
-                className={`flex w-full items-center gap-3 px-4 py-2 text-sm ${
+                className={cn(
+                  "flex w-full items-center gap-3 px-4 py-2 text-sm",
                   index === selectedIndex
                     ? "bg-accent text-accent-foreground"
-                    : "hover:bg-muted"
-                }`}
+                    : "hover:bg-muted",
+                  result.id === currentDiagramId && "font-medium"
+                )}
                 onClick={() => handleSelect(result)}
                 onMouseEnter={() => setSelectedIndex(index)}
               >
-                <span
-                  className={`text-xs px-1.5 py-0.5 border ${
-                    result.type === "node"
-                      ? "border-foreground"
-                      : "border-muted-foreground"
-                  }`}
-                >
-                  {result.type === "node" ? "Stock" : "Flow"}
-                </span>
-                <span className="flex-1 text-left truncate">{result.label}</span>
+                {result.pinned && (
+                  <Pin className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                )}
+                <span className="flex-1 text-left truncate">{result.title}</span>
+                {result.id === currentDiagramId && (
+                  <span className="text-xs text-muted-foreground">Current</span>
+                )}
               </button>
             ))}
           </div>
@@ -185,13 +139,13 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
 
         {query && results.length === 0 && (
           <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-            No results found for &quot;{query}&quot;
+            No systems found for &quot;{query}&quot;
           </div>
         )}
 
-        {!query && (
+        {!query && allDiagrams.length === 0 && (
           <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-            Start typing to search...
+            No systems yet
           </div>
         )}
       </div>
