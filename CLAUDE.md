@@ -17,9 +17,11 @@ A local-first, beautiful systems diagram editor with stocks and flows, Muse-like
 **IMPORTANT**: This project requires E2E testing of all changes:
 
 1. **Always E2E test changes**: Before considering any change complete, verify it works in the browser
-2. **Use Playwright for automated testing**: Run `bun test` to execute the full test suite
-3. **Manual verification**: After making UI changes, navigate to `http://localhost:4000` and test the feature
+2. **Use Playwright for automated testing**: Run `npx playwright test` to execute the full test suite
+3. **Manual verification**: After making UI changes, navigate to `http://localhost:$CONDUCTOR_PORT` (or `http://localhost:4000` outside Conductor) and test the feature
 4. **Test edge cases**: Try different inputs, long text, special characters, etc.
+
+**Port Configuration**: When running in Conductor, the dev server and tests automatically use `CONDUCTOR_PORT` environment variable. Outside Conductor, port 4000 is used as fallback.
 
 ### Documentation Workflow
 
@@ -61,18 +63,23 @@ Create new docs liberally in `/docs/` for:
 ### Running Tests
 
 ```bash
-# Run all tests (starts dev server automatically)
-bun test
+# Run all tests (starts dev server automatically on CONDUCTOR_PORT or 4000)
+npx playwright test
 
 # Interactive UI mode (recommended for debugging)
-bun run test:ui
+npx playwright test --ui
 
 # Run with visible browser
-bun run test:headed
+npx playwright test --headed
 
 # Debug mode with step-through
-bun run test:debug
+npx playwright test --debug
+
+# List all tests without running
+npx playwright test --list
 ```
+
+**Note**: The test server automatically uses `CONDUCTOR_PORT` when running in Conductor, falling back to port 4000 otherwise. This ensures tests work correctly in parallel Conductor workspaces.
 
 ### Test Fixtures
 
@@ -276,8 +283,8 @@ bun run dev -- -p 4000
 # Build for production
 bun run build
 
-# Run tests
-bun test
+# Run tests (Playwright E2E)
+npx playwright test
 ```
 
 ## Data Storage

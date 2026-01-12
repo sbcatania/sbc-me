@@ -4,6 +4,11 @@ import { defineConfig, devices } from "@playwright/test";
  * Playwright configuration for System Builder tests.
  * @see https://playwright.dev/docs/test-configuration
  */
+
+// Use CONDUCTOR_PORT if running in Conductor, otherwise fall back to 4000
+const port = process.env.CONDUCTOR_PORT || "4000";
+const baseURL = `http://localhost:${port}`;
+
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
@@ -13,7 +18,7 @@ export default defineConfig({
   reporter: "html",
 
   use: {
-    baseURL: "http://localhost:4000",
+    baseURL,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },
@@ -27,8 +32,8 @@ export default defineConfig({
 
   /* Run the dev server before tests */
   webServer: {
-    command: "npm run dev -- -p 4000",
-    url: "http://localhost:4000",
+    command: `npm run dev -- -p ${port}`,
+    url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
   },
