@@ -31,8 +31,8 @@ test.describe("Canvas Interactions", () => {
     // Import a diagram with nodes
     await importFixture(page, "single-stock");
 
-    // Click on the node
-    const node = page.locator("[data-node-id]").first();
+    // Click on the node (exclude handles)
+    const node = page.locator("[data-node-id]:not([data-handle])").first();
     await node.click();
 
     // Node should be visually selected (border changes)
@@ -89,7 +89,7 @@ test.describe("Canvas Interactions", () => {
     await importFixture(page, "complex-system");
 
     // Get initial positions
-    const initialNode = await page.locator("[data-node-id]").first().boundingBox();
+    const initialNode = await page.locator("[data-node-id]:not([data-handle])").first().boundingBox();
 
     // Run auto-layout
     await autoLayout(page);
@@ -114,7 +114,7 @@ test.describe("Canvas Interactions", () => {
   test("should pan canvas with space + drag", async ({ page }) => {
     await importFixture(page, "simple-flow");
 
-    const canvas = page.locator("svg");
+    const canvas = page.locator("svg.h-full.w-full");
 
     // Hold space and drag
     await page.keyboard.down("Space");

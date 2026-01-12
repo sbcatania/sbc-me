@@ -90,9 +90,11 @@ export async function waitForCanvas(page: Page): Promise<void> {
 
 /**
  * Get the count of nodes visible on the canvas.
+ * Only counts main node elements, not handles.
  */
 export async function getNodeCount(page: Page): Promise<number> {
-  return page.locator("[data-node-id]").count();
+  // Exclude handles which also have data-node-id
+  return page.locator("[data-node-id]:not([data-handle])").count();
 }
 
 /**
@@ -110,7 +112,8 @@ export async function createNodeAt(
   x: number,
   y: number
 ): Promise<void> {
-  const canvas = page.locator("svg");
+  // Use the main canvas SVG (the one with class h-full w-full)
+  const canvas = page.locator("svg.h-full.w-full");
   await canvas.dblclick({ position: { x, y } });
   // Wait for new node to appear
   await page.waitForTimeout(300);
@@ -120,7 +123,8 @@ export async function createNodeAt(
  * Select a node by its ID.
  */
 export async function selectNode(page: Page, nodeId: string): Promise<void> {
-  await page.click(`[data-node-id="${nodeId}"]`);
+  // Exclude handles to click on the main node group
+  await page.click(`[data-node-id="${nodeId}"]:not([data-handle])`);
 }
 
 /**
@@ -135,7 +139,7 @@ export async function deleteSelected(page: Page): Promise<void> {
  * Trigger auto-layout.
  */
 export async function autoLayout(page: Page): Promise<void> {
-  await page.click('[title="Auto Layout"]');
+  await page.click('[title^="Auto Layout"]');
   await page.waitForTimeout(500);
 }
 
@@ -143,7 +147,7 @@ export async function autoLayout(page: Page): Promise<void> {
  * Trigger zoom to fit.
  */
 export async function zoomToFit(page: Page): Promise<void> {
-  await page.click('[title="Zoom to Fit"]');
+  await page.click('[title^="Zoom to Fit"]');
   await page.waitForTimeout(300);
 }
 

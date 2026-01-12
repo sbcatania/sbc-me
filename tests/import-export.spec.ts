@@ -30,8 +30,8 @@ test.describe("Import/Export", () => {
     const nodeCount = await getNodeCount(page);
     expect(nodeCount).toBe(1);
 
-    // Verify the node label
-    await expect(page.locator("[data-node-id]")).toContainText("Inventory");
+    // Verify the node label (exclude handles)
+    await expect(page.locator("[data-node-id]:not([data-handle])")).toContainText("Inventory");
   });
 
   test("should import a simple flow diagram", async ({ page }) => {
@@ -106,10 +106,7 @@ test.describe("Import/Export", () => {
     await page.click('[data-testid="import-button"]');
     await expect(page.locator('[data-testid="import-modal"]')).toBeVisible();
 
-    // Switch to paste mode
-    await page.click('[data-testid="import-paste-button"]');
-
-    // Paste invalid JSON
+    // Paste invalid JSON (textarea is directly visible)
     await page.fill('[data-testid="import-paste-textarea"]', "{ invalid json }");
 
     // Try to import
