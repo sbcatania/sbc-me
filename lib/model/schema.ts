@@ -9,6 +9,48 @@ export const ViewportSchema = z.object({
 
 export type Viewport = z.infer<typeof ViewportSchema>;
 
+// Property option for select/multi-select
+export const PropertyOptionSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  color: z.enum(["gray", "blue", "green", "yellow", "orange", "red", "purple", "pink"]).optional(),
+});
+
+export type PropertyOption = z.infer<typeof PropertyOptionSchema>;
+
+// Property type discriminated union
+export const PropertyTypeSchema = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("text") }),
+  z.object({ type: z.literal("number") }),
+  z.object({ type: z.literal("checkbox") }),
+  z.object({
+    type: z.literal("select"),
+    options: z.array(PropertyOptionSchema),
+  }),
+  z.object({
+    type: z.literal("multi-select"),
+    options: z.array(PropertyOptionSchema),
+  }),
+]);
+
+export type PropertyType = z.infer<typeof PropertyTypeSchema>;
+
+// Property definition (unified for stocks and flows)
+export const PropertyDefinitionSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  propertyType: PropertyTypeSchema,
+});
+
+export type PropertyDefinition = z.infer<typeof PropertyDefinitionSchema>;
+
+// Diagram property schema
+export const DiagramPropertySchemaSchema = z.object({
+  properties: z.array(PropertyDefinitionSchema),
+});
+
+export type DiagramPropertySchema = z.infer<typeof DiagramPropertySchemaSchema>;
+
 // Curve control points for bezier edges
 export const CurveSchema = z.object({
   type: z.literal("bezier"),
@@ -117,6 +159,7 @@ export const DiagramDocSchema = z.object({
   edges: z.record(EdgeSchema),
   frames: z.record(FrameSchema).optional(),
   notes: z.record(NoteSchema).optional(),
+  propertySchema: DiagramPropertySchemaSchema.optional(),
 });
 
 export type DiagramDoc = z.infer<typeof DiagramDocSchema>;
@@ -140,6 +183,7 @@ export const UserPrefsSchema = z.object({
   grid: z.object({
     style: GridStyleSchema.default("lines"),
   }),
+  sidebarCollapsed: z.boolean().optional(),
 });
 
 export type UserPrefs = z.infer<typeof UserPrefsSchema>;
@@ -150,6 +194,7 @@ export const DiagramIndexEntrySchema = z.object({
   title: z.string(),
   updatedAt: z.number(),
   isRoot: z.boolean().optional(),
+  pinned: z.boolean().optional(),
 });
 
 export type DiagramIndexEntry = z.infer<typeof DiagramIndexEntrySchema>;

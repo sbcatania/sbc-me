@@ -177,6 +177,32 @@ Key principles (see docs for full spec):
 - Subtle grid background
 - Crisp typography
 
+### Undo/Redo Requirements
+
+**IMPORTANT**: All user actions that modify data must be undoable:
+
+1. **Every destructive action must be undoable** - Never use confirmation dialogs for delete operations. Instead, make the action reversible via undo (⌘Z).
+
+2. **Actions that require undo/redo support**:
+   - Node creation, deletion, and modification
+   - Edge creation, deletion, and modification
+   - Label changes
+   - Position changes (drag operations)
+   - Property value changes
+   - Selection changes (for multi-select operations)
+
+3. **Implementation pattern**:
+   - Store previous state before modification
+   - Push to undo stack
+   - Clear redo stack on new action
+   - Redo pops from redo stack, pushes to undo
+
+4. **Testing requirements**:
+   - Write E2E tests for undo/redo of each action type
+   - Test that redo works after undo
+   - Test that new actions clear redo stack
+   - Test undo/redo across persistence (state should survive page reload)
+
 ### Performance
 - Target smooth interaction at 50-100 nodes
 - SVG rendering for V1 (sufficient for target scale)
@@ -267,6 +293,10 @@ Key principles (see docs for full spec):
 | Select all | ⌘A |
 | Search | ⌘F |
 | Quick add | ⌘K |
+| Toggle sidebar | ⌘/ |
+| New system | ⇧⌘N |
+| System tab | ⌘1 |
+| Database tab | ⌘2 |
 
 ## Development
 

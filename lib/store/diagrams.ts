@@ -11,8 +11,9 @@ import {
   Frame,
   DEFAULT_VIEWPORT,
   Viewport,
+  PropertyDefinition,
 } from "@/lib/model/schema";
-import { generateDiagramId, generateNodeId, generateEdgeId, generateFrameId } from "@/lib/model/ids";
+import { generateDiagramId, generateNodeId, generateEdgeId, generateFrameId, generatePropertyId } from "@/lib/model/ids";
 
 const DIAGRAM_PREFIX = "diagram:";
 const DIAGRAMS_INDEX_KEY = "diagrams:index";
@@ -22,6 +23,7 @@ interface DiagramIndex {
     id: string;
     title: string;
     updatedAt: number;
+    pinned?: boolean;
   };
 }
 
@@ -87,6 +89,18 @@ interface DiagramState {
 
   // Persistence
   saveDiagram: () => Promise<void>;
+
+  // Property schema management
+  addProperty: (prop: Omit<PropertyDefinition, "id">) => string;
+  updateProperty: (id: string, updates: Partial<PropertyDefinition>) => void;
+  deleteProperty: (id: string) => void;
+  reorderProperties: (ids: string[]) => void;
+
+  // Pinned diagrams
+  togglePinned: (id: string) => void;
+
+  // Rename diagram
+  renameDiagram: (id: string, title: string) => void;
 }
 
 export const useDiagramStore = create<DiagramState>()(
@@ -577,6 +591,124 @@ export const useDiagramStore = create<DiagramState>()(
 
       await idbSet(`${DIAGRAM_PREFIX}${currentDiagram.id}`, currentDiagram);
       await idbSet(DIAGRAMS_INDEX_KEY, diagrams);
+    },
+
+    addProperty: (propData: Omit<PropertyDefinition, "id">) => {
+      const { currentDiagram } = get();
+      if (!currentDiagram) return "";
+
+      const id = generatePropertyId();
+      const prop: PropertyDefinition = { ...propData, id };
+
+      const currentSchema = currentDiagram.propertySchema || { properties: [] };
+      const updated = {
+        ...currentDiagram,
+        propertySchema: {
+          properties: [...currentSchema.properties, prop],
+        },
+        updatedAt: Date.now(),
+      };
+
+      set({ currentDiagram: updated });
+      return id;
+    },
+
+    updateProperty: (id: string, updates: Partial<PropertyDefinition>) => {
+      const { currentDiagram } = get();
+      if (!currentDiagram || !currentDiagram.propertySchema) return;
+
+      const properties = currentDiagram.propertySchema.properties.map((p) =>
+        p.id === id ? { ...p, ...updates } : p
+      );
+
+      const updated = {
+        ...currentDiagram,
+        propertySchema: { properties },
+        updatedAt: Date.now(),
+      };
+
+      set({ currentDiagram: updated });
+    },
+
+    deleteProperty: (id: string) => {
+      const { currentDiagram } = get();
+      if (!currentDiagram || !currentDiagram.propertySchema) return;
+
+      const properties = currentDiagram.propertySchema.properties.filter(
+        (p) => p.id !== id
+      );
+
+      const updated = {
+        ...currentDiagram,
+        propertySchema: { properties },
+        updatedAt: Date.now(),
+      };
+
+      set({ currentDiagram: updated });
+    },
+
+    reorderProperties: (ids: string[]) => {
+      const { currentDiagram } = get();
+      if (!currentDiagram || !currentDiagram.propertySchema) return;
+
+      const propMap = new Map(
+        currentDiagram.propertySchema.properties.map((p) => [p.id, p])
+      );
+      const properties = ids
+        .map((id) => propMap.get(id))
+        .filter((p): p is PropertyDefinition => p !== undefined);
+
+      const updated = {
+        ...currentDiagram,
+        propertySchema: { properties },
+        updatedAt: Date.now(),
+      };
+
+      set({ currentDiagram: updated });
+    },
+
+    togglePinned: (id: string) => {
+      const { diagrams } = get();
+      if (!diagrams[id]) return;
+
+      const newIndex = {
+        ...diagrams,
+        [id]: {
+          ...diagrams[id],
+          pinned: !diagrams[id].pinned,
+        },
+      };
+
+      set({ diagrams: newIndex });
+      idbSet(DIAGRAMS_INDEX_KEY, newIndex);
+    },
+
+    renameDiagram: (id: string, title: string) => {
+      const { diagrams, currentDiagram } = get();
+      if (!diagrams[id]) return;
+
+      const newIndex = {
+        ...diagrams,
+        [id]: {
+          ...diagrams[id],
+          title,
+          updatedAt: Date.now(),
+        },
+      };
+
+      // Also update currentDiagram if it's the same diagram
+      const updatedCurrentDiagram =
+        currentDiagram && currentDiagram.id === id
+          ? { ...currentDiagram, title, updatedAt: Date.now() }
+          : currentDiagram;
+
+      set({ diagrams: newIndex, currentDiagram: updatedCurrentDiagram });
+      idbSet(DIAGRAMS_INDEX_KEY, newIndex);
+
+      // Also update the full diagram in storage
+      if (updatedCurrentDiagram && updatedCurrentDiagram.id === id) {
+        idbSet(`${DIAGRAM_PREFIX}${id}`, updatedCurrentDiagram);
+      }
     },
   }))
 );

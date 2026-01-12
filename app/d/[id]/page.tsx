@@ -10,6 +10,9 @@ import { Breadcrumb } from "@/components/editor/Breadcrumb";
 import { SettingsPanel } from "@/components/editor/SettingsPanel";
 import { QuickAddMenu } from "@/components/editor/QuickAddMenu";
 import { SearchPanel } from "@/components/editor/SearchPanel";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { DatabaseView } from "@/components/editor/DatabaseView";
+import { TabType } from "@/components/layout/TabBar";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -32,12 +35,14 @@ export default function DiagramPage({ params }: PageProps) {
     initialized: prefsInitialized,
     initialize: initializePrefs,
     prefs,
+    toggleSidebar,
   } = usePrefsStore();
 
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [quickAddOpen, setQuickAddOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<TabType>("system");
 
   // Initialize stores
   useEffect(() => {
@@ -92,6 +97,31 @@ export default function DiagramPage({ params }: PageProps) {
         setQuickAddOpen(false);
       }
 
+      // Cmd/Ctrl + /: Toggle sidebar
+      if ((e.metaKey || e.ctrlKey) && e.key === "/") {
+        e.preventDefault();
+        toggleSidebar();
+      }
+
+      // Shift + Cmd/Ctrl + N: New system
+      if (e.shiftKey && (e.metaKey || e.ctrlKey) && e.key === "n") {
+        e.preventDefault();
+        const newId = createDiagram("New System");
+        router.push(`/d/${newId}`);
+      }
+
+      // Cmd/Ctrl + 1: System tab
+      if ((e.metaKey || e.ctrlKey) && e.key === "1") {
+        e.preventDefault();
+        setActiveTab("system");
+      }
+
+      // Cmd/Ctrl + 2: Database tab
+      if ((e.metaKey || e.ctrlKey) && e.key === "2") {
+        e.preventDefault();
+        setActiveTab("database");
+      }
+
       // Escape: Close panels
       if (e.key === "Escape") {
         setSettingsOpen(false);
@@ -102,7 +132,7 @@ export default function DiagramPage({ params }: PageProps) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [toggleSidebar, createDiagram, router]);
 
   // Apply font preference
   useEffect(() => {
@@ -134,20 +164,36 @@ export default function DiagramPage({ params }: PageProps) {
   }
 
   return (
-    <div className="flex h-screen flex-col">
-      <TopBar
+    <div className="flex h-screen">
+      {/* Sidebar - extends full height */}
+      <Sidebar />
+
+      {/* Right side - TopBar + content */}
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <TopBar
           settingsOpen={settingsOpen}
           onSettingsToggle={() => setSettingsOpen(!settingsOpen)}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
         />
-      <Breadcrumb />
 
-      <div className="relative flex-1 overflow-hidden">
-        <Canvas />
+        {/* Main content area */}
+        <div className="relative flex-1 flex flex-col overflow-hidden">
+          {activeTab === "system" && <Breadcrumb />}
 
-        <SettingsPanel
-          open={settingsOpen}
-          onClose={() => setSettingsOpen(false)}
-        />
+          <div className="relative flex-1 overflow-hidden">
+            {activeTab === "system" ? (
+              <Canvas />
+            ) : (
+              <DatabaseView />
+            )}
+
+            <SettingsPanel
+              open={settingsOpen}
+              onClose={() => setSettingsOpen(false)}
+            />
+          </div>
+        </div>
       </div>
 
       <QuickAddMenu open={quickAddOpen} onClose={() => setQuickAddOpen(false)} />

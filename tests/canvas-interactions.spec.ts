@@ -9,11 +9,15 @@ import {
   deleteSelected,
   autoLayout,
   zoomToFit,
+  clearIndexedDB,
 } from "./helpers";
 
 test.describe("Canvas Interactions", () => {
   test.beforeEach(async ({ page }) => {
+    // Clear IndexedDB to ensure clean test state
     await page.goto("/");
+    await clearIndexedDB(page);
+    await page.reload();
     await waitForCanvas(page);
   });
 
@@ -114,7 +118,7 @@ test.describe("Canvas Interactions", () => {
   test("should pan canvas with space + drag", async ({ page }) => {
     await importFixture(page, "simple-flow");
 
-    const canvas = page.locator("svg");
+    const canvas = page.locator('[data-testid="canvas-svg"]');
 
     // Hold space and drag
     await page.keyboard.down("Space");

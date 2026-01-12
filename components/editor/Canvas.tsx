@@ -501,6 +501,7 @@ export function Canvas() {
       <svg
         ref={svgRef}
         className="h-full w-full"
+        data-testid="canvas-svg"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}

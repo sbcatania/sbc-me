@@ -23,3 +23,11 @@ export function generateFrameId(): string {
 export function generateNoteId(): string {
   return `note_${nanoid(12)}`;
 }
+
+export function generatePropertyId(): string {
+  return `prop_${nanoid(12)}`;
+}
+
+export function generateOptionId(): string {
+  return `opt_${nanoid(8)}`;
+}
