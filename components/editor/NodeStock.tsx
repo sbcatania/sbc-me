@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { Node, DEFAULT_NODE_WIDTH, DEFAULT_NODE_HEIGHT } from "@/lib/model/schema";
+import { Node, DEFAULT_NODE_WIDTH, DEFAULT_NODE_HEIGHT, COLOR_PALETTE } from "@/lib/model/schema";
 import { useDiagramStore } from "@/lib/store/diagrams";
 
 interface NodeStockProps {
@@ -31,6 +31,8 @@ export function NodeStock({
   const { updateNode } = useDiagramStore();
 
   const isExternal = node.kind === "external";
+  const colorKey = node.color || "default";
+  const palette = COLOR_PALETTE[colorKey] || COLOR_PALETTE.default;
 
   // Calculate required node size based on text content
   const calculateNodeSize = useCallback((text: string) => {
@@ -123,9 +125,14 @@ export function NodeStock({
       <rect
         width={node.width}
         height={node.height}
-        className={`node-stock ${isExternal ? "node-stock-external" : ""} ${
-          selected ? "selected" : ""
+        className={`${isExternal ? "node-stock-external" : ""} ${
+          selected ? "node-stock-selected" : ""
         }`}
+        style={{
+          fill: palette.fill,
+          stroke: colorKey === "default" ? "currentColor" : palette.stroke,
+          strokeWidth: selected ? 1.5 : 1,
+        }}
         rx="0"
         ry="0"
       />
@@ -168,6 +175,7 @@ export function NodeStock({
               wordWrap: "break-word",
               overflowWrap: "break-word",
               whiteSpace: "pre-wrap",
+              color: colorKey !== "default" ? palette.text : undefined,
             }}
           >
             {node.label || "Stock"}

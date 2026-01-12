@@ -68,6 +68,36 @@ export const OntologySchema = z.object({
 
 export type Ontology = z.infer<typeof OntologySchema>;
 
+// Color options for nodes and edges (Notion-inspired palette)
+export const ColorOptions = [
+  "default",
+  "gray",
+  "brown",
+  "orange",
+  "yellow",
+  "green",
+  "blue",
+  "purple",
+  "pink",
+] as const;
+
+export const ColorSchema = z.enum(ColorOptions).optional();
+
+export type Color = z.infer<typeof ColorSchema>;
+
+// Color palette values - subtle, tasteful colors
+export const COLOR_PALETTE: Record<string, { fill: string; stroke: string; text: string }> = {
+  default: { fill: "white", stroke: "currentColor", text: "currentColor" },
+  gray: { fill: "#F1F1EF", stroke: "#787774", text: "#787774" },
+  brown: { fill: "#F4EEEE", stroke: "#976D57", text: "#64473A" },
+  orange: { fill: "#FBECDD", stroke: "#CC772F", text: "#D9730D" },
+  yellow: { fill: "#FBF3DB", stroke: "#C29243", text: "#DFAB01" },
+  green: { fill: "#EDF3EC", stroke: "#548164", text: "#0F7B6C" },
+  blue: { fill: "#E7F3F8", stroke: "#477DA5", text: "#0B6E99" },
+  purple: { fill: "#F4F0F7", stroke: "#9065B0", text: "#6940A5" },
+  pink: { fill: "#FBF2F5", stroke: "#B35588", text: "#AD1A72" },
+};
+
 // Node schema
 export const NodeSchema = z.object({
   id: z.string(),
@@ -78,6 +108,7 @@ export const NodeSchema = z.object({
   y: z.number(),
   width: z.number(),
   height: z.number(),
+  color: ColorSchema,
   childDiagramId: z.string().optional(),
   tags: z.array(z.string()).optional(),
   attributes: z.record(z.any()).optional(),
@@ -94,6 +125,7 @@ export const EdgeSchema = z.object({
   sourceId: z.string(),
   targetId: z.string(),
   label: z.string(),
+  color: ColorSchema,
   curve: CurveSchema.optional(),
   directionality: z.enum(["directed", "undirected"]).optional(),
   relationshipType: z.string().optional(),

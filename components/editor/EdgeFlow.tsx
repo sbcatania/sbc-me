@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Edge, Node } from "@/lib/model/schema";
+import { Edge, Node, COLOR_PALETTE } from "@/lib/model/schema";
 import { useDiagramStore } from "@/lib/store/diagrams";
 import {
   getEdgeEndpoints,
@@ -53,6 +53,10 @@ export function EdgeFlow({
   if (!sourceNode || !targetNode) {
     return null;
   }
+
+  const colorKey = edge.color || "default";
+  const palette = COLOR_PALETTE[colorKey] || COLOR_PALETTE.default;
+  const strokeColor = colorKey === "default" ? "currentColor" : palette.stroke;
 
   // Use pre-calculated route if provided, otherwise calculate
   let start: Point, end: Point, c1: Point, c2: Point;
@@ -148,7 +152,7 @@ export function EdgeFlow({
         d={path}
         className="flow-animated"
         fill="none"
-        stroke="currentColor"
+        stroke={strokeColor}
         strokeWidth={selected ? 1.5 : 1}
         strokeLinecap="round"
       />
@@ -158,7 +162,7 @@ export function EdgeFlow({
         <path
           d="M -6 -3 L 0 0 L -6 3"
           fill="none"
-          stroke="currentColor"
+          stroke={strokeColor}
           strokeWidth={selected ? 1.5 : 1}
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -200,10 +204,11 @@ export function EdgeFlow({
             <text
               textAnchor="middle"
               dominantBaseline="central"
-              className="pointer-events-none select-none fill-current"
+              className="pointer-events-none select-none"
               style={{
                 fontSize: "11px",
                 opacity: labelMode === "always" || selected || hovered ? 1 : 0.5,
+                fill: colorKey !== "default" ? palette.text : "currentColor",
               }}
             >
               {edge.label || "flow"}
