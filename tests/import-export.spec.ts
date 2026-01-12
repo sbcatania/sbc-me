@@ -30,8 +30,8 @@ test.describe("Import/Export", () => {
     const nodeCount = await getNodeCount(page);
     expect(nodeCount).toBe(1);
 
-    // Verify the node label
-    await expect(page.locator("[data-node-id]")).toContainText("Inventory");
+    // Verify the node label (exclude handles)
+    await expect(page.locator("[data-node-id]:not([data-handle])")).toContainText("Inventory");
   });
 
   test("should import a simple flow diagram", async ({ page }) => {
