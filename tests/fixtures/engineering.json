@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "id": "d_t7kcMbgqtB4S",
+  "title": "Engineering",
+  "createdAt": 1768188437560,
+  "updatedAt": 1768188445600,
+  "viewport": {
+    "x": 42.08695941788858,
+    "y": 356.85218059314315,
+    "zoom": 0.9173960278925236
+  },
+  "ui": {
+    "labelMode": "hover",
+    "hasRunInitialAutoLayout": false,
+    "hasManualLayoutEdits": true
+  },
+  "nodes": {
+    "n_BRB7yfWGGk8A": {
+      "id": "n_BRB7yfWGGk8A",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Usage data",
+      "x": 534,
+      "y": -303,
+      "width": 160,
+      "height": 52
+    },
+    "n_mDKZXgh7v11w": {
+      "id": "n_mDKZXgh7v11w",
+      "type": "stock",
+      "kind": "internal",
+      "label": "CX tickets",
+      "x": 78,
+      "y": -1,
+      "width": 160,
+      "height": 52
+    },
+    "n_1Sm_3uwqy-vK": {
+      "id": "n_1Sm_3uwqy-vK",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Bugs & tasks",
+      "x": 359,
+      "y": 74,
+      "width": 160,
+      "height": 52
+    },
+    "n_-khChiGFLvyz": {
+      "id": "n_-khChiGFLvyz",
+      "type": "stock",
+      "kind": "internal",
+      "label": "PM / AI spec-writer",
+      "x": 649,
+      "y": -119,
+      "width": 160,
+      "height": 52
+    },
+    "n_u7AK5CgsKg5t": {
+      "id": "n_u7AK5CgsKg5t",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Company docs",
+      "x": 725,
+      "y": -303,
+      "width": 160,
+      "height": 52
+    },
+    "n_gi-Kr5Sf1P51": {
+      "id": "n_gi-Kr5Sf1P51",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Specs",
+      "x": 633,
+      "y": 28,
+      "width": 160,
+      "height": 52
+    },
+    "n_rDbEHmBVKWON": {
+      "id": "n_rDbEHmBVKWON",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Git history",
+      "x": 1022,
+      "y": -40,
+      "width": 160,
+      "height": 52
+    },
+    "n_ASSgRsPBNke7": {
+      "id": "n_ASSgRsPBNke7",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Coding research",
+      "x": 864,
+      "y": 142,
+      "width": 160,
+      "height": 52
+    },
+    "n_t779j70MRCzl": {
+      "id": "n_t779j70MRCzl",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Logs + observability stack",
+      "x": 1104,
+      "y": 198,
+      "width": 160,
+      "height": 72
+    },
+    "n_KcWB5IDbm7xC": {
+      "id": "n_KcWB5IDbm7xC",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Tests",
+      "x": 999,
+      "y": 372,
+      "width": 160,
+      "height": 52
+    },
+    "n__wg4nYuYlAez": {
+      "id": "n__wg4nYuYlAez",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Code / PRs",
+      "x": 768,
+      "y": 380,
+      "width": 160,
+      "height": 52
+    },
+    "n_UC0j8atPd1ss": {
+      "id": "n_UC0j8atPd1ss",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Deploy preview",
+      "x": 523,
+      "y": 376,
+      "width": 160,
+      "height": 52
+    },
+    "n_smGDG9kWuEK2": {
+      "id": "n_smGDG9kWuEK2",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Code reviews",
+      "x": 582,
+      "y": 170,
+      "width": 160,
+      "height": 52
+    },
+    "n_eKnoucRkvBAf": {
+      "id": "n_eKnoucRkvBAf",
+      "type": "stock",
+      "kind": "internal",
+      "label": "User feedback",
+      "x": 180,
+      "y": 180,
+      "width": 160,
+      "height": 52
+    },
+    "n_yGXuAgkVECCj": {
+      "id": "n_yGXuAgkVECCj",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Dev/staging",
+      "x": 292,
+      "y": 386,
+      "width": 160,
+      "height": 52
+    },
+    "n_xHbM6NWmJO7H": {
+      "id": "n_xHbM6NWmJO7H",
+      "type": "stock",
+      "kind": "internal",
+      "label": "Production",
+      "x": 43,
+      "y": 398,
+      "width": 160,
+      "height": 52
+    }
+  },
+  "edges": {
+    "e_48PaDA-1UONs": {
+      "id": "e_48PaDA-1UONs",
+      "type": "flow",
+      "sourceId": "n_mDKZXgh7v11w",
+      "targetId": "n_1Sm_3uwqy-vK",
+      "label": ""
+    },
+    "e_8TYr62SMykMd": {
+      "id": "e_8TYr62SMykMd",
+      "type": "flow",
+      "sourceId": "n_-khChiGFLvyz",
+      "targetId": "n_gi-Kr5Sf1P51",
+      "label": ""
+    },
+    "e_GZGBUTnW_5uu": {
+      "id": "e_GZGBUTnW_5uu",
+      "type": "flow",
+      "sourceId": "n_1Sm_3uwqy-vK",
+      "targetId": "n_-khChiGFLvyz",
+      "label": ""
+    },
+    "e_dSCZOnizhuLs": {
+      "id": "e_dSCZOnizhuLs",
+      "type": "flow",
+      "sourceId": "n_BRB7yfWGGk8A",
+      "targetId": "n_-khChiGFLvyz",
+      "label": ""
+    },
+    "e_p-0nHyAtGDzV": {
+      "id": "e_p-0nHyAtGDzV",
+      "type": "flow",
+      "sourceId": "n_u7AK5CgsKg5t",
+      "targetId": "n_-khChiGFLvyz",
+      "label": ""
+    },
+    "e_zBWKyNIg4CoX": {
+      "id": "e_zBWKyNIg4CoX",
+      "type": "flow",
+      "sourceId": "n_u7AK5CgsKg5t",
+      "targetId": "n_ASSgRsPBNke7",
+      "label": ""
+    },
+    "e_NU1lnQDezb8i": {
+      "id": "e_NU1lnQDezb8i",
+      "type": "flow",
+      "sourceId": "n_rDbEHmBVKWON",
+      "targetId": "n_ASSgRsPBNke7",
+      "label": ""
+    },
+    "e_fygtSOFXL3oT": {
+      "id": "e_fygtSOFXL3oT",
+      "type": "flow",
+      "sourceId": "n_t779j70MRCzl",
+      "targetId": "n_ASSgRsPBNke7",
+      "label": ""
+    },
+    "e_XpaPsVK4X4p4": {
+      "id": "e_XpaPsVK4X4p4",
+      "type": "flow",
+      "sourceId": "n_KcWB5IDbm7xC",
+      "targetId": "n__wg4nYuYlAez",
+      "label": ""
+    },
+    "e_Mh9flyAM803x": {
+      "id": "e_Mh9flyAM803x",
+      "type": "flow",
+      "sourceId": "n_ASSgRsPBNke7",
+      "targetId": "n__wg4nYuYlAez",
+      "label": ""
+    },
+    "e_jrEjN1J_ZA5s": {
+      "id": "e_jrEjN1J_ZA5s",
+      "type": "flow",
+      "sourceId": "n_ASSgRsPBNke7",
+      "targetId": "n_KcWB5IDbm7xC",
+      "label": ""
+    },
+    "e_S4ZOHiHP42Xc": {
+      "id": "e_S4ZOHiHP42Xc",
+      "type": "flow",
+      "sourceId": "n_gi-Kr5Sf1P51",
+      "targetId": "n_ASSgRsPBNke7",
+      "label": ""
+    },
+    "e_bxuDLguZmb5h": {
+      "id": "e_bxuDLguZmb5h",
+      "type": "flow",
+      "sourceId": "n__wg4nYuYlAez",
+      "targetId": "n_UC0j8atPd1ss",
+      "label": ""
+    },
+    "e_fZ8AHbhpzRZx": {
+      "id": "e_fZ8AHbhpzRZx",
+      "type": "flow",
+      "sourceId": "n_UC0j8atPd1ss",
+      "targetId": "n_smGDG9kWuEK2",
+      "label": ""
+    },
+    "e_hmhIXvR_zu57": {
+      "id": "e_hmhIXvR_zu57",
+      "type": "flow",
+      "sourceId": "n_smGDG9kWuEK2",
+      "targetId": "n_ASSgRsPBNke7",
+      "label": ""
+    },
+    "e_j0VXBZousM7l": {
+      "id": "e_j0VXBZousM7l",
+      "type": "flow",
+      "sourceId": "n_UC0j8atPd1ss",
+      "targetId": "n_1Sm_3uwqy-vK",
+      "label": ""
+    },
+    "e_M6FM8GbfeBQK": {
+      "id": "e_M6FM8GbfeBQK",
+      "type": "flow",
+      "sourceId": "n_eKnoucRkvBAf",
+      "targetId": "n_1Sm_3uwqy-vK",
+      "label": ""
+    },
+    "e_V1wt_Y9TCOjY": {
+      "id": "e_V1wt_Y9TCOjY",
+      "type": "flow",
+      "sourceId": "n_UC0j8atPd1ss",
+      "targetId": "n_yGXuAgkVECCj",
+      "label": ""
+    },
+    "e_lL3CW4o40r3M": {
+      "id": "e_lL3CW4o40r3M",
+      "type": "flow",
+      "sourceId": "n_yGXuAgkVECCj",
+      "targetId": "n_xHbM6NWmJO7H",
+      "label": ""
+    },
+    "e_MOBt53x1Rb5G": {
+      "id": "e_MOBt53x1Rb5G",
+      "type": "flow",
+      "sourceId": "n_xHbM6NWmJO7H",
+      "targetId": "n_eKnoucRkvBAf",
+      "label": ""
+    },
+    "e_9y2gU_mdGtRH": {
+      "id": "e_9y2gU_mdGtRH",
+      "type": "flow",
+      "sourceId": "n_xHbM6NWmJO7H",
+      "targetId": "n_mDKZXgh7v11w",
+      "label": ""
+    },
+    "e_HIB5Hjf38In2": {
+      "id": "e_HIB5Hjf38In2",
+      "type": "flow",
+      "sourceId": "n_xHbM6NWmJO7H",
+      "targetId": "n_t779j70MRCzl",
+      "label": ""
+    },
+    "e_nEcR16QMXV7d": {
+      "id": "e_nEcR16QMXV7d",
+      "type": "flow",
+      "sourceId": "n_yGXuAgkVECCj",
+      "targetId": "n_1Sm_3uwqy-vK",
+      "label": ""
+    }
+  },
+  "frames": {},
+  "notes": {}
+}

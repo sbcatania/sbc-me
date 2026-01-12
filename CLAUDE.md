@@ -94,6 +94,9 @@ Test fixtures in `/tests/fixtures/` are JSON diagrams for different scenarios:
 | `cycle` | Feedback loop / SCC testing |
 | `complex-system` | Multi-node, multi-edge scenarios |
 | `hub-node` | Node with many in/out edges (edge routing stress test) |
+| `engineering` | Complex 16-node software engineering workflow (layout stress test) |
+| `simple-loop` | 4-node circular feedback loop |
+| `simple-flows-unconnected` | Branching flows with one unconnected node |
 
 ### Adding Test Fixtures
 
