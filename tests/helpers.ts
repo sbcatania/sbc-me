@@ -135,7 +135,7 @@ export async function deleteSelected(page: Page): Promise<void> {
  * Trigger auto-layout.
  */
 export async function autoLayout(page: Page): Promise<void> {
-  await page.click('[title="Auto Layout"]');
+  await page.click('[title*="Auto Layout"]');
   await page.waitForTimeout(500);
 }
 
@@ -143,7 +143,7 @@ export async function autoLayout(page: Page): Promise<void> {
  * Trigger zoom to fit.
  */
 export async function zoomToFit(page: Page): Promise<void> {
-  await page.click('[title="Zoom to Fit"]');
+  await page.click('[title*="Zoom to Fit"]');
   await page.waitForTimeout(300);
 }
 
@@ -151,7 +151,7 @@ export async function zoomToFit(page: Page): Promise<void> {
  * Open the settings panel.
  */
 export async function openSettings(page: Page): Promise<void> {
-  await page.click('[title="Settings"]');
+  await page.click('[title*="Settings"]:not([title*="Close"])');
   await page.waitForTimeout(200);
 }
 
@@ -159,7 +159,7 @@ export async function openSettings(page: Page): Promise<void> {
  * Close the settings panel.
  */
 export async function closeSettings(page: Page): Promise<void> {
-  await page.click('[title="Close Settings"]');
+  await page.click('[title*="Close Settings"]');
   await page.waitForTimeout(200);
 }
 

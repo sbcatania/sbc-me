@@ -202,6 +202,7 @@ Key principles (see docs for full spec):
     SettingsPanel.tsx           # Settings drawer
     ImportModal.tsx             # Import dialog (drag/drop, paste, file)
     ExportModal.tsx             # Export dialog (copy, download)
+    DataModal.tsx               # Universal import/export with tabs (⌘S)
     QuickAddMenu.tsx            # Cmd+K quick add
     SearchPanel.tsx             # Cmd+F search
   /ui                           # shadcn/ui components
@@ -253,6 +254,15 @@ Key principles (see docs for full spec):
 | Export textarea | `export-json-textarea` |
 | Export copy | `export-copy-button` |
 | Export download | `export-download-button` |
+| Data modal | `data-modal` |
+| Data modal export tab | `data-modal-export-tab` |
+| Data modal import tab | `data-modal-import-tab` |
+| Data modal export textarea | `data-modal-export-textarea` |
+| Data modal import textarea | `data-modal-import-textarea` |
+| Data modal copy button | `data-modal-copy-button` |
+| Data modal download button | `data-modal-download-button` |
+| Data modal import button | `data-modal-import-button` |
+| Data modal dropzone | `data-modal-dropzone` |
 
 ## Keyboard Shortcuts
 
@@ -267,6 +277,10 @@ Key principles (see docs for full spec):
 | Select all | ⌘A |
 | Search | ⌘F |
 | Quick add | ⌘K |
+| Settings | ⌘. |
+| Export + copy | ⌘E |
+| Import | ⌘I |
+| Data modal | ⌘S / ⌘⇧S |
 
 ## Development
 

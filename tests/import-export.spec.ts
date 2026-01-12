@@ -106,10 +106,7 @@ test.describe("Import/Export", () => {
     await page.click('[data-testid="import-button"]');
     await expect(page.locator('[data-testid="import-modal"]')).toBeVisible();
 
-    // Switch to paste mode
-    await page.click('[data-testid="import-paste-button"]');
-
-    // Paste invalid JSON
+    // Paste invalid JSON (textarea is directly visible now)
     await page.fill('[data-testid="import-paste-textarea"]', "{ invalid json }");
 
     // Try to import

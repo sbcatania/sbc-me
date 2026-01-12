@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, use } from "react";
+import React, { useEffect, useState, use, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useDiagramStore } from "@/lib/store/diagrams";
 import { usePrefsStore } from "@/lib/store/prefs";
@@ -10,6 +10,9 @@ import { Breadcrumb } from "@/components/editor/Breadcrumb";
 import { SettingsPanel } from "@/components/editor/SettingsPanel";
 import { QuickAddMenu } from "@/components/editor/QuickAddMenu";
 import { SearchPanel } from "@/components/editor/SearchPanel";
+import { ImportModal } from "@/components/editor/ImportModal";
+import { ExportModal } from "@/components/editor/ExportModal";
+import { DataModal } from "@/components/editor/DataModal";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -37,6 +40,10 @@ export default function DiagramPage({ params }: PageProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [quickAddOpen, setQuickAddOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [importModalOpen, setImportModalOpen] = useState(false);
+  const [exportModalOpen, setExportModalOpen] = useState(false);
+  const [dataModalOpen, setDataModalOpen] = useState(false);
+  const [dataModalDefaultTab, setDataModalDefaultTab] = useState<"export" | "import">("export");
   const [loading, setLoading] = useState(true);
 
   // Initialize stores
@@ -65,6 +72,15 @@ export default function DiagramPage({ params }: PageProps) {
     load();
   }, [id, diagramsInitialized, loadDiagram, createDiagram, router]);
 
+  // Copy diagram to clipboard
+  const copyDiagramToClipboard = useCallback(async () => {
+    const diagram = useDiagramStore.getState().currentDiagram;
+    if (diagram) {
+      const json = JSON.stringify(diagram, null, 2);
+      await navigator.clipboard.writeText(json);
+    }
+  }, []);
+
   // Global keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -92,17 +108,46 @@ export default function DiagramPage({ params }: PageProps) {
         setQuickAddOpen(false);
       }
 
+      // Cmd/Ctrl + . : Toggle settings
+      if ((e.metaKey || e.ctrlKey) && e.key === ".") {
+        e.preventDefault();
+        setSettingsOpen((prev) => !prev);
+      }
+
+      // Cmd/Ctrl + E: Export + copy to clipboard
+      if ((e.metaKey || e.ctrlKey) && e.key === "e") {
+        e.preventDefault();
+        copyDiagramToClipboard();
+        setExportModalOpen(true);
+      }
+
+      // Cmd/Ctrl + I: Import modal
+      if ((e.metaKey || e.ctrlKey) && e.key === "i") {
+        e.preventDefault();
+        setImportModalOpen(true);
+      }
+
+      // Cmd/Ctrl + S or Cmd/Ctrl + Shift + S: Universal data modal
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "s") {
+        e.preventDefault();
+        setDataModalDefaultTab("export");
+        setDataModalOpen(true);
+      }
+
       // Escape: Close panels
       if (e.key === "Escape") {
         setSettingsOpen(false);
         setQuickAddOpen(false);
         setSearchOpen(false);
+        setImportModalOpen(false);
+        setExportModalOpen(false);
+        setDataModalOpen(false);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [copyDiagramToClipboard]);
 
   // Apply font preference
   useEffect(() => {
@@ -136,9 +181,13 @@ export default function DiagramPage({ params }: PageProps) {
   return (
     <div className="flex h-screen flex-col">
       <TopBar
-          settingsOpen={settingsOpen}
-          onSettingsToggle={() => setSettingsOpen(!settingsOpen)}
-        />
+        settingsOpen={settingsOpen}
+        onSettingsToggle={() => setSettingsOpen(!settingsOpen)}
+        importModalOpen={importModalOpen}
+        onImportModalToggle={() => setImportModalOpen(!importModalOpen)}
+        exportModalOpen={exportModalOpen}
+        onExportModalToggle={() => setExportModalOpen(!exportModalOpen)}
+      />
       <Breadcrumb />
 
       <div className="relative flex-1 overflow-hidden">
@@ -152,6 +201,20 @@ export default function DiagramPage({ params }: PageProps) {
 
       <QuickAddMenu open={quickAddOpen} onClose={() => setQuickAddOpen(false)} />
       <SearchPanel open={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      <ImportModal
+        open={importModalOpen}
+        onClose={() => setImportModalOpen(false)}
+      />
+      <ExportModal
+        open={exportModalOpen}
+        onClose={() => setExportModalOpen(false)}
+      />
+      <DataModal
+        open={dataModalOpen}
+        onClose={() => setDataModalOpen(false)}
+        defaultTab={dataModalDefaultTab}
+      />
     </div>
   );
 }
