@@ -179,29 +179,44 @@ Key principles (see docs for full spec):
 
 ### Undo/Redo Requirements
 
-**IMPORTANT**: All user actions that modify data must be undoable:
+**CRITICAL**: Every single user action that modifies any data must be undoable. No exceptions.
 
-1. **Every destructive action must be undoable** - Never use confirmation dialogs for delete operations. Instead, make the action reversible via undo (⌘Z).
+1. **Never use confirmation dialogs** - All destructive actions must be reversible via undo (⌘Z) instead of showing "Are you sure?" dialogs.
 
-2. **Actions that require undo/redo support**:
+2. **ALL actions require undo/redo support**:
+
+   **System-level actions:**
+   - Creating a new system/diagram
+   - Deleting a system/diagram
+   - Renaming a system/diagram
+   - Duplicating a system/diagram
+   - Pinning/unpinning a system
+
+   **Canvas actions:**
    - Node creation, deletion, and modification
    - Edge creation, deletion, and modification
-   - Label changes
+   - Label changes (on nodes and edges)
    - Position changes (drag operations)
-   - Property value changes
    - Selection changes (for multi-select operations)
 
+   **Property/Data actions:**
+   - Property schema changes (adding/removing/reordering columns)
+   - Property value changes (in database view or elsewhere)
+   - Any attribute modifications
+
 3. **Implementation pattern**:
-   - Store previous state before modification
+   - Store previous state before ANY modification
    - Push to undo stack
    - Clear redo stack on new action
    - Redo pops from redo stack, pushes to undo
+   - For system-level actions, may need a separate undo stack or soft-delete pattern
 
 4. **Testing requirements**:
-   - Write E2E tests for undo/redo of each action type
+   - Write E2E tests for undo/redo of EVERY action type
    - Test that redo works after undo
    - Test that new actions clear redo stack
    - Test undo/redo across persistence (state should survive page reload)
+   - Test system-level undo (diagram deletion, etc.)
 
 ### Performance
 - Target smooth interaction at 50-100 nodes

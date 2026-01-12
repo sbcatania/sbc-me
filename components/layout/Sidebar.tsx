@@ -19,16 +19,15 @@ import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   className?: string;
+  onSearchOpen?: () => void;
 }
 
-export function Sidebar({ className }: SidebarProps) {
+export function Sidebar({ className, onSearchOpen }: SidebarProps) {
   const router = useRouter();
   const { prefs, toggleSidebar } = usePrefsStore();
   const { diagrams, currentDiagramId, createDiagram } = useDiagramStore();
   const isCollapsed = prefs.sidebarCollapsed;
 
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [logoHovered, setLogoHovered] = useState(false);
 
   const handleCreateDiagram = () => {
@@ -38,13 +37,8 @@ export function Sidebar({ className }: SidebarProps) {
 
   const sortedDiagrams = React.useMemo(() => {
     const all = Object.values(diagrams);
-    const filtered = searchQuery
-      ? all.filter((d) =>
-          d.title.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      : all;
-    return filtered.sort((a, b) => b.updatedAt - a.updatedAt);
-  }, [diagrams, searchQuery]);
+    return all.sort((a, b) => b.updatedAt - a.updatedAt);
+  }, [diagrams]);
 
   const pinnedDiagrams = sortedDiagrams.filter((d) => d.pinned);
   const unpinnedDiagrams = sortedDiagrams.filter((d) => !d.pinned);
@@ -83,26 +77,23 @@ export function Sidebar({ className }: SidebarProps) {
               variant="ghost"
               size="icon"
               onClick={handleCreateDiagram}
-              className="h-10 w-10"
+              className="h-8 w-8"
             >
-              <Plus className="h-5 w-5" />
+              <Plus className="h-4 w-4" />
             </Button>
           </SidebarTooltip>
         </div>
 
         {/* Search */}
         <div className="flex justify-center py-1">
-          <SidebarTooltip label="Search systems" shortcut="⌘F">
+          <SidebarTooltip label="Search" shortcut="⌘F">
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => {
-                toggleSidebar();
-                setSearchOpen(true);
-              }}
-              className="h-10 w-10"
+              onClick={onSearchOpen}
+              className="h-8 w-8"
             >
-              <Search className="h-5 w-5" />
+              <Search className="h-4 w-4" />
             </Button>
           </SidebarTooltip>
         </div>
@@ -113,8 +104,8 @@ export function Sidebar({ className }: SidebarProps) {
         {/* Return to main site */}
         <div className="flex justify-center py-3">
           <SidebarTooltip label="Return to Sam's main site">
-            <Button variant="ghost" size="icon" className="h-10 w-10">
-              <ArrowLeft className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="h-8 w-8">
+              <ArrowLeft className="h-4 w-4" />
             </Button>
           </SidebarTooltip>
         </div>
@@ -133,7 +124,7 @@ export function Sidebar({ className }: SidebarProps) {
       {/* Header with logo and collapse */}
       <div className="flex h-12 items-center justify-between px-3">
         {/* Logo */}
-        <div className="h-6 w-6 rounded-full bg-foreground" />
+        <div className="h-5 w-5 rounded-full bg-foreground" />
 
         {/* Collapse button */}
         <SidebarTooltip label="Close sidebar" shortcut="⌘/">
@@ -160,32 +151,15 @@ export function Sidebar({ className }: SidebarProps) {
           <span className="ml-auto text-xs text-muted-foreground">⇧⌘N</span>
         </button>
 
-        {/* Search systems */}
-        {searchOpen ? (
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <input
-              type="text"
-              placeholder="Search systems..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onBlur={() => {
-                if (!searchQuery) setSearchOpen(false);
-              }}
-              autoFocus
-              className="w-full rounded border border-border bg-background py-2 pl-10 pr-2 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
-            />
-          </div>
-        ) : (
-          <button
-            onClick={() => setSearchOpen(true)}
-            className="flex w-full items-center gap-3 rounded px-2 py-2 text-sm hover:bg-muted transition-colors"
-          >
-            <Search className="h-4 w-4" />
-            <span>Search systems</span>
-            <span className="ml-auto text-xs text-muted-foreground">⌘F</span>
-          </button>
-        )}
+        {/* Search - opens command palette */}
+        <button
+          onClick={onSearchOpen}
+          className="flex w-full items-center gap-3 rounded px-2 py-2 text-sm hover:bg-muted transition-colors"
+        >
+          <Search className="h-4 w-4" />
+          <span>Search</span>
+          <span className="ml-auto text-xs text-muted-foreground">⌘F</span>
+        </button>
       </div>
 
       {/* Systems list */}
@@ -224,7 +198,7 @@ export function Sidebar({ className }: SidebarProps) {
         {/* Empty state */}
         {sortedDiagrams.length === 0 && (
           <div className="px-3 py-8 text-center text-sm text-muted-foreground">
-            {searchQuery ? "No systems found" : "No systems yet"}
+            No systems yet
           </div>
         )}
       </div>

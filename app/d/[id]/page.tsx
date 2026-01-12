@@ -97,8 +97,8 @@ export default function DiagramPage({ params }: PageProps) {
         setQuickAddOpen(false);
       }
 
-      // Cmd/Ctrl + /: Toggle sidebar
-      if ((e.metaKey || e.ctrlKey) && e.key === "/") {
+      // Cmd/Ctrl + /: Toggle sidebar (check both key and code for cross-platform)
+      if ((e.metaKey || e.ctrlKey) && (e.key === "/" || e.code === "Slash")) {
         e.preventDefault();
         toggleSidebar();
       }
@@ -166,7 +166,7 @@ export default function DiagramPage({ params }: PageProps) {
   return (
     <div className="flex h-screen">
       {/* Sidebar - extends full height */}
-      <Sidebar />
+      <Sidebar onSearchOpen={() => setSearchOpen(true)} />
 
       {/* Right side - TopBar + content */}
       <div className="flex flex-1 flex-col overflow-hidden">
