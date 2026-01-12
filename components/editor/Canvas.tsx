@@ -493,7 +493,8 @@ export function Canvas() {
     <div
       ref={containerRef}
       className={`relative h-full w-full overflow-hidden ${
-        prefs.grid.enabled ? "canvas-grid" : "bg-background"
+        prefs.grid.style === "lines" ? "canvas-grid-lines" :
+        prefs.grid.style === "dotted" ? "canvas-grid-dotted" : "bg-background"
       }`}
       style={{ cursor: spaceHeld || dragState?.type === "pan" ? "grab" : "default" }}
     >

@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 import { get as idbGet, set as idbSet } from "idb-keyval";
-import { UserPrefs, UserPrefsSchema, DEFAULT_USER_PREFS } from "@/lib/model/schema";
+import { UserPrefs, UserPrefsSchema, DEFAULT_USER_PREFS, GridStyle } from "@/lib/model/schema";
 
 const PREFS_KEY = "prefs";
 
@@ -14,7 +14,7 @@ interface PrefsState {
   updatePrefs: (updates: Partial<UserPrefs>) => void;
   setLabelMode: (mode: "hover" | "always") => void;
   setFontFamily: (font: "inter" | "ibm-plex-mono" | "system") => void;
-  setGridEnabled: (enabled: boolean) => void;
+  setGridStyle: (style: GridStyle) => void;
 }
 
 export const usePrefsStore = create<PrefsState>((set, get) => ({
@@ -60,11 +60,11 @@ export const usePrefsStore = create<PrefsState>((set, get) => ({
     idbSet(PREFS_KEY, newPrefs);
   },
 
-  setGridEnabled: (enabled: boolean) => {
+  setGridStyle: (style: GridStyle) => {
     const { prefs } = get();
     const newPrefs = {
       ...prefs,
-      grid: { ...prefs.grid, enabled },
+      grid: { ...prefs.grid, style },
     };
     set({ prefs: newPrefs });
     idbSet(PREFS_KEY, newPrefs);

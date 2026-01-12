@@ -129,12 +129,16 @@ export const ThemePrefsSchema = z.object({
 
 export type ThemePrefs = z.infer<typeof ThemePrefsSchema>;
 
+export const GridStyleSchema = z.enum(["lines", "dotted", "none"]);
+
+export type GridStyle = z.infer<typeof GridStyleSchema>;
+
 export const UserPrefsSchema = z.object({
   version: z.literal(1),
   theme: ThemePrefsSchema,
   labelModeDefault: z.enum(["hover", "always"]).default("hover"),
   grid: z.object({
-    enabled: z.boolean().default(true),
+    style: GridStyleSchema.default("lines"),
   }),
 });
 
@@ -168,6 +172,6 @@ export const DEFAULT_USER_PREFS: UserPrefs = {
   },
   labelModeDefault: "hover",
   grid: {
-    enabled: true,
+    style: "lines",
   },
 };
