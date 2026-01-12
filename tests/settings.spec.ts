@@ -32,11 +32,11 @@ test.describe("Settings", () => {
     await expect(page.locator('text="Flow Label Display"')).not.toBeVisible();
 
     // Click settings button (shows Settings icon)
-    await page.click('[title="Settings"]');
+    await page.click('[title*="Settings"]:not([title*="Close"])');
     await expect(page.locator('text="Flow Label Display"')).toBeVisible();
 
     // Click again (now shows X icon)
-    await page.click('[title="Close Settings"]');
+    await page.click('[title*="Close Settings"]');
     await expect(page.locator('text="Flow Label Display"')).not.toBeVisible();
   });
 
@@ -79,20 +79,20 @@ test.describe("Settings", () => {
   test("should toggle grid visibility", async ({ page }) => {
     await openSettings(page);
 
-    // Click "Hide" to hide the grid
-    await page.click('button:has-text("Hide")');
+    // Click "None" to hide the grid
+    await page.click('button:has-text("None")');
 
-    // The canvas should not have the grid class
-    const canvas = page.locator(".canvas-grid");
-    await expect(canvas).toHaveCount(0);
+    // The canvas should not have any grid class
+    await expect(page.locator(".canvas-grid-lines")).toHaveCount(0);
+    await expect(page.locator(".canvas-grid-dotted")).toHaveCount(0);
 
-    // Click "Show" to show the grid
-    await page.click('button:has-text("Show")');
+    // Click "Lines" to show the grid
+    await page.click('button:has-text("Lines")');
 
     await closeSettings(page);
 
-    // The canvas should have the grid class
-    await expect(page.locator(".canvas-grid")).toHaveCount(1);
+    // The canvas should have the lines grid class
+    await expect(page.locator(".canvas-grid-lines")).toHaveCount(1);
   });
 
   test("should show keyboard shortcuts reference", async ({ page }) => {

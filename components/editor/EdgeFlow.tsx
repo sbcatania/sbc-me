@@ -167,7 +167,11 @@ export function EdgeFlow({
 
       {/* Label */}
       {showLabel && (
-        <g transform={`translate(${labelX}, ${labelY})`}>
+        <g
+          transform={`translate(${labelX}, ${labelY})`}
+          onDoubleClick={handleDoubleClick}
+          className="cursor-pointer"
+        >
           {/* Label background */}
           <rect
             x={-40}
@@ -201,7 +205,6 @@ export function EdgeFlow({
                 fontSize: "11px",
                 opacity: labelMode === "always" || selected || hovered ? 1 : 0.5,
               }}
-              onDoubleClick={handleDoubleClick}
             >
               {edge.label || "flow"}
             </text>

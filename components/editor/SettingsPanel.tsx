@@ -155,6 +155,22 @@ export function SettingsPanel({ open, onClose: _onClose }: SettingsPanelProps) {
               <span>Quick add</span>
               <span className="font-mono">⌘K</span>
             </div>
+            <div className="flex justify-between">
+              <span>Settings</span>
+              <span className="font-mono">⌘.</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Export + copy</span>
+              <span className="font-mono">⌘E</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Import</span>
+              <span className="font-mono">⌘I</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Data modal</span>
+              <span className="font-mono">⌘S / ⌘⇧S</span>
+            </div>
           </div>
         </div>
 
