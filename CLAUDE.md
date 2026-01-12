@@ -200,9 +200,7 @@ Key principles (see docs for full spec):
     Breadcrumb.tsx              # Drill-down breadcrumb
     TopBar.tsx                  # Top toolbar
     SettingsPanel.tsx           # Settings drawer
-    ImportModal.tsx             # Import dialog (drag/drop, paste, file)
-    ExportModal.tsx             # Export dialog (copy, download)
-    DataModal.tsx               # Universal import/export with tabs (⌘S)
+    ImportExportModal.tsx       # Unified import/export modal (⌘E, ⌘I, ⌘S)
     QuickAddMenu.tsx            # Cmd+K quick add
     SearchPanel.tsx             # Cmd+F search
   /ui                           # shadcn/ui components
@@ -231,38 +229,26 @@ Key principles (see docs for full spec):
 
 ## Import/Export
 
-### Import Modal
-- **Paste JSON**: Paste directly into the textarea at the top
-- **Drag & drop**: Drop JSON file onto the dropzone below
-- **File select**: Click the dropzone to select a file
-
-### Export Modal
-- **Copy**: Click copy button to copy JSON to clipboard
-- **Download**: Click download button to save as file
+All import and export functionality is handled by a single unified `ImportExportModal` component that can be configured to show:
+- **Export only** (⌘E): Copy JSON to clipboard or download as file
+- **Import only** (⌘I): Paste JSON or drag & drop a file
+- **Both tabs** (⌘S / ⌘⇧S): Full modal with tab switcher
 
 ### Test IDs for Automation
 | Element | `data-testid` |
 |---------|---------------|
-| Import button | `import-button` |
-| Import modal | `import-modal` |
-| Import paste textarea | `import-paste-textarea` |
-| Import dropzone | `import-dropzone` |
-| Import confirm | `import-confirm-paste` |
-| Import error | `import-error` |
-| Export button | `export-button` |
-| Export modal | `export-modal` |
-| Export textarea | `export-json-textarea` |
-| Export copy | `export-copy-button` |
-| Export download | `export-download-button` |
-| Data modal | `data-modal` |
-| Data modal export tab | `data-modal-export-tab` |
-| Data modal import tab | `data-modal-import-tab` |
-| Data modal export textarea | `data-modal-export-textarea` |
-| Data modal import textarea | `data-modal-import-textarea` |
-| Data modal copy button | `data-modal-copy-button` |
-| Data modal download button | `data-modal-download-button` |
-| Data modal import button | `data-modal-import-button` |
-| Data modal dropzone | `data-modal-dropzone` |
+| Import button (toolbar) | `import-button` |
+| Export button (toolbar) | `export-button` |
+| Import/Export modal | `import-export-modal` |
+| Export tab | `import-export-modal-export-tab` |
+| Import tab | `import-export-modal-import-tab` |
+| Export textarea | `import-export-modal-export-textarea` |
+| Import textarea | `import-export-modal-import-textarea` |
+| Copy button | `import-export-modal-copy-button` |
+| Download button | `import-export-modal-download-button` |
+| Import button | `import-export-modal-import-button` |
+| Dropzone | `import-export-modal-dropzone` |
+| Error message | `import-export-modal-error` |
 
 ## Keyboard Shortcuts
 
@@ -280,7 +266,7 @@ Key principles (see docs for full spec):
 | Settings | ⌘. |
 | Export + copy | ⌘E |
 | Import | ⌘I |
-| Data modal | ⌘S / ⌘⇧S |
+| Import/Export modal | ⌘S / ⌘⇧S |
 
 ## Development
 

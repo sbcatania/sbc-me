@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, use, useCallback } from "react";
+import React, { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { useDiagramStore } from "@/lib/store/diagrams";
 import { usePrefsStore } from "@/lib/store/prefs";
@@ -10,12 +10,17 @@ import { Breadcrumb } from "@/components/editor/Breadcrumb";
 import { SettingsPanel } from "@/components/editor/SettingsPanel";
 import { QuickAddMenu } from "@/components/editor/QuickAddMenu";
 import { SearchPanel } from "@/components/editor/SearchPanel";
-import { ImportModal } from "@/components/editor/ImportModal";
-import { ExportModal } from "@/components/editor/ExportModal";
-import { DataModal } from "@/components/editor/DataModal";
+import { ImportExportModal } from "@/components/editor/ImportExportModal";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+// Modal configuration for different use cases
+interface ModalConfig {
+  defaultTab: "export" | "import";
+  showTabs: boolean;
+  autoCopy: boolean;
 }
 
 export default function DiagramPage({ params }: PageProps) {
@@ -40,11 +45,15 @@ export default function DiagramPage({ params }: PageProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [quickAddOpen, setQuickAddOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [importModalOpen, setImportModalOpen] = useState(false);
-  const [exportModalOpen, setExportModalOpen] = useState(false);
-  const [dataModalOpen, setDataModalOpen] = useState(false);
-  const [dataModalDefaultTab, setDataModalDefaultTab] = useState<"export" | "import">("export");
   const [loading, setLoading] = useState(true);
+
+  // Unified import/export modal state
+  const [importExportModalOpen, setImportExportModalOpen] = useState(false);
+  const [modalConfig, setModalConfig] = useState<ModalConfig>({
+    defaultTab: "export",
+    showTabs: true,
+    autoCopy: false,
+  });
 
   // Initialize stores
   useEffect(() => {
@@ -72,14 +81,15 @@ export default function DiagramPage({ params }: PageProps) {
     load();
   }, [id, diagramsInitialized, loadDiagram, createDiagram, router]);
 
-  // Copy diagram to clipboard
-  const copyDiagramToClipboard = useCallback(async () => {
-    const diagram = useDiagramStore.getState().currentDiagram;
-    if (diagram) {
-      const json = JSON.stringify(diagram, null, 2);
-      await navigator.clipboard.writeText(json);
-    }
-  }, []);
+  // Helper to open modal with specific config
+  const openModal = (config: Partial<ModalConfig>) => {
+    setModalConfig({
+      defaultTab: config.defaultTab ?? "export",
+      showTabs: config.showTabs ?? true,
+      autoCopy: config.autoCopy ?? false,
+    });
+    setImportExportModalOpen(true);
+  };
 
   // Global keyboard shortcuts
   useEffect(() => {
@@ -114,24 +124,22 @@ export default function DiagramPage({ params }: PageProps) {
         setSettingsOpen((prev) => !prev);
       }
 
-      // Cmd/Ctrl + E: Export + copy to clipboard
+      // Cmd/Ctrl + E: Export (single tab, auto-copy)
       if ((e.metaKey || e.ctrlKey) && e.key === "e") {
         e.preventDefault();
-        copyDiagramToClipboard();
-        setExportModalOpen(true);
+        openModal({ defaultTab: "export", showTabs: false, autoCopy: true });
       }
 
-      // Cmd/Ctrl + I: Import modal
+      // Cmd/Ctrl + I: Import (single tab)
       if ((e.metaKey || e.ctrlKey) && e.key === "i") {
         e.preventDefault();
-        setImportModalOpen(true);
+        openModal({ defaultTab: "import", showTabs: false });
       }
 
-      // Cmd/Ctrl + S or Cmd/Ctrl + Shift + S: Universal data modal
+      // Cmd/Ctrl + S or Cmd/Ctrl + Shift + S: Full import/export modal with tabs
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "s") {
         e.preventDefault();
-        setDataModalDefaultTab("export");
-        setDataModalOpen(true);
+        openModal({ defaultTab: "export", showTabs: true });
       }
 
       // Escape: Close panels
@@ -139,15 +147,13 @@ export default function DiagramPage({ params }: PageProps) {
         setSettingsOpen(false);
         setQuickAddOpen(false);
         setSearchOpen(false);
-        setImportModalOpen(false);
-        setExportModalOpen(false);
-        setDataModalOpen(false);
+        setImportExportModalOpen(false);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [copyDiagramToClipboard]);
+  }, []);
 
   // Apply font preference
   useEffect(() => {
@@ -183,10 +189,8 @@ export default function DiagramPage({ params }: PageProps) {
       <TopBar
         settingsOpen={settingsOpen}
         onSettingsToggle={() => setSettingsOpen(!settingsOpen)}
-        importModalOpen={importModalOpen}
-        onImportModalToggle={() => setImportModalOpen(!importModalOpen)}
-        exportModalOpen={exportModalOpen}
-        onExportModalToggle={() => setExportModalOpen(!exportModalOpen)}
+        onExportClick={() => openModal({ defaultTab: "export", showTabs: false, autoCopy: true })}
+        onImportClick={() => openModal({ defaultTab: "import", showTabs: false })}
       />
       <Breadcrumb />
 
@@ -202,18 +206,12 @@ export default function DiagramPage({ params }: PageProps) {
       <QuickAddMenu open={quickAddOpen} onClose={() => setQuickAddOpen(false)} />
       <SearchPanel open={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      <ImportModal
-        open={importModalOpen}
-        onClose={() => setImportModalOpen(false)}
-      />
-      <ExportModal
-        open={exportModalOpen}
-        onClose={() => setExportModalOpen(false)}
-      />
-      <DataModal
-        open={dataModalOpen}
-        onClose={() => setDataModalOpen(false)}
-        defaultTab={dataModalDefaultTab}
+      <ImportExportModal
+        open={importExportModalOpen}
+        onClose={() => setImportExportModalOpen(false)}
+        defaultTab={modalConfig.defaultTab}
+        showTabs={modalConfig.showTabs}
+        autoCopy={modalConfig.autoCopy}
       />
     </div>
   );

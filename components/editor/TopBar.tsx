@@ -38,19 +38,15 @@ import { calculateZoomToFit } from "@/lib/layout/geometry";
 interface TopBarProps {
   settingsOpen: boolean;
   onSettingsToggle: () => void;
-  importModalOpen: boolean;
-  onImportModalToggle: () => void;
-  exportModalOpen: boolean;
-  onExportModalToggle: () => void;
+  onExportClick: () => void;
+  onImportClick: () => void;
 }
 
 export function TopBar({
   settingsOpen,
   onSettingsToggle,
-  importModalOpen: _importModalOpen,
-  onImportModalToggle,
-  exportModalOpen: _exportModalOpen,
-  onExportModalToggle,
+  onExportClick,
+  onImportClick,
 }: TopBarProps) {
   const router = useRouter();
   const titleInputRef = useRef<HTMLInputElement>(null);
@@ -292,7 +288,7 @@ export function TopBar({
           <Button
             variant="ghost"
             size="icon"
-            onClick={onExportModalToggle}
+            onClick={onExportClick}
             title="Export — Save diagram as JSON (⌘E)"
             data-testid="export-button"
           >
@@ -302,7 +298,7 @@ export function TopBar({
           <Button
             variant="ghost"
             size="icon"
-            onClick={onImportModalToggle}
+            onClick={onImportClick}
             title="Import — Load diagram from JSON (⌘I)"
             data-testid="import-button"
           >

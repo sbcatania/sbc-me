@@ -45,13 +45,13 @@ export async function importFixture(page: Page, fixtureName: string): Promise<vo
   await page.click('[data-testid="import-button"]');
 
   // Wait for modal to appear
-  await expect(page.locator('[data-testid="import-modal"]')).toBeVisible();
+  await expect(page.locator('[data-testid="import-export-modal"]')).toBeVisible();
 
-  // Paste the fixture JSON into the textarea (now directly visible)
-  await page.fill('[data-testid="import-paste-textarea"]', json);
+  // Paste the fixture JSON into the textarea
+  await page.fill('[data-testid="import-export-modal-import-textarea"]', json);
 
   // Click import button
-  await page.click('[data-testid="import-confirm-paste"]');
+  await page.click('[data-testid="import-export-modal-import-button"]');
 
   // Wait for navigation to new diagram
   await page.waitForURL(/\/d\//);
@@ -68,10 +68,10 @@ export async function exportDiagram(page: Page): Promise<string> {
   await page.click('[data-testid="export-button"]');
 
   // Wait for modal to appear
-  await expect(page.locator('[data-testid="export-modal"]')).toBeVisible();
+  await expect(page.locator('[data-testid="import-export-modal"]')).toBeVisible();
 
   // Get the JSON from the textarea
-  const json = await page.locator('[data-testid="export-json-textarea"]').inputValue();
+  const json = await page.locator('[data-testid="import-export-modal-export-textarea"]').inputValue();
 
   // Close the modal
   await page.keyboard.press("Escape");

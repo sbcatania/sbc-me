@@ -14,13 +14,24 @@ import {
 import { useDiagramStore } from "@/lib/store/diagrams";
 import { DiagramDocSchema } from "@/lib/model/schema";
 
-interface DataModalProps {
+interface ImportExportModalProps {
   open: boolean;
   onClose: () => void;
+  /** Which tab to show when modal opens. Defaults to "export". */
   defaultTab?: "export" | "import";
+  /** Whether to show tab switcher. If false, only shows the defaultTab content. */
+  showTabs?: boolean;
+  /** Whether to auto-copy to clipboard when opening on export tab. */
+  autoCopy?: boolean;
 }
 
-export function DataModal({ open, onClose, defaultTab = "export" }: DataModalProps) {
+export function ImportExportModal({
+  open,
+  onClose,
+  defaultTab = "export",
+  showTabs = true,
+  autoCopy = false,
+}: ImportExportModalProps) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [activeTab, setActiveTab] = useState<"export" | "import">(defaultTab);
@@ -40,8 +51,16 @@ export function DataModal({ open, onClose, defaultTab = "export" }: DataModalPro
       setCopied(false);
       setError(null);
       setPasteValue("");
+
+      // Auto-copy if requested
+      if (autoCopy && defaultTab === "export" && json) {
+        navigator.clipboard.writeText(json).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        });
+      }
     }
-  }, [open, defaultTab]);
+  }, [open, defaultTab, autoCopy, json]);
 
   // Export handlers
   const handleCopy = useCallback(async () => {
@@ -155,48 +174,65 @@ export function DataModal({ open, onClose, defaultTab = "export" }: DataModalPro
     onClose();
   }, [onClose]);
 
+  // Determine title based on mode
+  const getTitle = () => {
+    if (!showTabs) {
+      return defaultTab === "export" ? "Export Diagram" : "Import Diagram";
+    }
+    return "Import / Export";
+  };
+
+  const getDescription = () => {
+    if (!showTabs) {
+      return defaultTab === "export"
+        ? "Copy the JSON to your clipboard or download as a file."
+        : "Paste JSON below or drag & drop a file.";
+    }
+    return "Export or import your diagram as JSON.";
+  };
+
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent data-testid="data-modal" className="sm:max-w-lg">
+      <DialogContent data-testid="import-export-modal" className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>Data</DialogTitle>
-          <DialogDescription>
-            Export or import your diagram as JSON.
-          </DialogDescription>
+          <DialogTitle>{getTitle()}</DialogTitle>
+          <DialogDescription>{getDescription()}</DialogDescription>
         </DialogHeader>
 
-        {/* Tab buttons */}
-        <div className="flex gap-1 rounded-lg border border-border p-1">
-          <button
-            onClick={() => setActiveTab("export")}
-            className={`flex-1 rounded px-3 py-1.5 text-sm font-medium transition-colors ${
-              activeTab === "export"
-                ? "bg-foreground text-background"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-            data-testid="data-modal-export-tab"
-          >
-            Export
-          </button>
-          <button
-            onClick={() => setActiveTab("import")}
-            className={`flex-1 rounded px-3 py-1.5 text-sm font-medium transition-colors ${
-              activeTab === "import"
-                ? "bg-foreground text-background"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-            data-testid="data-modal-import-tab"
-          >
-            Import
-          </button>
-        </div>
+        {/* Tab buttons - only show if showTabs is true */}
+        {showTabs && (
+          <div className="flex gap-1 rounded-lg border border-border p-1">
+            <button
+              onClick={() => setActiveTab("export")}
+              className={`flex-1 rounded px-3 py-1.5 text-sm font-medium transition-colors ${
+                activeTab === "export"
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+              data-testid="import-export-modal-export-tab"
+            >
+              Export
+            </button>
+            <button
+              onClick={() => setActiveTab("import")}
+              className={`flex-1 rounded px-3 py-1.5 text-sm font-medium transition-colors ${
+                activeTab === "import"
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+              data-testid="import-export-modal-import-tab"
+            >
+              Import
+            </button>
+          </div>
+        )}
 
         {activeTab === "export" ? (
           <>
             {/* Export content */}
             <div className="relative">
               <textarea
-                data-testid="data-modal-export-textarea"
+                data-testid="import-export-modal-export-textarea"
                 value={json}
                 readOnly
                 className="h-[250px] w-full resize-none rounded border border-border bg-muted/50 p-3 font-mono text-xs focus:outline-none"
@@ -206,7 +242,7 @@ export function DataModal({ open, onClose, defaultTab = "export" }: DataModalPro
                   variant="secondary"
                   size="sm"
                   onClick={handleCopy}
-                  data-testid="data-modal-copy-button"
+                  data-testid="import-export-modal-copy-button"
                 >
                   {copied ? (
                     <>
@@ -226,7 +262,7 @@ export function DataModal({ open, onClose, defaultTab = "export" }: DataModalPro
             <Button
               onClick={handleDownload}
               className="w-full"
-              data-testid="data-modal-download-button"
+              data-testid="import-export-modal-download-button"
             >
               <Download className="mr-2 h-4 w-4" />
               Download File
@@ -238,14 +274,14 @@ export function DataModal({ open, onClose, defaultTab = "export" }: DataModalPro
             {error && (
               <div
                 className="rounded border border-red-500 bg-red-50 p-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-300"
-                data-testid="data-modal-import-error"
+                data-testid="import-export-modal-error"
               >
                 {error}
               </div>
             )}
 
             <textarea
-              data-testid="data-modal-import-textarea"
+              data-testid="import-export-modal-import-textarea"
               value={pasteValue}
               onChange={(e) => {
                 setPasteValue(e.target.value);
@@ -256,7 +292,7 @@ export function DataModal({ open, onClose, defaultTab = "export" }: DataModalPro
             />
 
             <div
-              data-testid="data-modal-dropzone"
+              data-testid="import-export-modal-dropzone"
               onDrop={handleDrop}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
@@ -279,14 +315,14 @@ export function DataModal({ open, onClose, defaultTab = "export" }: DataModalPro
               accept=".json,application/json"
               className="hidden"
               onChange={handleFileChange}
-              data-testid="data-modal-file-input"
+              data-testid="import-export-modal-file-input"
             />
 
             <Button
               onClick={handleImport}
               disabled={!pasteValue.trim()}
               className="w-full"
-              data-testid="data-modal-import-button"
+              data-testid="import-export-modal-import-button"
             >
               <FileText className="mr-2 h-4 w-4" />
               Import
