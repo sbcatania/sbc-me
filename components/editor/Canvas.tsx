@@ -8,6 +8,8 @@ import { clamp, calculateAllEdgeEndpoints } from "@/lib/layout/geometry";
 import { NodeStock } from "./NodeStock";
 import { EdgeFlow } from "./EdgeFlow";
 import { SelectionRect } from "./SelectionRect";
+import { ColorPicker } from "./ColorPicker";
+import { Color } from "@/lib/model/schema";
 
 const MIN_ZOOM = 0.1;
 const MAX_ZOOM = 4;
@@ -35,6 +37,7 @@ export function Canvas() {
     addNode,
     updateNode,
     addEdge,
+    updateEdge,
     deleteSelected,
     setViewport,
   } = useDiagramStore();
@@ -56,6 +59,11 @@ export function Canvas() {
   const [editingNodeId, setEditingNodeId] = useState<string | null>(null);
   const [editingEdgeId, setEditingEdgeId] = useState<string | null>(null);
   const [spaceHeld, setSpaceHeld] = useState(false);
+  const [colorPickerState, setColorPickerState] = useState<{
+    type: "node" | "edge";
+    id: string;
+    position: { x: number; y: number };
+  } | null>(null);
 
   const viewport = useMemo<Viewport>(
     () => currentDiagram?.viewport || { x: 0, y: 0, zoom: 1 },
@@ -96,6 +104,48 @@ export function Canvas() {
       setEditingNodeId(nodeId);
     },
     [screenToCanvas, addNode, clearSelection, setSelectedNodeIds]
+  );
+
+  // Handle right-click context menu for color picker
+  const handleContextMenu = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+
+      const target = e.target as SVGElement;
+      const nodeElement = target.closest("[data-node-id]");
+      const edgeElement = target.closest("[data-edge-id]");
+
+      if (nodeElement) {
+        const nodeId = nodeElement.getAttribute("data-node-id")!;
+        setColorPickerState({
+          type: "node",
+          id: nodeId,
+          position: { x: e.clientX, y: e.clientY },
+        });
+      } else if (edgeElement) {
+        const edgeId = edgeElement.getAttribute("data-edge-id")!;
+        setColorPickerState({
+          type: "edge",
+          id: edgeId,
+          position: { x: e.clientX, y: e.clientY },
+        });
+      }
+    },
+    []
+  );
+
+  // Handle color selection
+  const handleColorSelect = useCallback(
+    (color: Color) => {
+      if (!colorPickerState) return;
+
+      if (colorPickerState.type === "node") {
+        updateNode(colorPickerState.id, { color });
+      } else {
+        updateEdge(colorPickerState.id, { color });
+      }
+    },
+    [colorPickerState, updateNode, updateEdge]
   );
 
   // Handle mouse down
@@ -507,6 +557,7 @@ export function Canvas() {
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         onDoubleClick={handleDoubleClick}
+        onContextMenu={handleContextMenu}
       >
         <defs>
           {/* Arrowhead marker (kept for potential future use) */}
@@ -572,6 +623,20 @@ export function Canvas() {
           )}
         </g>
       </svg>
+
+      {/* Color picker popup */}
+      {colorPickerState && currentDiagram && (
+        <ColorPicker
+          currentColor={
+            colorPickerState.type === "node"
+              ? currentDiagram.nodes[colorPickerState.id]?.color
+              : currentDiagram.edges[colorPickerState.id]?.color
+          }
+          onColorSelect={handleColorSelect}
+          onClose={() => setColorPickerState(null)}
+          position={colorPickerState.position}
+        />
+      )}
     </div>
   );
 }
