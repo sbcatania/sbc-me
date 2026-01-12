@@ -104,18 +104,15 @@ test.describe("Import/Export", () => {
   test("should show error for invalid JSON", async ({ page }) => {
     // Open import modal
     await page.click('[data-testid="import-button"]');
-    await expect(page.locator('[data-testid="import-modal"]')).toBeVisible();
-
-    // Switch to paste mode
-    await page.click('[data-testid="import-paste-button"]');
+    await expect(page.locator('[data-testid="import-export-modal"]')).toBeVisible();
 
     // Paste invalid JSON
-    await page.fill('[data-testid="import-paste-textarea"]', "{ invalid json }");
+    await page.fill('[data-testid="import-export-modal-import-textarea"]', "{ invalid json }");
 
     // Try to import
-    await page.click('[data-testid="import-confirm-paste"]');
+    await page.click('[data-testid="import-export-modal-import-button"]');
 
     // Should show error
-    await expect(page.locator('[data-testid="import-error"]')).toBeVisible();
+    await expect(page.locator('[data-testid="import-export-modal-error"]')).toBeVisible();
   });
 });

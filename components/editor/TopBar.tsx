@@ -15,8 +15,6 @@ import {
   X,
   Pencil,
 } from "lucide-react";
-import { ImportModal } from "./ImportModal";
-import { ExportModal } from "./ExportModal";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -40,15 +38,20 @@ import { calculateZoomToFit } from "@/lib/layout/geometry";
 interface TopBarProps {
   settingsOpen: boolean;
   onSettingsToggle: () => void;
+  onExportClick: () => void;
+  onImportClick: () => void;
 }
 
-export function TopBar({ settingsOpen, onSettingsToggle }: TopBarProps) {
+export function TopBar({
+  settingsOpen,
+  onSettingsToggle,
+  onExportClick,
+  onImportClick,
+}: TopBarProps) {
   const router = useRouter();
   const titleInputRef = useRef<HTMLInputElement>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [diagramToDelete, setDiagramToDelete] = useState<string | null>(null);
-  const [importModalOpen, setImportModalOpen] = useState(false);
-  const [exportModalOpen, setExportModalOpen] = useState(false);
   const [editingTitle, setEditingTitle] = useState(false);
   const [titleValue, setTitleValue] = useState("");
 
@@ -285,8 +288,8 @@ export function TopBar({ settingsOpen, onSettingsToggle }: TopBarProps) {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setExportModalOpen(true)}
-            title="Export — Save diagram as JSON"
+            onClick={onExportClick}
+            title="Export — Save diagram as JSON (⌘E)"
             data-testid="export-button"
           >
             <Download className="h-4 w-4" />
@@ -295,8 +298,8 @@ export function TopBar({ settingsOpen, onSettingsToggle }: TopBarProps) {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setImportModalOpen(true)}
-            title="Import — Load diagram from JSON"
+            onClick={onImportClick}
+            title="Import — Load diagram from JSON (⌘I)"
             data-testid="import-button"
           >
             <Upload className="h-4 w-4" />
@@ -309,7 +312,7 @@ export function TopBar({ settingsOpen, onSettingsToggle }: TopBarProps) {
             variant="ghost"
             size="icon"
             onClick={onSettingsToggle}
-            title={settingsOpen ? "Close Settings" : "Settings — Preferences & shortcuts"}
+            title={settingsOpen ? "Close Settings (⌘.)" : "Settings — Preferences & shortcuts (⌘.)"}
           >
             {settingsOpen ? (
               <X className="h-4 w-4" />
@@ -319,18 +322,6 @@ export function TopBar({ settingsOpen, onSettingsToggle }: TopBarProps) {
           </Button>
         </div>
       </div>
-
-      {/* Import Modal */}
-      <ImportModal
-        open={importModalOpen}
-        onClose={() => setImportModalOpen(false)}
-      />
-
-      {/* Export Modal */}
-      <ExportModal
-        open={exportModalOpen}
-        onClose={() => setExportModalOpen(false)}
-      />
 
       {/* Delete confirmation dialog */}
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
