@@ -12,7 +12,6 @@ import {
   Settings,
   Layout,
   Maximize2,
-  RotateCcw,
   X,
   Pencil,
 } from "lucide-react";
@@ -173,10 +172,6 @@ export function TopBar({ settingsOpen, onSettingsToggle }: TopBarProps) {
     setViewport(viewport);
   };
 
-  const handleResetZoom = () => {
-    setViewport({ x: 0, y: 0, zoom: 1 });
-  };
-
   const sortedDiagrams = Object.values(diagrams).sort(
     (a, b) => b.updatedAt - a.updatedAt
   );
@@ -282,15 +277,6 @@ export function TopBar({ settingsOpen, onSettingsToggle }: TopBarProps) {
             title="Zoom to Fit — Show all nodes"
           >
             <Maximize2 className="h-4 w-4" />
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={handleResetZoom}
-            title="Reset View — Return to origin"
-          >
-            <RotateCcw className="h-4 w-4" />
           </Button>
 
           <div className="mx-2 h-6 w-px bg-border" />
