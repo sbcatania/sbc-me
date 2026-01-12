@@ -1,9 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { HardDrive } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePrefsStore } from "@/lib/store/prefs";
 import { useDiagramStore } from "@/lib/store/diagrams";
+import { FullBackupModal } from "./FullBackupModal";
 
 interface SettingsPanelProps {
   open: boolean;
@@ -11,8 +13,9 @@ interface SettingsPanelProps {
 }
 
 export function SettingsPanel({ open, onClose: _onClose }: SettingsPanelProps) {
-  const { prefs, setLabelMode, setFontFamily, setGridEnabled } = usePrefsStore();
+  const { prefs, setLabelMode, setFontFamily, setGridStyle } = usePrefsStore();
   const { currentDiagram, updateDiagram } = useDiagramStore();
+  const [backupModalOpen, setBackupModalOpen] = useState(false);
 
   if (!open) return null;
 
@@ -86,21 +89,28 @@ export function SettingsPanel({ open, onClose: _onClose }: SettingsPanelProps) {
 
         {/* Grid */}
         <div className="space-y-2">
-          <label className="text-sm font-medium">Canvas Grid</label>
+          <label className="text-sm font-medium">Grid</label>
           <div className="flex gap-2">
             <Button
-              variant={prefs.grid.enabled ? "default" : "outline"}
+              variant={prefs.grid.style === "lines" ? "default" : "outline"}
               size="sm"
-              onClick={() => setGridEnabled(true)}
+              onClick={() => setGridStyle("lines")}
             >
-              Show
+              Lines
             </Button>
             <Button
-              variant={!prefs.grid.enabled ? "default" : "outline"}
+              variant={prefs.grid.style === "dotted" ? "default" : "outline"}
               size="sm"
-              onClick={() => setGridEnabled(false)}
+              onClick={() => setGridStyle("dotted")}
             >
-              Hide
+              Dotted
+            </Button>
+            <Button
+              variant={prefs.grid.style === "none" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setGridStyle("none")}
+            >
+              None
             </Button>
           </div>
         </div>
@@ -147,7 +157,29 @@ export function SettingsPanel({ open, onClose: _onClose }: SettingsPanelProps) {
             </div>
           </div>
         </div>
+
+        {/* Full Backup */}
+        <div className="space-y-2 pt-4 border-t border-border">
+          <label className="text-sm font-medium">Data</label>
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full"
+            onClick={() => setBackupModalOpen(true)}
+          >
+            <HardDrive className="mr-2 h-4 w-4" />
+            Full Backup
+          </Button>
+          <p className="text-xs text-muted-foreground">
+            Export or import all diagrams and settings
+          </p>
+        </div>
       </div>
+
+      <FullBackupModal
+        open={backupModalOpen}
+        onClose={() => setBackupModalOpen(false)}
+      />
     </div>
   );
 }
