@@ -1,0 +1,2367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favicon Concepts - System Builder</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 40px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .card h3 {
+      margin: 0 0 4px 0;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .card .description {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 16px;
+    }
+    .preview-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .large-preview {
+      width: 64px;
+      height: 64px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+    }
+    .large-preview svg {
+      width: 48px;
+      height: 48px;
+    }
+    .tab-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .tab-preview-label {
+      font-size: 10px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .fake-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #e8e8e8;
+      padding: 6px 12px 6px 8px;
+      border-radius: 8px 8px 0 0;
+      font-size: 12px;
+      color: #333;
+    }
+    .fake-tab svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .category {
+      grid-column: 1 / -1;
+      margin-top: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+    .category:first-child {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Favicon Concepts</h1>
+  <p class="subtitle">System Builder - Monochrome, sharp-edged aesthetic</p>
+
+  <div class="grid">
+
+    <div class="category">Geometric / Abstract</div>
+
+    <!-- 1. Stacked Rectangles -->
+    <div class="card">
+      <h3>1. Stacked Rectangles</h3>
+      <p class="description">Overlapping rectangles representing stocks</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="8" width="16" height="12" fill="none" stroke="black" stroke-width="2"/>
+            <rect x="12" y="12" width="16" height="12" fill="white" stroke="black" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="4" y="8" width="16" height="12" fill="none" stroke="black" stroke-width="2.5"/>
+              <rect x="12" y="12" width="16" height="12" fill="white" stroke="black" stroke-width="2.5"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Box with Arrow -->
+    <div class="card">
+      <h3>2. Box with Arrow</h3>
+      <p class="description">Rectangle with curved flow arrow</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="10" width="14" height="12" stroke="black" stroke-width="2"/>
+            <path d="M18 16 Q24 16 24 22 L28 22" stroke="black" stroke-width="2" fill="none"/>
+            <path d="M26 19 L28 22 L26 25" stroke="black" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="4" y="10" width="14" height="12" stroke="black" stroke-width="2.5"/>
+              <path d="M18 16 Q24 16 24 22 L28 22" stroke="black" stroke-width="2.5" fill="none"/>
+              <path d="M26 19 L28 22 L26 25" stroke="black" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Connected Nodes -->
+    <div class="card">
+      <h3>3. Connected Nodes</h3>
+      <p class="description">Two squares with curved connector</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="3" y="11" width="10" height="10" stroke="black" stroke-width="2"/>
+            <rect x="19" y="11" width="10" height="10" stroke="black" stroke-width="2"/>
+            <path d="M13 16 Q16 16 16 12 Q16 8 19 8" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="3" y="11" width="10" height="10" stroke="black" stroke-width="2.5"/>
+              <rect x="19" y="11" width="10" height="10" stroke="black" stroke-width="2.5"/>
+              <path d="M13 16 Q16 16 16 12 Q16 8 19 8" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Flow Triangle -->
+    <div class="card">
+      <h3>4. Flow Triangle</h3>
+      <p class="description">Direction indicator chevron</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M8 6 L24 16 L8 26 Z" fill="black"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M8 6 L24 16 L8 26 Z" fill="black"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Grid of 4 -->
+    <div class="card">
+      <h3>5. Grid of 4</h3>
+      <p class="description">2x2 grid with one highlighted</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="4" width="10" height="10" stroke="black" stroke-width="2"/>
+            <rect x="18" y="4" width="10" height="10" fill="black"/>
+            <rect x="4" y="18" width="10" height="10" stroke="black" stroke-width="2"/>
+            <rect x="18" y="18" width="10" height="10" stroke="black" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="4" y="4" width="10" height="10" stroke="black" stroke-width="2.5"/>
+              <rect x="18" y="4" width="10" height="10" fill="black"/>
+              <rect x="4" y="18" width="10" height="10" stroke="black" stroke-width="2.5"/>
+              <rect x="18" y="18" width="10" height="10" stroke="black" stroke-width="2.5"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">Typography / Lettermark</div>
+
+    <!-- 6. S Lettermark -->
+    <div class="card">
+      <h3>6. "S" Lettermark</h3>
+      <p class="description">Geometric S with sharp corners</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M24 8 L8 8 L8 14 L24 14 L24 24 L8 24" stroke="black" stroke-width="3" fill="none" stroke-linecap="square"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M24 8 L8 8 L8 14 L24 14 L24 24 L8 24" stroke="black" stroke-width="3.5" fill="none" stroke-linecap="square"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. SB Monogram -->
+    <div class="card">
+      <h3>7. "SB" Monogram</h3>
+      <p class="description">Interlocking S and B</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <text x="4" y="24" font-family="monospace" font-size="20" font-weight="bold" fill="black">SB</text>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <text x="4" y="24" font-family="monospace" font-size="20" font-weight="bold" fill="black">SB</text>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Bracket S -->
+    <div class="card">
+      <h3>8. Bracket S</h3>
+      <p class="description">[S] code aesthetic</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <text x="2" y="23" font-family="monospace" font-size="16" font-weight="600" fill="black">[S]</text>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <text x="2" y="23" font-family="monospace" font-size="16" font-weight="600" fill="black">[S]</text>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Sigma -->
+    <div class="card">
+      <h3>9. Sigma (Σ)</h3>
+      <p class="description">Mathematical systems symbol</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M24 6 L8 6 L16 16 L8 26 L24 26" stroke="black" stroke-width="3" fill="none" stroke-linecap="square" stroke-linejoin="miter"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M24 6 L8 6 L16 16 L8 26 L24 26" stroke="black" stroke-width="3.5" fill="none" stroke-linecap="square" stroke-linejoin="miter"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">Diagram-Specific</div>
+
+    <!-- 10. Feedback Loop -->
+    <div class="card">
+      <h3>10. Feedback Loop</h3>
+      <p class="description">Circular arrow for system feedback</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="10" stroke="black" stroke-width="2.5" fill="none" stroke-dasharray="50 12"/>
+            <path d="M23 9 L26 13 L22 14" stroke="black" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="10" stroke="black" stroke-width="3" fill="none" stroke-dasharray="50 12"/>
+              <path d="M23 9 L26 13 L22 14" stroke="black" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Stock-Flow Icon -->
+    <div class="card">
+      <h3>11. Stock-Flow-Stock</h3>
+      <p class="description">Simplified horizontal diagram</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="2" y="11" width="8" height="10" stroke="black" stroke-width="2"/>
+            <rect x="22" y="11" width="8" height="10" stroke="black" stroke-width="2"/>
+            <line x1="10" y1="16" x2="22" y2="16" stroke="black" stroke-width="2"/>
+            <path d="M19 13 L22 16 L19 19" stroke="black" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="2" y="11" width="8" height="10" stroke="black" stroke-width="2.5"/>
+              <rect x="22" y="11" width="8" height="10" stroke="black" stroke-width="2.5"/>
+              <line x1="10" y1="16" x2="22" y2="16" stroke="black" stroke-width="2.5"/>
+              <path d="M19 13 L22 16 L19 19" stroke="black" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Tree Branch -->
+    <div class="card">
+      <h3>12. Tree Branch</h3>
+      <p class="description">Hierarchy / drill-down icon</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="12" width="8" height="8" stroke="black" stroke-width="2"/>
+            <rect x="20" y="4" width="8" height="8" stroke="black" stroke-width="2"/>
+            <rect x="20" y="20" width="8" height="8" stroke="black" stroke-width="2"/>
+            <path d="M12 16 L16 16 L16 8 L20 8" stroke="black" stroke-width="2" fill="none"/>
+            <path d="M16 16 L16 24 L20 24" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="4" y="12" width="8" height="8" stroke="black" stroke-width="2.5"/>
+              <rect x="20" y="4" width="8" height="8" stroke="black" stroke-width="2.5"/>
+              <rect x="20" y="20" width="8" height="8" stroke="black" stroke-width="2.5"/>
+              <path d="M12 16 L16 16 L16 8 L20 8" stroke="black" stroke-width="2.5" fill="none"/>
+              <path d="M16 16 L16 24 L20 24" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Cycle -->
+    <div class="card">
+      <h3>13. Triangular Cycle</h3>
+      <p class="description">Three nodes in feedback loop</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="12" y="2" width="8" height="8" stroke="black" stroke-width="2"/>
+            <rect x="2" y="22" width="8" height="8" stroke="black" stroke-width="2"/>
+            <rect x="22" y="22" width="8" height="8" stroke="black" stroke-width="2"/>
+            <path d="M20 6 L26 22" stroke="black" stroke-width="1.5"/>
+            <path d="M10 26 L6 26" stroke="black" stroke-width="0"/>
+            <line x1="10" y1="26" x2="22" y2="26" stroke="black" stroke-width="1.5"/>
+            <path d="M6 22 L12 10" stroke="black" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="12" y="2" width="8" height="8" fill="black"/>
+              <rect x="2" y="22" width="8" height="8" fill="black"/>
+              <rect x="22" y="22" width="8" height="8" fill="black"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">Minimal / Symbolic</div>
+
+    <!-- 14. Single Thick Rectangle -->
+    <div class="card">
+      <h3>14. Bold Rectangle</h3>
+      <p class="description">Single stock node, thick stroke</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="6" y="8" width="20" height="16" stroke="black" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="6" y="8" width="20" height="16" stroke="black" stroke-width="3.5"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. Dot-Line-Dot -->
+    <div class="card">
+      <h3>15. Dot-Line-Dot</h3>
+      <p class="description">Ultra-minimal connection</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <circle cx="8" cy="16" r="4" fill="black"/>
+            <circle cx="24" cy="16" r="4" fill="black"/>
+            <line x1="12" y1="16" x2="20" y2="16" stroke="black" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <circle cx="8" cy="16" r="4" fill="black"/>
+              <circle cx="24" cy="16" r="4" fill="black"/>
+              <line x1="12" y1="16" x2="20" y2="16" stroke="black" stroke-width="2.5"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 16. Crosshairs -->
+    <div class="card">
+      <h3>16. Crosshairs</h3>
+      <p class="description">Canvas/grid focus point</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <line x1="16" y1="4" x2="16" y2="28" stroke="black" stroke-width="2"/>
+            <line x1="4" y1="16" x2="28" y2="16" stroke="black" stroke-width="2"/>
+            <circle cx="16" cy="16" r="6" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <line x1="16" y1="4" x2="16" y2="28" stroke="black" stroke-width="2.5"/>
+              <line x1="4" y1="16" x2="28" y2="16" stroke="black" stroke-width="2.5"/>
+              <circle cx="16" cy="16" r="6" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 17. Nested Squares -->
+    <div class="card">
+      <h3>17. Nested Squares</h3>
+      <p class="description">Drill-down / hierarchy</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="4" width="24" height="24" stroke="black" stroke-width="2"/>
+            <rect x="10" y="10" width="12" height="12" stroke="black" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="4" y="4" width="24" height="24" stroke="black" stroke-width="2.5"/>
+              <rect x="10" y="10" width="12" height="12" stroke="black" stroke-width="2.5"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 18. Offset Nested -->
+    <div class="card">
+      <h3>18. Offset Nested</h3>
+      <p class="description">Depth/layers indication</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="8" y="4" width="20" height="16" stroke="black" stroke-width="2"/>
+            <rect x="4" y="12" width="20" height="16" fill="white" stroke="black" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="8" y="4" width="20" height="16" stroke="black" stroke-width="2.5"/>
+              <rect x="4" y="12" width="20" height="16" fill="white" stroke="black" stroke-width="2.5"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">Playful / Unique</div>
+
+    <!-- 19. Bezier Curve -->
+    <div class="card">
+      <h3>19. Bezier S-Curve</h3>
+      <p class="description">Your signature edge style</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M6 26 C6 16, 26 16, 26 6" stroke="black" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M6 26 C6 16, 26 16, 26 6" stroke="black" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 20. Building Blocks -->
+    <div class="card">
+      <h3>20. Building Blocks</h3>
+      <p class="description">Tetris-like arrangement</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="18" width="10" height="10" fill="black"/>
+            <rect x="14" y="18" width="10" height="10" stroke="black" stroke-width="2"/>
+            <rect x="14" y="8" width="10" height="10" fill="black"/>
+            <rect x="24" y="8" width="4" height="10" stroke="black" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="4" y="18" width="10" height="10" fill="black"/>
+              <rect x="14" y="18" width="10" height="10" stroke="black" stroke-width="2.5"/>
+              <rect x="14" y="8" width="10" height="10" fill="black"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 21. Infinity Flow -->
+    <div class="card">
+      <h3>21. Infinity Flow</h3>
+      <p class="description">Continuous system loop</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 16 C16 10, 6 10, 6 16 C6 22, 16 22, 16 16 C16 10, 26 10, 26 16 C26 22, 16 22, 16 16" stroke="black" stroke-width="2.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M16 16 C16 10, 6 10, 6 16 C6 22, 16 22, 16 16 C16 10, 26 10, 26 16 C26 22, 16 22, 16 16" stroke="black" stroke-width="3" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 22. Corner Bracket -->
+    <div class="card">
+      <h3>22. Corner Brackets</h3>
+      <p class="description">Selection/focus corners</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M4 10 L4 4 L10 4" stroke="black" stroke-width="3" fill="none" stroke-linecap="square"/>
+            <path d="M22 4 L28 4 L28 10" stroke="black" stroke-width="3" fill="none" stroke-linecap="square"/>
+            <path d="M28 22 L28 28 L22 28" stroke="black" stroke-width="3" fill="none" stroke-linecap="square"/>
+            <path d="M10 28 L4 28 L4 22" stroke="black" stroke-width="3" fill="none" stroke-linecap="square"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M4 10 L4 4 L10 4" stroke="black" stroke-width="3.5" fill="none" stroke-linecap="square"/>
+              <path d="M22 4 L28 4 L28 10" stroke="black" stroke-width="3.5" fill="none" stroke-linecap="square"/>
+              <path d="M28 22 L28 28 L22 28" stroke="black" stroke-width="3.5" fill="none" stroke-linecap="square"/>
+              <path d="M10 28 L4 28 L4 22" stroke="black" stroke-width="3.5" fill="none" stroke-linecap="square"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 23. Arrow Grid -->
+    <div class="card">
+      <h3>23. Flow Arrows</h3>
+      <p class="description">Multiple direction indicators</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M4 16 L12 16 M9 13 L12 16 L9 19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 16 L28 16 M25 13 L28 16 L25 19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 4 L16 12 M13 9 L16 12 L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 20 L16 28 M13 25 L16 28 L19 25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M4 16 L12 16 M9 13 L12 16 L9 19" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 16 L28 16 M25 13 L28 16 L25 19" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 4 L16 12 M13 9 L16 12 L19 9" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 20 L16 28 M13 25 L16 28 L19 25" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 24. Filled Box -->
+    <div class="card">
+      <h3>24. Solid Square</h3>
+      <p class="description">Bold, unmistakable presence</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="6" y="6" width="20" height="20" fill="black"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="6" y="6" width="20" height="20" fill="black"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">Slinky / "Thinking in Systems" Inspired</div>
+
+    <!-- 25. Vertical Slinky -->
+    <div class="card">
+      <h3>25. Vertical Slinky</h3>
+      <p class="description">Classic coiled spring, vertical</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <ellipse cx="16" cy="6" rx="10" ry="3" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="12" rx="10" ry="3" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="18" rx="10" ry="3" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="24" rx="10" ry="3" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="6" rx="10" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="12" rx="10" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="18" rx="10" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="24" rx="10" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 26. Slinky 3 Coils -->
+    <div class="card">
+      <h3>26. Slinky (3 Coils)</h3>
+      <p class="description">Fewer coils, bolder look</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <ellipse cx="16" cy="7" rx="11" ry="4" stroke="black" stroke-width="2.5" fill="none"/>
+            <ellipse cx="16" cy="16" rx="11" ry="4" stroke="black" stroke-width="2.5" fill="none"/>
+            <ellipse cx="16" cy="25" rx="11" ry="4" stroke="black" stroke-width="2.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="7" rx="11" ry="4" stroke="black" stroke-width="3" fill="none"/>
+              <ellipse cx="16" cy="16" rx="11" ry="4" stroke="black" stroke-width="3" fill="none"/>
+              <ellipse cx="16" cy="25" rx="11" ry="4" stroke="black" stroke-width="3" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 27. Diagonal Slinky -->
+    <div class="card">
+      <h3>27. Diagonal Slinky</h3>
+      <p class="description">Dynamic angle, like the book cover</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <g transform="rotate(-25 16 16)">
+              <ellipse cx="16" cy="6" rx="9" ry="3" stroke="black" stroke-width="2" fill="none"/>
+              <ellipse cx="16" cy="12" rx="9" ry="3" stroke="black" stroke-width="2" fill="none"/>
+              <ellipse cx="16" cy="18" rx="9" ry="3" stroke="black" stroke-width="2" fill="none"/>
+              <ellipse cx="16" cy="24" rx="9" ry="3" stroke="black" stroke-width="2" fill="none"/>
+            </g>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <g transform="rotate(-25 16 16)">
+                <ellipse cx="16" cy="6" rx="9" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+                <ellipse cx="16" cy="12" rx="9" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+                <ellipse cx="16" cy="18" rx="9" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+                <ellipse cx="16" cy="24" rx="9" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+              </g>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 28. Stretched Slinky -->
+    <div class="card">
+      <h3>28. Stretched Slinky</h3>
+      <p class="description">More space between coils</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <ellipse cx="16" cy="5" rx="10" ry="2.5" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="14" rx="10" ry="2.5" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="23" rx="10" ry="2.5" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="5" rx="10" ry="2.5" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="14" rx="10" ry="2.5" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="23" rx="10" ry="2.5" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 29. Slinky Spiral Path -->
+    <div class="card">
+      <h3>29. Spiral Coil</h3>
+      <p class="description">Continuous spiral path</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M6 6 Q26 6 26 11 Q26 16 6 16 Q6 21 26 21 Q26 26 6 26" stroke="black" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M6 6 Q26 6 26 11 Q26 16 6 16 Q6 21 26 21 Q26 26 6 26" stroke="black" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 30. Horizontal Slinky -->
+    <div class="card">
+      <h3>30. Horizontal Slinky</h3>
+      <p class="description">Side view coils</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <ellipse cx="6" cy="16" rx="3" ry="10" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="13" cy="16" rx="3" ry="10" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="20" cy="16" rx="3" ry="10" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="27" cy="16" rx="3" ry="10" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <ellipse cx="6" cy="16" rx="3" ry="10" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="13" cy="16" rx="3" ry="10" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="20" cy="16" rx="3" ry="10" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="27" cy="16" rx="3" ry="10" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 31. Filled Coils -->
+    <div class="card">
+      <h3>31. Filled Coils</h3>
+      <p class="description">Solid ellipses, bold presence</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <ellipse cx="16" cy="7" rx="10" ry="3" fill="black"/>
+            <ellipse cx="16" cy="16" rx="10" ry="3" fill="black"/>
+            <ellipse cx="16" cy="25" rx="10" ry="3" fill="black"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="7" rx="10" ry="3" fill="black"/>
+              <ellipse cx="16" cy="16" rx="10" ry="3" fill="black"/>
+              <ellipse cx="16" cy="25" rx="10" ry="3" fill="black"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 32. Tapered Slinky -->
+    <div class="card">
+      <h3>32. Tapered Slinky</h3>
+      <p class="description">Perspective depth effect</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <ellipse cx="16" cy="5" rx="12" ry="3" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="12" rx="10" ry="2.5" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="19" rx="8" ry="2" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="25" rx="6" ry="1.5" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="5" rx="12" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="12" rx="10" ry="2.5" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="19" rx="8" ry="2" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="25" rx="6" ry="1.5" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 33. 3D Helix -->
+    <div class="card">
+      <h3>33. 3D Helix</h3>
+      <p class="description">Half-coils showing depth</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M6 6 Q16 2 26 6" stroke="black" stroke-width="2" fill="none"/>
+            <path d="M26 6 Q16 14 6 10" stroke="black" stroke-width="2" fill="none"/>
+            <path d="M6 10 Q16 6 26 14" stroke="black" stroke-width="2" fill="none"/>
+            <path d="M26 14 Q16 22 6 18" stroke="black" stroke-width="2" fill="none"/>
+            <path d="M6 18 Q16 14 26 22" stroke="black" stroke-width="2" fill="none"/>
+            <path d="M26 22 Q16 30 6 26" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M6 6 Q16 2 26 6" stroke="black" stroke-width="2.5" fill="none"/>
+              <path d="M26 6 Q16 14 6 10" stroke="black" stroke-width="2.5" fill="none"/>
+              <path d="M6 10 Q16 6 26 14" stroke="black" stroke-width="2.5" fill="none"/>
+              <path d="M26 14 Q16 22 6 18" stroke="black" stroke-width="2.5" fill="none"/>
+              <path d="M6 18 Q16 14 26 22" stroke="black" stroke-width="2.5" fill="none"/>
+              <path d="M26 22 Q16 30 6 26" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 34. Minimal 2 Coils -->
+    <div class="card">
+      <h3>34. Minimal 2 Coils</h3>
+      <p class="description">Just two, very readable</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <ellipse cx="16" cy="11" rx="11" ry="5" stroke="black" stroke-width="3" fill="none"/>
+            <ellipse cx="16" cy="22" rx="11" ry="5" stroke="black" stroke-width="3" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="11" rx="11" ry="5" stroke="black" stroke-width="3.5" fill="none"/>
+              <ellipse cx="16" cy="22" rx="11" ry="5" stroke="black" stroke-width="3.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 35. Bouncing Slinky -->
+    <div class="card">
+      <h3>35. Bouncing Slinky</h3>
+      <p class="description">Compressed at bottom, stretched top</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <ellipse cx="16" cy="5" rx="10" ry="2" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="14" rx="10" ry="3" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="21" rx="10" ry="3" stroke="black" stroke-width="2" fill="none"/>
+            <ellipse cx="16" cy="27" rx="10" ry="3" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="5" rx="10" ry="2" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="14" rx="10" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="21" rx="10" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="16" cy="27" rx="10" ry="3" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 36. Angular Slinky -->
+    <div class="card">
+      <h3>36. Angular Slinky</h3>
+      <p class="description">Sharp-edged to match your aesthetic</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M4 6 L28 6 L28 10 L4 10" stroke="black" stroke-width="2" fill="none" stroke-linejoin="miter"/>
+            <path d="M4 14 L28 14 L28 18 L4 18" stroke="black" stroke-width="2" fill="none" stroke-linejoin="miter"/>
+            <path d="M4 22 L28 22 L28 26 L4 26" stroke="black" stroke-width="2" fill="none" stroke-linejoin="miter"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M4 6 L28 6 L28 10 L4 10" stroke="black" stroke-width="2.5" fill="none" stroke-linejoin="miter"/>
+              <path d="M4 14 L28 14 L28 18 L4 18" stroke="black" stroke-width="2.5" fill="none" stroke-linejoin="miter"/>
+              <path d="M4 22 L28 22 L28 26 L4 26" stroke="black" stroke-width="2.5" fill="none" stroke-linejoin="miter"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 37. Wave Coil -->
+    <div class="card">
+      <h3>37. Wave Coil</h3>
+      <p class="description">Sine wave representation</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M4 8 Q10 4 16 8 Q22 12 28 8" stroke="black" stroke-width="2.5" fill="none"/>
+            <path d="M4 16 Q10 12 16 16 Q22 20 28 16" stroke="black" stroke-width="2.5" fill="none"/>
+            <path d="M4 24 Q10 20 16 24 Q22 28 28 24" stroke="black" stroke-width="2.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M4 8 Q10 4 16 8 Q22 12 28 8" stroke="black" stroke-width="3" fill="none"/>
+              <path d="M4 16 Q10 12 16 16 Q22 20 28 16" stroke="black" stroke-width="3" fill="none"/>
+              <path d="M4 24 Q10 20 16 24 Q22 28 28 24" stroke="black" stroke-width="3" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">3D Helix (Better Attempts)</div>
+
+    <!-- 38. Overlapping Coil -->
+    <div class="card">
+      <h3>38. Overlapping Coil</h3>
+      <p class="description">Front arcs overlap back arcs with white knockout</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <!-- Back halves (drawn first, thinner) -->
+            <path d="M6 8 Q16 4 26 8" stroke="black" stroke-width="1.5" fill="none"/>
+            <path d="M6 16 Q16 12 26 16" stroke="black" stroke-width="1.5" fill="none"/>
+            <path d="M6 24 Q16 20 26 24" stroke="black" stroke-width="1.5" fill="none"/>
+            <!-- Front halves (drawn second, thicker, with white background) -->
+            <path d="M26 8 Q16 12 6 16" stroke="white" stroke-width="4" fill="none"/>
+            <path d="M26 8 Q16 12 6 16" stroke="black" stroke-width="2.5" fill="none"/>
+            <path d="M26 16 Q16 20 6 24" stroke="white" stroke-width="4" fill="none"/>
+            <path d="M26 16 Q16 20 6 24" stroke="black" stroke-width="2.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M6 8 Q16 4 26 8" stroke="black" stroke-width="1.5" fill="none"/>
+              <path d="M6 16 Q16 12 26 16" stroke="black" stroke-width="1.5" fill="none"/>
+              <path d="M6 24 Q16 20 26 24" stroke="black" stroke-width="1.5" fill="none"/>
+              <path d="M26 8 Q16 12 6 16" stroke="white" stroke-width="5" fill="none"/>
+              <path d="M26 8 Q16 12 6 16" stroke="black" stroke-width="3" fill="none"/>
+              <path d="M26 16 Q16 20 6 24" stroke="white" stroke-width="5" fill="none"/>
+              <path d="M26 16 Q16 20 6 24" stroke="black" stroke-width="3" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 39. Ribbon Helix -->
+    <div class="card">
+      <h3>39. Ribbon Helix</h3>
+      <p class="description">Twisted ribbon showing front/back faces</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <!-- Ribbon as filled shapes alternating -->
+            <path d="M6 4 Q16 0 26 4 L26 8 Q16 4 6 8 Z" fill="black"/>
+            <path d="M6 8 Q16 12 26 8 L26 12 Q16 8 6 12 Z" fill="none" stroke="black" stroke-width="1"/>
+            <path d="M6 12 Q16 8 26 12 L26 16 Q16 12 6 16 Z" fill="black"/>
+            <path d="M6 16 Q16 20 26 16 L26 20 Q16 16 6 20 Z" fill="none" stroke="black" stroke-width="1"/>
+            <path d="M6 20 Q16 16 26 20 L26 24 Q16 20 6 24 Z" fill="black"/>
+            <path d="M6 24 Q16 28 26 24 L26 28 Q16 24 6 28 Z" fill="none" stroke="black" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M6 4 Q16 0 26 4 L26 8 Q16 4 6 8 Z" fill="black"/>
+              <path d="M6 8 Q16 12 26 8 L26 12 Q16 8 6 12 Z" fill="none" stroke="black" stroke-width="1.5"/>
+              <path d="M6 12 Q16 8 26 12 L26 16 Q16 12 6 16 Z" fill="black"/>
+              <path d="M6 16 Q16 20 26 16 L26 20 Q16 16 6 20 Z" fill="none" stroke="black" stroke-width="1.5"/>
+              <path d="M6 20 Q16 16 26 20 L26 24 Q16 20 6 24 Z" fill="black"/>
+              <path d="M6 24 Q16 28 26 24 L26 28 Q16 24 6 28 Z" fill="none" stroke="black" stroke-width="1.5"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 40. DNA Style -->
+    <div class="card">
+      <h3>40. DNA Double Helix</h3>
+      <p class="description">Two intertwined strands with crossbars</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <!-- Left strand -->
+            <path d="M8 2 Q4 8 8 14 Q12 20 8 26 Q4 32 8 32" stroke="black" stroke-width="2.5" fill="none"/>
+            <!-- Right strand -->
+            <path d="M24 2 Q28 8 24 14 Q20 20 24 26 Q28 32 24 32" stroke="black" stroke-width="2.5" fill="none"/>
+            <!-- Crossbars (only visible ones) -->
+            <line x1="8" y1="8" x2="24" y2="8" stroke="black" stroke-width="1.5"/>
+            <line x1="10" y1="14" x2="22" y2="14" stroke="black" stroke-width="1.5"/>
+            <line x1="8" y1="20" x2="24" y2="20" stroke="black" stroke-width="1.5"/>
+            <line x1="10" y1="26" x2="22" y2="26" stroke="black" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M8 2 Q4 8 8 14 Q12 20 8 26 Q4 32 8 32" stroke="black" stroke-width="3" fill="none"/>
+              <path d="M24 2 Q28 8 24 14 Q20 20 24 26 Q28 32 24 32" stroke="black" stroke-width="3" fill="none"/>
+              <line x1="8" y1="8" x2="24" y2="8" stroke="black" stroke-width="2"/>
+              <line x1="8" y1="20" x2="24" y2="20" stroke="black" stroke-width="2"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 41. Isometric Coil -->
+    <div class="card">
+      <h3>41. Isometric Coil</h3>
+      <p class="description">Coil at 30° isometric angle</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <!-- Back segments (lighter) -->
+            <path d="M8 6 L24 14" stroke="black" stroke-width="1.5" stroke-opacity="0.4" fill="none"/>
+            <path d="M8 14 L24 22" stroke="black" stroke-width="1.5" stroke-opacity="0.4" fill="none"/>
+            <!-- Front coils with depth -->
+            <path d="M4 10 Q8 6 8 6 L8 6 Q12 4 16 6 Q20 8 24 6 L24 14 Q20 16 16 14 Q12 12 8 14 L8 14 Q4 14 4 10" stroke="black" stroke-width="2" fill="white"/>
+            <path d="M4 18 Q8 14 8 14 L8 14 Q12 12 16 14 Q20 16 24 14 L24 22 Q20 24 16 22 Q12 20 8 22 L8 22 Q4 22 4 18" stroke="black" stroke-width="2" fill="white"/>
+            <ellipse cx="16" cy="26" rx="12" ry="4" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="8" rx="11" ry="4" stroke="black" stroke-width="2.5" fill="white"/>
+              <ellipse cx="16" cy="17" rx="11" ry="4" stroke="black" stroke-width="2.5" fill="white"/>
+              <ellipse cx="16" cy="26" rx="11" ry="4" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 42. Continuous Spiral -->
+    <div class="card">
+      <h3>42. Continuous Spiral</h3>
+      <p class="description">Single stroke with crossing overlaps</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <!-- Draw back parts first -->
+            <path d="M26 6 C20 9 12 9 6 6" stroke="black" stroke-width="1.5" fill="none"/>
+            <path d="M26 14 C20 17 12 17 6 14" stroke="black" stroke-width="1.5" fill="none"/>
+            <path d="M26 22 C20 25 12 25 6 22" stroke="black" stroke-width="1.5" fill="none"/>
+            <!-- White knockout for crossings -->
+            <circle cx="6" cy="10" r="3" fill="white"/>
+            <circle cx="6" cy="18" r="3" fill="white"/>
+            <!-- Front crossover segments -->
+            <path d="M6 6 C12 3 20 3 26 6" stroke="black" stroke-width="2.5" fill="none"/>
+            <path d="M6 6 C6 10 6 10 6 14" stroke="black" stroke-width="2.5" fill="none"/>
+            <path d="M6 14 C12 11 20 11 26 14" stroke="black" stroke-width="2.5" fill="none"/>
+            <path d="M6 14 C6 18 6 18 6 22" stroke="black" stroke-width="2.5" fill="none"/>
+            <path d="M6 22 C12 19 20 19 26 22" stroke="black" stroke-width="2.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M26 6 C20 9 12 9 6 6" stroke="black" stroke-width="2" fill="none"/>
+              <path d="M26 14 C20 17 12 17 6 14" stroke="black" stroke-width="2" fill="none"/>
+              <path d="M26 22 C20 25 12 25 6 22" stroke="black" stroke-width="2" fill="none"/>
+              <circle cx="6" cy="10" r="3" fill="white"/>
+              <circle cx="6" cy="18" r="3" fill="white"/>
+              <path d="M6 6 C12 3 20 3 26 6" stroke="black" stroke-width="3" fill="none"/>
+              <path d="M6 6 C6 10 6 10 6 14" stroke="black" stroke-width="3" fill="none"/>
+              <path d="M6 14 C12 11 20 11 26 14" stroke="black" stroke-width="3" fill="none"/>
+              <path d="M6 14 C6 18 6 18 6 22" stroke="black" stroke-width="3" fill="none"/>
+              <path d="M6 22 C12 19 20 19 26 22" stroke="black" stroke-width="3" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 43. Proper 3D Slinky -->
+    <div class="card">
+      <h3>43. Proper 3D Slinky</h3>
+      <p class="description">Calculated helix with correct occlusion</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <!-- Back arcs (behind) - drawn first, thinner -->
+            <path d="M6 7 C6 3 26 3 26 7" stroke="black" stroke-width="1" fill="none"/>
+            <path d="M6 15 C6 11 26 11 26 15" stroke="black" stroke-width="1" fill="none"/>
+            <path d="M6 23 C6 19 26 19 26 23" stroke="black" stroke-width="1" fill="none"/>
+            <!-- Vertical connectors on right (behind) -->
+            <line x1="26" y1="7" x2="26" y2="11" stroke="black" stroke-width="1"/>
+            <line x1="26" y1="15" x2="26" y2="19" stroke="black" stroke-width="1"/>
+            <!-- White knockout circles for overlap -->
+            <circle cx="6" cy="11" r="2.5" fill="white"/>
+            <circle cx="6" cy="19" r="2.5" fill="white"/>
+            <!-- Front arcs - drawn last, full weight -->
+            <path d="M26 7 C26 11 6 11 6 15" stroke="black" stroke-width="2.5" fill="none"/>
+            <path d="M26 15 C26 19 6 19 6 23" stroke="black" stroke-width="2.5" fill="none"/>
+            <path d="M26 23 C26 27 6 27 6 27" stroke="black" stroke-width="2.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M6 7 C6 3 26 3 26 7" stroke="black" stroke-width="1.5" fill="none"/>
+              <path d="M6 15 C6 11 26 11 26 15" stroke="black" stroke-width="1.5" fill="none"/>
+              <path d="M6 23 C6 19 26 19 26 23" stroke="black" stroke-width="1.5" fill="none"/>
+              <line x1="26" y1="7" x2="26" y2="11" stroke="black" stroke-width="1.5"/>
+              <line x1="26" y1="15" x2="26" y2="19" stroke="black" stroke-width="1.5"/>
+              <circle cx="6" cy="11" r="3" fill="white"/>
+              <circle cx="6" cy="19" r="3" fill="white"/>
+              <path d="M26 7 C26 11 6 11 6 15" stroke="black" stroke-width="3" fill="none"/>
+              <path d="M26 15 C26 19 6 19 6 23" stroke="black" stroke-width="3" fill="none"/>
+              <path d="M26 23 C26 27 6 27 6 27" stroke="black" stroke-width="3" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 44. Spring Side View -->
+    <div class="card">
+      <h3>44. Spring Side View</h3>
+      <p class="description">Classic coil spring from the side</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M4 16
+                     L7 6 L11 26 L15 6 L19 26 L23 6 L27 16"
+                  stroke="black" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M4 16 L7 6 L11 26 L15 6 L19 26 L23 6 L27 16"
+                    stroke="black" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 45. Thick Coil 3D -->
+    <div class="card">
+      <h3>45. Thick Coil 3D</h3>
+      <p class="description">Bold overlapping arcs, high contrast</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <!-- Layer 1: All back curves (thin) -->
+            <path d="M5 8 C5 4 27 4 27 8" stroke="black" stroke-width="2" fill="none"/>
+            <path d="M5 18 C5 14 27 14 27 18" stroke="black" stroke-width="2" fill="none"/>
+            <!-- Layer 2: White mask for overlaps -->
+            <path d="M27 8 C27 13 5 13 5 18" stroke="white" stroke-width="5" fill="none"/>
+            <path d="M27 18 C27 23 5 23 5 28" stroke="white" stroke-width="5" fill="none"/>
+            <!-- Layer 3: Front curves (thick) -->
+            <path d="M27 8 C27 13 5 13 5 18" stroke="black" stroke-width="3" fill="none"/>
+            <path d="M27 18 C27 23 5 23 5 28" stroke="black" stroke-width="3" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M5 8 C5 4 27 4 27 8" stroke="black" stroke-width="2.5" fill="none"/>
+              <path d="M5 18 C5 14 27 14 27 18" stroke="black" stroke-width="2.5" fill="none"/>
+              <path d="M27 8 C27 13 5 13 5 18" stroke="white" stroke-width="6" fill="none"/>
+              <path d="M27 18 C27 23 5 23 5 28" stroke="white" stroke-width="6" fill="none"/>
+              <path d="M27 8 C27 13 5 13 5 18" stroke="black" stroke-width="3.5" fill="none"/>
+              <path d="M27 18 C27 23 5 23 5 28" stroke="black" stroke-width="3.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 46. Minimal Helix -->
+    <div class="card">
+      <h3>46. Minimal Helix</h3>
+      <p class="description">Just 1.5 turns, clean depth</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <!-- Back arc -->
+            <path d="M6 10 C6 4 26 4 26 10" stroke="black" stroke-width="2" fill="none"/>
+            <!-- White mask -->
+            <ellipse cx="6" cy="16" rx="3" ry="4" fill="white"/>
+            <!-- Front connecting arc -->
+            <path d="M26 10 C26 16 6 16 6 22" stroke="black" stroke-width="3" fill="none"/>
+            <!-- Bottom arc -->
+            <path d="M6 22 C6 28 26 28 26 22" stroke="black" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M6 10 C6 4 26 4 26 10" stroke="black" stroke-width="2.5" fill="none"/>
+              <ellipse cx="6" cy="16" rx="4" ry="5" fill="white"/>
+              <path d="M26 10 C26 16 6 16 6 22" stroke="black" stroke-width="3.5" fill="none"/>
+              <path d="M6 22 C6 28 26 28 26 22" stroke="black" stroke-width="2.5" fill="none"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 47. Abstract Helix Symbol -->
+    <div class="card">
+      <h3>47. Abstract Helix Symbol</h3>
+      <p class="description">Stylized, iconic representation</p>
+      <div class="preview-row">
+        <div class="large-preview">
+          <svg viewBox="0 0 32 32" fill="none">
+            <!-- Two interlocking S-curves -->
+            <path d="M8 4 C8 12 24 12 24 20 C24 28 8 28 8 28" stroke="black" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M24 4 C24 12 8 12 8 20 C8 28 24 28 24 28" stroke="black" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- White knockout at crossings -->
+            <circle cx="16" cy="12" r="3" fill="white"/>
+            <circle cx="16" cy="20" r="3" fill="white"/>
+            <!-- Redraw cross points -->
+            <circle cx="16" cy="12" r="1.5" fill="black"/>
+            <circle cx="16" cy="20" r="1.5" fill="black"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M8 4 C8 12 24 12 24 20 C24 28 8 28 8 28" stroke="black" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+              <path d="M24 4 C24 12 8 12 8 20 C8 28 24 28 24 28" stroke="black" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+              <circle cx="16" cy="12" r="3.5" fill="white"/>
+              <circle cx="16" cy="20" r="3.5" fill="white"/>
+              <circle cx="16" cy="12" r="2" fill="black"/>
+              <circle cx="16" cy="20" r="2" fill="black"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">Pixel Art Slinky (45° Diagonal, Transparent BG)</div>
+
+    <!-- 48. Rainbow Pixel Slinky -->
+    <div class="card">
+      <h3>48. Rainbow Pixel Slinky</h3>
+      <p class="description">Full rainbow gradient, chunky pixels</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Coil 1 - Red/Orange -->
+            <rect x="4" y="2" width="2" height="2" fill="#ff4444"/>
+            <rect x="6" y="2" width="2" height="2" fill="#ff5544"/>
+            <rect x="8" y="2" width="2" height="2" fill="#ff6644"/>
+            <rect x="10" y="4" width="2" height="2" fill="#ff7744"/>
+            <rect x="8" y="6" width="2" height="2" fill="#ff8844"/>
+            <rect x="6" y="6" width="2" height="2" fill="#ff9944"/>
+            <!-- Coil 2 - Orange/Yellow -->
+            <rect x="8" y="8" width="2" height="2" fill="#ffaa44"/>
+            <rect x="10" y="8" width="2" height="2" fill="#ffbb44"/>
+            <rect x="12" y="8" width="2" height="2" fill="#ffcc44"/>
+            <rect x="14" y="10" width="2" height="2" fill="#ffdd44"/>
+            <rect x="12" y="12" width="2" height="2" fill="#ffee44"/>
+            <rect x="10" y="12" width="2" height="2" fill="#eeff44"/>
+            <!-- Coil 3 - Yellow/Green -->
+            <rect x="12" y="14" width="2" height="2" fill="#ccff44"/>
+            <rect x="14" y="14" width="2" height="2" fill="#99ff44"/>
+            <rect x="16" y="14" width="2" height="2" fill="#66ff44"/>
+            <rect x="18" y="16" width="2" height="2" fill="#44ff66"/>
+            <rect x="16" y="18" width="2" height="2" fill="#44ff99"/>
+            <rect x="14" y="18" width="2" height="2" fill="#44ffcc"/>
+            <!-- Coil 4 - Cyan/Blue -->
+            <rect x="16" y="20" width="2" height="2" fill="#44ffff"/>
+            <rect x="18" y="20" width="2" height="2" fill="#44ccff"/>
+            <rect x="20" y="20" width="2" height="2" fill="#4499ff"/>
+            <rect x="22" y="22" width="2" height="2" fill="#4466ff"/>
+            <rect x="20" y="24" width="2" height="2" fill="#6644ff"/>
+            <rect x="18" y="24" width="2" height="2" fill="#9944ff"/>
+            <!-- Coil 5 - Purple/Pink -->
+            <rect x="20" y="26" width="2" height="2" fill="#cc44ff"/>
+            <rect x="22" y="26" width="2" height="2" fill="#ff44cc"/>
+            <rect x="24" y="26" width="2" height="2" fill="#ff4499"/>
+            <rect x="26" y="28" width="2" height="2" fill="#ff4466"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="4" y="2" width="2" height="2" fill="#ff4444"/>
+              <rect x="6" y="2" width="2" height="2" fill="#ff5544"/>
+              <rect x="8" y="2" width="2" height="2" fill="#ff6644"/>
+              <rect x="10" y="4" width="2" height="2" fill="#ff7744"/>
+              <rect x="8" y="6" width="2" height="2" fill="#ff8844"/>
+              <rect x="6" y="6" width="2" height="2" fill="#ff9944"/>
+              <rect x="8" y="8" width="2" height="2" fill="#ffaa44"/>
+              <rect x="10" y="8" width="2" height="2" fill="#ffbb44"/>
+              <rect x="12" y="8" width="2" height="2" fill="#ffcc44"/>
+              <rect x="14" y="10" width="2" height="2" fill="#ffdd44"/>
+              <rect x="12" y="12" width="2" height="2" fill="#ffee44"/>
+              <rect x="10" y="12" width="2" height="2" fill="#eeff44"/>
+              <rect x="12" y="14" width="2" height="2" fill="#ccff44"/>
+              <rect x="14" y="14" width="2" height="2" fill="#99ff44"/>
+              <rect x="16" y="14" width="2" height="2" fill="#66ff44"/>
+              <rect x="18" y="16" width="2" height="2" fill="#44ff66"/>
+              <rect x="16" y="18" width="2" height="2" fill="#44ff99"/>
+              <rect x="14" y="18" width="2" height="2" fill="#44ffcc"/>
+              <rect x="16" y="20" width="2" height="2" fill="#44ffff"/>
+              <rect x="18" y="20" width="2" height="2" fill="#44ccff"/>
+              <rect x="20" y="20" width="2" height="2" fill="#4499ff"/>
+              <rect x="22" y="22" width="2" height="2" fill="#4466ff"/>
+              <rect x="20" y="24" width="2" height="2" fill="#6644ff"/>
+              <rect x="18" y="24" width="2" height="2" fill="#9944ff"/>
+              <rect x="20" y="26" width="2" height="2" fill="#cc44ff"/>
+              <rect x="22" y="26" width="2" height="2" fill="#ff44cc"/>
+              <rect x="24" y="26" width="2" height="2" fill="#ff4499"/>
+              <rect x="26" y="28" width="2" height="2" fill="#ff4466"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 49. Blue-Green Pixel Slinky -->
+    <div class="card">
+      <h3>49. Blue-Green Gradient</h3>
+      <p class="description">Teal/cyan palette, smooth diagonal</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Coil 1 - Deep Blue -->
+            <rect x="2" y="4" width="2" height="2" fill="#1a5f7a"/>
+            <rect x="4" y="2" width="2" height="2" fill="#1e6e8a"/>
+            <rect x="6" y="2" width="2" height="2" fill="#227d9a"/>
+            <rect x="8" y="4" width="2" height="2" fill="#268caa"/>
+            <rect x="6" y="6" width="2" height="2" fill="#2a9bba"/>
+            <rect x="4" y="6" width="2" height="2" fill="#2eaaca"/>
+            <!-- Coil 2 - Teal -->
+            <rect x="6" y="8" width="2" height="2" fill="#32b9da"/>
+            <rect x="8" y="8" width="2" height="2" fill="#36c5e0"/>
+            <rect x="10" y="8" width="2" height="2" fill="#3ad1e6"/>
+            <rect x="12" y="10" width="2" height="2" fill="#3ee0e0"/>
+            <rect x="10" y="12" width="2" height="2" fill="#42e8d8"/>
+            <rect x="8" y="12" width="2" height="2" fill="#46f0d0"/>
+            <!-- Coil 3 - Cyan-Green -->
+            <rect x="10" y="14" width="2" height="2" fill="#4af0c8"/>
+            <rect x="12" y="14" width="2" height="2" fill="#4eecc0"/>
+            <rect x="14" y="14" width="2" height="2" fill="#52e8b8"/>
+            <rect x="16" y="16" width="2" height="2" fill="#56e4b0"/>
+            <rect x="14" y="18" width="2" height="2" fill="#5ae0a8"/>
+            <rect x="12" y="18" width="2" height="2" fill="#5edca0"/>
+            <!-- Coil 4 - Green -->
+            <rect x="14" y="20" width="2" height="2" fill="#62d898"/>
+            <rect x="16" y="20" width="2" height="2" fill="#66d490"/>
+            <rect x="18" y="20" width="2" height="2" fill="#6ad088"/>
+            <rect x="20" y="22" width="2" height="2" fill="#6ecc80"/>
+            <rect x="18" y="24" width="2" height="2" fill="#72c878"/>
+            <rect x="16" y="24" width="2" height="2" fill="#76c470"/>
+            <!-- Coil 5 - Lime -->
+            <rect x="18" y="26" width="2" height="2" fill="#7ac068"/>
+            <rect x="20" y="26" width="2" height="2" fill="#7ebc60"/>
+            <rect x="22" y="26" width="2" height="2" fill="#82b858"/>
+            <rect x="24" y="28" width="2" height="2" fill="#86b450"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="2" y="4" width="2" height="2" fill="#1a5f7a"/>
+              <rect x="4" y="2" width="2" height="2" fill="#1e6e8a"/>
+              <rect x="6" y="2" width="2" height="2" fill="#227d9a"/>
+              <rect x="8" y="4" width="2" height="2" fill="#268caa"/>
+              <rect x="6" y="6" width="2" height="2" fill="#2a9bba"/>
+              <rect x="4" y="6" width="2" height="2" fill="#2eaaca"/>
+              <rect x="6" y="8" width="2" height="2" fill="#32b9da"/>
+              <rect x="8" y="8" width="2" height="2" fill="#36c5e0"/>
+              <rect x="10" y="8" width="2" height="2" fill="#3ad1e6"/>
+              <rect x="12" y="10" width="2" height="2" fill="#3ee0e0"/>
+              <rect x="10" y="12" width="2" height="2" fill="#42e8d8"/>
+              <rect x="8" y="12" width="2" height="2" fill="#46f0d0"/>
+              <rect x="10" y="14" width="2" height="2" fill="#4af0c8"/>
+              <rect x="12" y="14" width="2" height="2" fill="#4eecc0"/>
+              <rect x="14" y="14" width="2" height="2" fill="#52e8b8"/>
+              <rect x="16" y="16" width="2" height="2" fill="#56e4b0"/>
+              <rect x="14" y="18" width="2" height="2" fill="#5ae0a8"/>
+              <rect x="12" y="18" width="2" height="2" fill="#5edca0"/>
+              <rect x="14" y="20" width="2" height="2" fill="#62d898"/>
+              <rect x="16" y="20" width="2" height="2" fill="#66d490"/>
+              <rect x="18" y="20" width="2" height="2" fill="#6ad088"/>
+              <rect x="20" y="22" width="2" height="2" fill="#6ecc80"/>
+              <rect x="18" y="24" width="2" height="2" fill="#72c878"/>
+              <rect x="16" y="24" width="2" height="2" fill="#76c470"/>
+              <rect x="18" y="26" width="2" height="2" fill="#7ac068"/>
+              <rect x="20" y="26" width="2" height="2" fill="#7ebc60"/>
+              <rect x="22" y="26" width="2" height="2" fill="#82b858"/>
+              <rect x="24" y="28" width="2" height="2" fill="#86b450"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 50. Thicker Pixel Coils Rainbow -->
+    <div class="card">
+      <h3>50. Chunky Rainbow Coils</h3>
+      <p class="description">Thicker coil bands, more visible</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Coil 1 - Red -->
+            <rect x="2" y="2" width="2" height="2" fill="#e63946"/>
+            <rect x="4" y="2" width="2" height="2" fill="#e63946"/>
+            <rect x="6" y="2" width="2" height="2" fill="#e63946"/>
+            <rect x="8" y="2" width="2" height="2" fill="#e63946"/>
+            <rect x="8" y="4" width="2" height="2" fill="#e63946"/>
+            <rect x="6" y="4" width="2" height="2" fill="#ff6b6b"/>
+            <rect x="4" y="4" width="2" height="2" fill="#ff6b6b"/>
+            <rect x="2" y="4" width="2" height="2" fill="#ff6b6b"/>
+            <!-- Coil 2 - Orange -->
+            <rect x="6" y="6" width="2" height="2" fill="#f4a261"/>
+            <rect x="8" y="6" width="2" height="2" fill="#f4a261"/>
+            <rect x="10" y="6" width="2" height="2" fill="#f4a261"/>
+            <rect x="12" y="6" width="2" height="2" fill="#f4a261"/>
+            <rect x="12" y="8" width="2" height="2" fill="#f4a261"/>
+            <rect x="10" y="8" width="2" height="2" fill="#ffb347"/>
+            <rect x="8" y="8" width="2" height="2" fill="#ffb347"/>
+            <rect x="6" y="8" width="2" height="2" fill="#ffb347"/>
+            <!-- Coil 3 - Yellow -->
+            <rect x="10" y="10" width="2" height="2" fill="#f9c74f"/>
+            <rect x="12" y="10" width="2" height="2" fill="#f9c74f"/>
+            <rect x="14" y="10" width="2" height="2" fill="#f9c74f"/>
+            <rect x="16" y="10" width="2" height="2" fill="#f9c74f"/>
+            <rect x="16" y="12" width="2" height="2" fill="#f9c74f"/>
+            <rect x="14" y="12" width="2" height="2" fill="#fee440"/>
+            <rect x="12" y="12" width="2" height="2" fill="#fee440"/>
+            <rect x="10" y="12" width="2" height="2" fill="#fee440"/>
+            <!-- Coil 4 - Green -->
+            <rect x="14" y="14" width="2" height="2" fill="#90be6d"/>
+            <rect x="16" y="14" width="2" height="2" fill="#90be6d"/>
+            <rect x="18" y="14" width="2" height="2" fill="#90be6d"/>
+            <rect x="20" y="14" width="2" height="2" fill="#90be6d"/>
+            <rect x="20" y="16" width="2" height="2" fill="#90be6d"/>
+            <rect x="18" y="16" width="2" height="2" fill="#a7c957"/>
+            <rect x="16" y="16" width="2" height="2" fill="#a7c957"/>
+            <rect x="14" y="16" width="2" height="2" fill="#a7c957"/>
+            <!-- Coil 5 - Cyan -->
+            <rect x="18" y="18" width="2" height="2" fill="#43aa8b"/>
+            <rect x="20" y="18" width="2" height="2" fill="#43aa8b"/>
+            <rect x="22" y="18" width="2" height="2" fill="#43aa8b"/>
+            <rect x="24" y="18" width="2" height="2" fill="#43aa8b"/>
+            <rect x="24" y="20" width="2" height="2" fill="#43aa8b"/>
+            <rect x="22" y="20" width="2" height="2" fill="#4ecdc4"/>
+            <rect x="20" y="20" width="2" height="2" fill="#4ecdc4"/>
+            <rect x="18" y="20" width="2" height="2" fill="#4ecdc4"/>
+            <!-- Coil 6 - Blue -->
+            <rect x="22" y="22" width="2" height="2" fill="#577590"/>
+            <rect x="24" y="22" width="2" height="2" fill="#577590"/>
+            <rect x="26" y="22" width="2" height="2" fill="#577590"/>
+            <rect x="28" y="22" width="2" height="2" fill="#577590"/>
+            <rect x="28" y="24" width="2" height="2" fill="#577590"/>
+            <rect x="26" y="24" width="2" height="2" fill="#4a90d9"/>
+            <rect x="24" y="24" width="2" height="2" fill="#4a90d9"/>
+            <rect x="22" y="24" width="2" height="2" fill="#4a90d9"/>
+            <!-- Coil 7 - Purple -->
+            <rect x="24" y="26" width="2" height="2" fill="#9b5de5"/>
+            <rect x="26" y="26" width="2" height="2" fill="#9b5de5"/>
+            <rect x="28" y="26" width="2" height="2" fill="#9b5de5"/>
+            <rect x="28" y="28" width="2" height="2" fill="#c77dff"/>
+            <rect x="26" y="28" width="2" height="2" fill="#c77dff"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="2" y="2" width="2" height="2" fill="#e63946"/><rect x="4" y="2" width="2" height="2" fill="#e63946"/><rect x="6" y="2" width="2" height="2" fill="#e63946"/><rect x="8" y="2" width="2" height="2" fill="#e63946"/><rect x="8" y="4" width="2" height="2" fill="#e63946"/><rect x="6" y="4" width="2" height="2" fill="#ff6b6b"/><rect x="4" y="4" width="2" height="2" fill="#ff6b6b"/><rect x="2" y="4" width="2" height="2" fill="#ff6b6b"/>
+              <rect x="6" y="6" width="2" height="2" fill="#f4a261"/><rect x="8" y="6" width="2" height="2" fill="#f4a261"/><rect x="10" y="6" width="2" height="2" fill="#f4a261"/><rect x="12" y="6" width="2" height="2" fill="#f4a261"/><rect x="12" y="8" width="2" height="2" fill="#f4a261"/><rect x="10" y="8" width="2" height="2" fill="#ffb347"/><rect x="8" y="8" width="2" height="2" fill="#ffb347"/><rect x="6" y="8" width="2" height="2" fill="#ffb347"/>
+              <rect x="10" y="10" width="2" height="2" fill="#f9c74f"/><rect x="12" y="10" width="2" height="2" fill="#f9c74f"/><rect x="14" y="10" width="2" height="2" fill="#f9c74f"/><rect x="16" y="10" width="2" height="2" fill="#f9c74f"/><rect x="16" y="12" width="2" height="2" fill="#f9c74f"/><rect x="14" y="12" width="2" height="2" fill="#fee440"/><rect x="12" y="12" width="2" height="2" fill="#fee440"/><rect x="10" y="12" width="2" height="2" fill="#fee440"/>
+              <rect x="14" y="14" width="2" height="2" fill="#90be6d"/><rect x="16" y="14" width="2" height="2" fill="#90be6d"/><rect x="18" y="14" width="2" height="2" fill="#90be6d"/><rect x="20" y="14" width="2" height="2" fill="#90be6d"/><rect x="20" y="16" width="2" height="2" fill="#90be6d"/><rect x="18" y="16" width="2" height="2" fill="#a7c957"/><rect x="16" y="16" width="2" height="2" fill="#a7c957"/><rect x="14" y="16" width="2" height="2" fill="#a7c957"/>
+              <rect x="18" y="18" width="2" height="2" fill="#43aa8b"/><rect x="20" y="18" width="2" height="2" fill="#43aa8b"/><rect x="22" y="18" width="2" height="2" fill="#43aa8b"/><rect x="24" y="18" width="2" height="2" fill="#43aa8b"/><rect x="24" y="20" width="2" height="2" fill="#43aa8b"/><rect x="22" y="20" width="2" height="2" fill="#4ecdc4"/><rect x="20" y="20" width="2" height="2" fill="#4ecdc4"/><rect x="18" y="20" width="2" height="2" fill="#4ecdc4"/>
+              <rect x="22" y="22" width="2" height="2" fill="#577590"/><rect x="24" y="22" width="2" height="2" fill="#577590"/><rect x="26" y="22" width="2" height="2" fill="#577590"/><rect x="28" y="22" width="2" height="2" fill="#577590"/><rect x="28" y="24" width="2" height="2" fill="#577590"/><rect x="26" y="24" width="2" height="2" fill="#4a90d9"/><rect x="24" y="24" width="2" height="2" fill="#4a90d9"/><rect x="22" y="24" width="2" height="2" fill="#4a90d9"/>
+              <rect x="24" y="26" width="2" height="2" fill="#9b5de5"/><rect x="26" y="26" width="2" height="2" fill="#9b5de5"/><rect x="28" y="26" width="2" height="2" fill="#9b5de5"/><rect x="28" y="28" width="2" height="2" fill="#c77dff"/><rect x="26" y="28" width="2" height="2" fill="#c77dff"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 51. Blue-Teal Chunky -->
+    <div class="card">
+      <h3>51. Blue-Teal Chunky</h3>
+      <p class="description">Ocean colors, thick coil bands</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Coil 1 -->
+            <rect x="2" y="2" width="2" height="2" fill="#023e8a"/>
+            <rect x="4" y="2" width="2" height="2" fill="#023e8a"/>
+            <rect x="6" y="2" width="2" height="2" fill="#0353a4"/>
+            <rect x="8" y="2" width="2" height="2" fill="#0353a4"/>
+            <rect x="8" y="4" width="2" height="2" fill="#0466c8"/>
+            <rect x="6" y="4" width="2" height="2" fill="#0466c8"/>
+            <rect x="4" y="4" width="2" height="2" fill="#0077b6"/>
+            <rect x="2" y="4" width="2" height="2" fill="#0077b6"/>
+            <!-- Coil 2 -->
+            <rect x="6" y="6" width="2" height="2" fill="#0096c7"/>
+            <rect x="8" y="6" width="2" height="2" fill="#0096c7"/>
+            <rect x="10" y="6" width="2" height="2" fill="#00a8cc"/>
+            <rect x="12" y="6" width="2" height="2" fill="#00a8cc"/>
+            <rect x="12" y="8" width="2" height="2" fill="#00b4d8"/>
+            <rect x="10" y="8" width="2" height="2" fill="#00b4d8"/>
+            <rect x="8" y="8" width="2" height="2" fill="#48cae4"/>
+            <rect x="6" y="8" width="2" height="2" fill="#48cae4"/>
+            <!-- Coil 3 -->
+            <rect x="10" y="10" width="2" height="2" fill="#56d0e0"/>
+            <rect x="12" y="10" width="2" height="2" fill="#56d0e0"/>
+            <rect x="14" y="10" width="2" height="2" fill="#64d6dc"/>
+            <rect x="16" y="10" width="2" height="2" fill="#64d6dc"/>
+            <rect x="16" y="12" width="2" height="2" fill="#72dcd8"/>
+            <rect x="14" y="12" width="2" height="2" fill="#72dcd8"/>
+            <rect x="12" y="12" width="2" height="2" fill="#80e2d4"/>
+            <rect x="10" y="12" width="2" height="2" fill="#80e2d4"/>
+            <!-- Coil 4 -->
+            <rect x="14" y="14" width="2" height="2" fill="#8ee8d0"/>
+            <rect x="16" y="14" width="2" height="2" fill="#8ee8d0"/>
+            <rect x="18" y="14" width="2" height="2" fill="#90e0c0"/>
+            <rect x="20" y="14" width="2" height="2" fill="#90e0c0"/>
+            <rect x="20" y="16" width="2" height="2" fill="#92d8b0"/>
+            <rect x="18" y="16" width="2" height="2" fill="#92d8b0"/>
+            <rect x="16" y="16" width="2" height="2" fill="#94d0a0"/>
+            <rect x="14" y="16" width="2" height="2" fill="#94d0a0"/>
+            <!-- Coil 5 -->
+            <rect x="18" y="18" width="2" height="2" fill="#96c890"/>
+            <rect x="20" y="18" width="2" height="2" fill="#96c890"/>
+            <rect x="22" y="18" width="2" height="2" fill="#98c080"/>
+            <rect x="24" y="18" width="2" height="2" fill="#98c080"/>
+            <rect x="24" y="20" width="2" height="2" fill="#9ab870"/>
+            <rect x="22" y="20" width="2" height="2" fill="#9ab870"/>
+            <rect x="20" y="20" width="2" height="2" fill="#9cb060"/>
+            <rect x="18" y="20" width="2" height="2" fill="#9cb060"/>
+            <!-- Coil 6 -->
+            <rect x="22" y="22" width="2" height="2" fill="#9ea850"/>
+            <rect x="24" y="22" width="2" height="2" fill="#9ea850"/>
+            <rect x="26" y="22" width="2" height="2" fill="#a0a040"/>
+            <rect x="28" y="24" width="2" height="2" fill="#a0a040"/>
+            <rect x="26" y="24" width="2" height="2" fill="#a2a830"/>
+            <rect x="24" y="24" width="2" height="2" fill="#a2a830"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="2" y="2" width="2" height="2" fill="#023e8a"/><rect x="4" y="2" width="2" height="2" fill="#023e8a"/><rect x="6" y="2" width="2" height="2" fill="#0353a4"/><rect x="8" y="2" width="2" height="2" fill="#0353a4"/><rect x="8" y="4" width="2" height="2" fill="#0466c8"/><rect x="6" y="4" width="2" height="2" fill="#0466c8"/><rect x="4" y="4" width="2" height="2" fill="#0077b6"/><rect x="2" y="4" width="2" height="2" fill="#0077b6"/>
+              <rect x="6" y="6" width="2" height="2" fill="#0096c7"/><rect x="8" y="6" width="2" height="2" fill="#0096c7"/><rect x="10" y="6" width="2" height="2" fill="#00a8cc"/><rect x="12" y="6" width="2" height="2" fill="#00a8cc"/><rect x="12" y="8" width="2" height="2" fill="#00b4d8"/><rect x="10" y="8" width="2" height="2" fill="#00b4d8"/><rect x="8" y="8" width="2" height="2" fill="#48cae4"/><rect x="6" y="8" width="2" height="2" fill="#48cae4"/>
+              <rect x="10" y="10" width="2" height="2" fill="#56d0e0"/><rect x="12" y="10" width="2" height="2" fill="#56d0e0"/><rect x="14" y="10" width="2" height="2" fill="#64d6dc"/><rect x="16" y="10" width="2" height="2" fill="#64d6dc"/><rect x="16" y="12" width="2" height="2" fill="#72dcd8"/><rect x="14" y="12" width="2" height="2" fill="#72dcd8"/><rect x="12" y="12" width="2" height="2" fill="#80e2d4"/><rect x="10" y="12" width="2" height="2" fill="#80e2d4"/>
+              <rect x="14" y="14" width="2" height="2" fill="#8ee8d0"/><rect x="16" y="14" width="2" height="2" fill="#8ee8d0"/><rect x="18" y="14" width="2" height="2" fill="#90e0c0"/><rect x="20" y="14" width="2" height="2" fill="#90e0c0"/><rect x="20" y="16" width="2" height="2" fill="#92d8b0"/><rect x="18" y="16" width="2" height="2" fill="#92d8b0"/><rect x="16" y="16" width="2" height="2" fill="#94d0a0"/><rect x="14" y="16" width="2" height="2" fill="#94d0a0"/>
+              <rect x="18" y="18" width="2" height="2" fill="#96c890"/><rect x="20" y="18" width="2" height="2" fill="#96c890"/><rect x="22" y="18" width="2" height="2" fill="#98c080"/><rect x="24" y="18" width="2" height="2" fill="#98c080"/><rect x="24" y="20" width="2" height="2" fill="#9ab870"/><rect x="22" y="20" width="2" height="2" fill="#9ab870"/><rect x="20" y="20" width="2" height="2" fill="#9cb060"/><rect x="18" y="20" width="2" height="2" fill="#9cb060"/>
+              <rect x="22" y="22" width="2" height="2" fill="#9ea850"/><rect x="24" y="22" width="2" height="2" fill="#9ea850"/><rect x="26" y="22" width="2" height="2" fill="#a0a040"/><rect x="28" y="24" width="2" height="2" fill="#a0a040"/><rect x="26" y="24" width="2" height="2" fill="#a2a830"/><rect x="24" y="24" width="2" height="2" fill="#a2a830"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 52. Simpler Pixel Slinky Rainbow -->
+    <div class="card">
+      <h3>52. Simple Rainbow Spiral</h3>
+      <p class="description">Cleaner diagonal, fewer pixels</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Single continuous diagonal with color bands -->
+            <!-- Red band -->
+            <rect x="2" y="2" width="4" height="2" fill="#ff4757"/>
+            <rect x="4" y="4" width="4" height="2" fill="#ff6b81"/>
+            <!-- Orange band -->
+            <rect x="6" y="6" width="4" height="2" fill="#ffa502"/>
+            <rect x="8" y="8" width="4" height="2" fill="#ffbe76"/>
+            <!-- Yellow band -->
+            <rect x="10" y="10" width="4" height="2" fill="#ffd32a"/>
+            <rect x="12" y="12" width="4" height="2" fill="#fff200"/>
+            <!-- Green band -->
+            <rect x="14" y="14" width="4" height="2" fill="#7bed9f"/>
+            <rect x="16" y="16" width="4" height="2" fill="#2ed573"/>
+            <!-- Cyan band -->
+            <rect x="18" y="18" width="4" height="2" fill="#70a1ff"/>
+            <rect x="20" y="20" width="4" height="2" fill="#1e90ff"/>
+            <!-- Blue band -->
+            <rect x="22" y="22" width="4" height="2" fill="#5352ed"/>
+            <rect x="24" y="24" width="4" height="2" fill="#3742fa"/>
+            <!-- Purple band -->
+            <rect x="26" y="26" width="4" height="2" fill="#a55eea"/>
+            <rect x="28" y="28" width="2" height="2" fill="#8854d0"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="2" y="2" width="4" height="2" fill="#ff4757"/>
+              <rect x="4" y="4" width="4" height="2" fill="#ff6b81"/>
+              <rect x="6" y="6" width="4" height="2" fill="#ffa502"/>
+              <rect x="8" y="8" width="4" height="2" fill="#ffbe76"/>
+              <rect x="10" y="10" width="4" height="2" fill="#ffd32a"/>
+              <rect x="12" y="12" width="4" height="2" fill="#fff200"/>
+              <rect x="14" y="14" width="4" height="2" fill="#7bed9f"/>
+              <rect x="16" y="16" width="4" height="2" fill="#2ed573"/>
+              <rect x="18" y="18" width="4" height="2" fill="#70a1ff"/>
+              <rect x="20" y="20" width="4" height="2" fill="#1e90ff"/>
+              <rect x="22" y="22" width="4" height="2" fill="#5352ed"/>
+              <rect x="24" y="24" width="4" height="2" fill="#3742fa"/>
+              <rect x="26" y="26" width="4" height="2" fill="#a55eea"/>
+              <rect x="28" y="28" width="2" height="2" fill="#8854d0"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 53. Proper 3D Pixel Slinky -->
+    <div class="card">
+      <h3>53. 3D Pixel Slinky (Blue-Green)</h3>
+      <p class="description">Actual coil shape with depth shading</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Coil 1 - back (darker) then front (lighter) -->
+            <rect x="4" y="2" width="2" height="2" fill="#0a4a6e"/>
+            <rect x="6" y="2" width="2" height="2" fill="#0d5a80"/>
+            <rect x="8" y="2" width="2" height="2" fill="#106a92"/>
+            <rect x="10" y="4" width="2" height="2" fill="#137aa4"/>
+            <rect x="10" y="6" width="2" height="2" fill="#168ab6"/>
+            <rect x="8" y="6" width="2" height="2" fill="#199ac8"/>
+            <rect x="6" y="6" width="2" height="2" fill="#1caada"/>
+            <rect x="4" y="4" width="2" height="2" fill="#1fbaec"/>
+            <!-- Coil 2 -->
+            <rect x="8" y="8" width="2" height="2" fill="#0e6e5a"/>
+            <rect x="10" y="8" width="2" height="2" fill="#118068"/>
+            <rect x="12" y="8" width="2" height="2" fill="#149276"/>
+            <rect x="14" y="10" width="2" height="2" fill="#17a484"/>
+            <rect x="14" y="12" width="2" height="2" fill="#1ab692"/>
+            <rect x="12" y="12" width="2" height="2" fill="#1dc8a0"/>
+            <rect x="10" y="12" width="2" height="2" fill="#20daae"/>
+            <rect x="8" y="10" width="2" height="2" fill="#23ecbc"/>
+            <!-- Coil 3 -->
+            <rect x="12" y="14" width="2" height="2" fill="#2a7e4c"/>
+            <rect x="14" y="14" width="2" height="2" fill="#2f9058"/>
+            <rect x="16" y="14" width="2" height="2" fill="#34a264"/>
+            <rect x="18" y="16" width="2" height="2" fill="#39b470"/>
+            <rect x="18" y="18" width="2" height="2" fill="#3ec67c"/>
+            <rect x="16" y="18" width="2" height="2" fill="#43d888"/>
+            <rect x="14" y="18" width="2" height="2" fill="#48ea94"/>
+            <rect x="12" y="16" width="2" height="2" fill="#4dfca0"/>
+            <!-- Coil 4 -->
+            <rect x="16" y="20" width="2" height="2" fill="#5a8e3e"/>
+            <rect x="18" y="20" width="2" height="2" fill="#64a046"/>
+            <rect x="20" y="20" width="2" height="2" fill="#6eb24e"/>
+            <rect x="22" y="22" width="2" height="2" fill="#78c456"/>
+            <rect x="22" y="24" width="2" height="2" fill="#82d65e"/>
+            <rect x="20" y="24" width="2" height="2" fill="#8ce866"/>
+            <rect x="18" y="24" width="2" height="2" fill="#96fa6e"/>
+            <rect x="16" y="22" width="2" height="2" fill="#a0ff76"/>
+            <!-- Coil 5 (end) -->
+            <rect x="20" y="26" width="2" height="2" fill="#8aa030"/>
+            <rect x="22" y="26" width="2" height="2" fill="#98b238"/>
+            <rect x="24" y="26" width="2" height="2" fill="#a6c440"/>
+            <rect x="26" y="28" width="2" height="2" fill="#b4d648"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="4" y="2" width="2" height="2" fill="#0a4a6e"/><rect x="6" y="2" width="2" height="2" fill="#0d5a80"/><rect x="8" y="2" width="2" height="2" fill="#106a92"/><rect x="10" y="4" width="2" height="2" fill="#137aa4"/><rect x="10" y="6" width="2" height="2" fill="#168ab6"/><rect x="8" y="6" width="2" height="2" fill="#199ac8"/><rect x="6" y="6" width="2" height="2" fill="#1caada"/><rect x="4" y="4" width="2" height="2" fill="#1fbaec"/>
+              <rect x="8" y="8" width="2" height="2" fill="#0e6e5a"/><rect x="10" y="8" width="2" height="2" fill="#118068"/><rect x="12" y="8" width="2" height="2" fill="#149276"/><rect x="14" y="10" width="2" height="2" fill="#17a484"/><rect x="14" y="12" width="2" height="2" fill="#1ab692"/><rect x="12" y="12" width="2" height="2" fill="#1dc8a0"/><rect x="10" y="12" width="2" height="2" fill="#20daae"/><rect x="8" y="10" width="2" height="2" fill="#23ecbc"/>
+              <rect x="12" y="14" width="2" height="2" fill="#2a7e4c"/><rect x="14" y="14" width="2" height="2" fill="#2f9058"/><rect x="16" y="14" width="2" height="2" fill="#34a264"/><rect x="18" y="16" width="2" height="2" fill="#39b470"/><rect x="18" y="18" width="2" height="2" fill="#3ec67c"/><rect x="16" y="18" width="2" height="2" fill="#43d888"/><rect x="14" y="18" width="2" height="2" fill="#48ea94"/><rect x="12" y="16" width="2" height="2" fill="#4dfca0"/>
+              <rect x="16" y="20" width="2" height="2" fill="#5a8e3e"/><rect x="18" y="20" width="2" height="2" fill="#64a046"/><rect x="20" y="20" width="2" height="2" fill="#6eb24e"/><rect x="22" y="22" width="2" height="2" fill="#78c456"/><rect x="22" y="24" width="2" height="2" fill="#82d65e"/><rect x="20" y="24" width="2" height="2" fill="#8ce866"/><rect x="18" y="24" width="2" height="2" fill="#96fa6e"/><rect x="16" y="22" width="2" height="2" fill="#a0ff76"/>
+              <rect x="20" y="26" width="2" height="2" fill="#8aa030"/><rect x="22" y="26" width="2" height="2" fill="#98b238"/><rect x="24" y="26" width="2" height="2" fill="#a6c440"/><rect x="26" y="28" width="2" height="2" fill="#b4d648"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 54. Saturated Rainbow -->
+    <div class="card">
+      <h3>54. Vibrant Rainbow Coils</h3>
+      <p class="description">High saturation, punchy colors</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Coil 1 - Red -->
+            <rect x="2" y="2" width="2" height="2" fill="#ff0040"/>
+            <rect x="4" y="2" width="2" height="2" fill="#ff0040"/>
+            <rect x="6" y="2" width="2" height="2" fill="#ff0040"/>
+            <rect x="8" y="4" width="2" height="2" fill="#ff0040"/>
+            <rect x="6" y="4" width="2" height="2" fill="#ff3366"/>
+            <rect x="4" y="4" width="2" height="2" fill="#ff3366"/>
+            <rect x="2" y="4" width="2" height="2" fill="#ff3366"/>
+            <!-- Coil 2 - Orange -->
+            <rect x="6" y="6" width="2" height="2" fill="#ff8800"/>
+            <rect x="8" y="6" width="2" height="2" fill="#ff8800"/>
+            <rect x="10" y="6" width="2" height="2" fill="#ff8800"/>
+            <rect x="12" y="8" width="2" height="2" fill="#ff8800"/>
+            <rect x="10" y="8" width="2" height="2" fill="#ffaa33"/>
+            <rect x="8" y="8" width="2" height="2" fill="#ffaa33"/>
+            <rect x="6" y="8" width="2" height="2" fill="#ffaa33"/>
+            <!-- Coil 3 - Yellow -->
+            <rect x="10" y="10" width="2" height="2" fill="#ffdd00"/>
+            <rect x="12" y="10" width="2" height="2" fill="#ffdd00"/>
+            <rect x="14" y="10" width="2" height="2" fill="#ffdd00"/>
+            <rect x="16" y="12" width="2" height="2" fill="#ffdd00"/>
+            <rect x="14" y="12" width="2" height="2" fill="#ffee55"/>
+            <rect x="12" y="12" width="2" height="2" fill="#ffee55"/>
+            <rect x="10" y="12" width="2" height="2" fill="#ffee55"/>
+            <!-- Coil 4 - Green -->
+            <rect x="14" y="14" width="2" height="2" fill="#00dd44"/>
+            <rect x="16" y="14" width="2" height="2" fill="#00dd44"/>
+            <rect x="18" y="14" width="2" height="2" fill="#00dd44"/>
+            <rect x="20" y="16" width="2" height="2" fill="#00dd44"/>
+            <rect x="18" y="16" width="2" height="2" fill="#44ee77"/>
+            <rect x="16" y="16" width="2" height="2" fill="#44ee77"/>
+            <rect x="14" y="16" width="2" height="2" fill="#44ee77"/>
+            <!-- Coil 5 - Cyan -->
+            <rect x="18" y="18" width="2" height="2" fill="#00dddd"/>
+            <rect x="20" y="18" width="2" height="2" fill="#00dddd"/>
+            <rect x="22" y="18" width="2" height="2" fill="#00dddd"/>
+            <rect x="24" y="20" width="2" height="2" fill="#00dddd"/>
+            <rect x="22" y="20" width="2" height="2" fill="#55eeee"/>
+            <rect x="20" y="20" width="2" height="2" fill="#55eeee"/>
+            <rect x="18" y="20" width="2" height="2" fill="#55eeee"/>
+            <!-- Coil 6 - Blue -->
+            <rect x="22" y="22" width="2" height="2" fill="#0066ff"/>
+            <rect x="24" y="22" width="2" height="2" fill="#0066ff"/>
+            <rect x="26" y="22" width="2" height="2" fill="#0066ff"/>
+            <rect x="28" y="24" width="2" height="2" fill="#0066ff"/>
+            <rect x="26" y="24" width="2" height="2" fill="#4488ff"/>
+            <rect x="24" y="24" width="2" height="2" fill="#4488ff"/>
+            <rect x="22" y="24" width="2" height="2" fill="#4488ff"/>
+            <!-- Coil 7 - Purple -->
+            <rect x="26" y="26" width="2" height="2" fill="#aa00ff"/>
+            <rect x="28" y="26" width="2" height="2" fill="#aa00ff"/>
+            <rect x="28" y="28" width="2" height="2" fill="#cc55ff"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="2" y="2" width="2" height="2" fill="#ff0040"/><rect x="4" y="2" width="2" height="2" fill="#ff0040"/><rect x="6" y="2" width="2" height="2" fill="#ff0040"/><rect x="8" y="4" width="2" height="2" fill="#ff0040"/><rect x="6" y="4" width="2" height="2" fill="#ff3366"/><rect x="4" y="4" width="2" height="2" fill="#ff3366"/><rect x="2" y="4" width="2" height="2" fill="#ff3366"/>
+              <rect x="6" y="6" width="2" height="2" fill="#ff8800"/><rect x="8" y="6" width="2" height="2" fill="#ff8800"/><rect x="10" y="6" width="2" height="2" fill="#ff8800"/><rect x="12" y="8" width="2" height="2" fill="#ff8800"/><rect x="10" y="8" width="2" height="2" fill="#ffaa33"/><rect x="8" y="8" width="2" height="2" fill="#ffaa33"/><rect x="6" y="8" width="2" height="2" fill="#ffaa33"/>
+              <rect x="10" y="10" width="2" height="2" fill="#ffdd00"/><rect x="12" y="10" width="2" height="2" fill="#ffdd00"/><rect x="14" y="10" width="2" height="2" fill="#ffdd00"/><rect x="16" y="12" width="2" height="2" fill="#ffdd00"/><rect x="14" y="12" width="2" height="2" fill="#ffee55"/><rect x="12" y="12" width="2" height="2" fill="#ffee55"/><rect x="10" y="12" width="2" height="2" fill="#ffee55"/>
+              <rect x="14" y="14" width="2" height="2" fill="#00dd44"/><rect x="16" y="14" width="2" height="2" fill="#00dd44"/><rect x="18" y="14" width="2" height="2" fill="#00dd44"/><rect x="20" y="16" width="2" height="2" fill="#00dd44"/><rect x="18" y="16" width="2" height="2" fill="#44ee77"/><rect x="16" y="16" width="2" height="2" fill="#44ee77"/><rect x="14" y="16" width="2" height="2" fill="#44ee77"/>
+              <rect x="18" y="18" width="2" height="2" fill="#00dddd"/><rect x="20" y="18" width="2" height="2" fill="#00dddd"/><rect x="22" y="18" width="2" height="2" fill="#00dddd"/><rect x="24" y="20" width="2" height="2" fill="#00dddd"/><rect x="22" y="20" width="2" height="2" fill="#55eeee"/><rect x="20" y="20" width="2" height="2" fill="#55eeee"/><rect x="18" y="20" width="2" height="2" fill="#55eeee"/>
+              <rect x="22" y="22" width="2" height="2" fill="#0066ff"/><rect x="24" y="22" width="2" height="2" fill="#0066ff"/><rect x="26" y="22" width="2" height="2" fill="#0066ff"/><rect x="28" y="24" width="2" height="2" fill="#0066ff"/><rect x="26" y="24" width="2" height="2" fill="#4488ff"/><rect x="24" y="24" width="2" height="2" fill="#4488ff"/><rect x="22" y="24" width="2" height="2" fill="#4488ff"/>
+              <rect x="26" y="26" width="2" height="2" fill="#aa00ff"/><rect x="28" y="26" width="2" height="2" fill="#aa00ff"/><rect x="28" y="28" width="2" height="2" fill="#cc55ff"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">LARGE Pixel Art Slinky (Big Loops for Visibility)</div>
+
+    <!-- 55. Large Rainbow Coils -->
+    <div class="card">
+      <h3>55. Large Rainbow Coils</h3>
+      <p class="description">3 big coils filling the space</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Coil 1 - Red/Orange (top-left) -->
+            <rect x="0" y="4" width="2" height="2" fill="#ff3366"/>
+            <rect x="0" y="6" width="2" height="2" fill="#ff3366"/>
+            <rect x="2" y="2" width="2" height="2" fill="#ff3366"/>
+            <rect x="2" y="8" width="2" height="2" fill="#ff5544"/>
+            <rect x="4" y="0" width="2" height="2" fill="#ff3366"/>
+            <rect x="4" y="10" width="2" height="2" fill="#ff5544"/>
+            <rect x="6" y="0" width="2" height="2" fill="#ff3366"/>
+            <rect x="6" y="10" width="2" height="2" fill="#ff6633"/>
+            <rect x="8" y="0" width="2" height="2" fill="#ff5544"/>
+            <rect x="8" y="10" width="2" height="2" fill="#ff7722"/>
+            <rect x="10" y="2" width="2" height="2" fill="#ff5544"/>
+            <rect x="10" y="8" width="2" height="2" fill="#ff8811"/>
+            <rect x="12" y="4" width="2" height="2" fill="#ff6633"/>
+            <rect x="12" y="6" width="2" height="2" fill="#ff9900"/>
+            <!-- Coil 2 - Yellow/Green (middle) -->
+            <rect x="6" y="14" width="2" height="2" fill="#ffcc00"/>
+            <rect x="6" y="16" width="2" height="2" fill="#ffcc00"/>
+            <rect x="8" y="12" width="2" height="2" fill="#ffcc00"/>
+            <rect x="8" y="18" width="2" height="2" fill="#ccdd00"/>
+            <rect x="10" y="10" width="2" height="2" fill="#ffdd00"/>
+            <rect x="10" y="20" width="2" height="2" fill="#99ee00"/>
+            <rect x="12" y="10" width="2" height="2" fill="#ffdd00"/>
+            <rect x="12" y="20" width="2" height="2" fill="#66ee22"/>
+            <rect x="14" y="10" width="2" height="2" fill="#eedd00"/>
+            <rect x="14" y="20" width="2" height="2" fill="#44dd44"/>
+            <rect x="16" y="12" width="2" height="2" fill="#ddcc00"/>
+            <rect x="16" y="18" width="2" height="2" fill="#22cc66"/>
+            <rect x="18" y="14" width="2" height="2" fill="#ccbb00"/>
+            <rect x="18" y="16" width="2" height="2" fill="#00bb88"/>
+            <!-- Coil 3 - Cyan/Blue/Purple (bottom-right) -->
+            <rect x="18" y="24" width="2" height="2" fill="#00cccc"/>
+            <rect x="18" y="26" width="2" height="2" fill="#00cccc"/>
+            <rect x="20" y="22" width="2" height="2" fill="#00cccc"/>
+            <rect x="20" y="28" width="2" height="2" fill="#00aadd"/>
+            <rect x="22" y="20" width="2" height="2" fill="#00bbcc"/>
+            <rect x="22" y="30" width="2" height="2" fill="#0088ee"/>
+            <rect x="24" y="20" width="2" height="2" fill="#00aadd"/>
+            <rect x="24" y="30" width="2" height="2" fill="#2266ff"/>
+            <rect x="26" y="20" width="2" height="2" fill="#0099ee"/>
+            <rect x="26" y="30" width="2" height="2" fill="#6644ff"/>
+            <rect x="28" y="22" width="2" height="2" fill="#0088ff"/>
+            <rect x="28" y="28" width="2" height="2" fill="#9933ff"/>
+            <rect x="30" y="24" width="2" height="2" fill="#4466ff"/>
+            <rect x="30" y="26" width="2" height="2" fill="#cc22ff"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="0" y="4" width="2" height="2" fill="#ff3366"/><rect x="0" y="6" width="2" height="2" fill="#ff3366"/><rect x="2" y="2" width="2" height="2" fill="#ff3366"/><rect x="2" y="8" width="2" height="2" fill="#ff5544"/><rect x="4" y="0" width="2" height="2" fill="#ff3366"/><rect x="4" y="10" width="2" height="2" fill="#ff5544"/><rect x="6" y="0" width="2" height="2" fill="#ff3366"/><rect x="6" y="10" width="2" height="2" fill="#ff6633"/><rect x="8" y="0" width="2" height="2" fill="#ff5544"/><rect x="8" y="10" width="2" height="2" fill="#ff7722"/><rect x="10" y="2" width="2" height="2" fill="#ff5544"/><rect x="10" y="8" width="2" height="2" fill="#ff8811"/><rect x="12" y="4" width="2" height="2" fill="#ff6633"/><rect x="12" y="6" width="2" height="2" fill="#ff9900"/>
+              <rect x="6" y="14" width="2" height="2" fill="#ffcc00"/><rect x="6" y="16" width="2" height="2" fill="#ffcc00"/><rect x="8" y="12" width="2" height="2" fill="#ffcc00"/><rect x="8" y="18" width="2" height="2" fill="#ccdd00"/><rect x="10" y="10" width="2" height="2" fill="#ffdd00"/><rect x="10" y="20" width="2" height="2" fill="#99ee00"/><rect x="12" y="10" width="2" height="2" fill="#ffdd00"/><rect x="12" y="20" width="2" height="2" fill="#66ee22"/><rect x="14" y="10" width="2" height="2" fill="#eedd00"/><rect x="14" y="20" width="2" height="2" fill="#44dd44"/><rect x="16" y="12" width="2" height="2" fill="#ddcc00"/><rect x="16" y="18" width="2" height="2" fill="#22cc66"/><rect x="18" y="14" width="2" height="2" fill="#ccbb00"/><rect x="18" y="16" width="2" height="2" fill="#00bb88"/>
+              <rect x="18" y="24" width="2" height="2" fill="#00cccc"/><rect x="18" y="26" width="2" height="2" fill="#00cccc"/><rect x="20" y="22" width="2" height="2" fill="#00cccc"/><rect x="20" y="28" width="2" height="2" fill="#00aadd"/><rect x="22" y="20" width="2" height="2" fill="#00bbcc"/><rect x="22" y="30" width="2" height="2" fill="#0088ee"/><rect x="24" y="20" width="2" height="2" fill="#00aadd"/><rect x="24" y="30" width="2" height="2" fill="#2266ff"/><rect x="26" y="20" width="2" height="2" fill="#0099ee"/><rect x="26" y="30" width="2" height="2" fill="#6644ff"/><rect x="28" y="22" width="2" height="2" fill="#0088ff"/><rect x="28" y="28" width="2" height="2" fill="#9933ff"/><rect x="30" y="24" width="2" height="2" fill="#4466ff"/><rect x="30" y="26" width="2" height="2" fill="#cc22ff"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 56. Large Blue-Green Coils -->
+    <div class="card">
+      <h3>56. Large Blue-Green Coils</h3>
+      <p class="description">3 big teal/cyan coils</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Coil 1 - Deep Blue (top-left) -->
+            <rect x="0" y="4" width="2" height="2" fill="#0a4a6e"/>
+            <rect x="0" y="6" width="2" height="2" fill="#0a4a6e"/>
+            <rect x="2" y="2" width="2" height="2" fill="#0a4a6e"/>
+            <rect x="2" y="8" width="2" height="2" fill="#0e5a7e"/>
+            <rect x="4" y="0" width="2" height="2" fill="#0a4a6e"/>
+            <rect x="4" y="10" width="2" height="2" fill="#126a8e"/>
+            <rect x="6" y="0" width="2" height="2" fill="#0e5a7e"/>
+            <rect x="6" y="10" width="2" height="2" fill="#167a9e"/>
+            <rect x="8" y="0" width="2" height="2" fill="#126a8e"/>
+            <rect x="8" y="10" width="2" height="2" fill="#1a8aae"/>
+            <rect x="10" y="2" width="2" height="2" fill="#167a9e"/>
+            <rect x="10" y="8" width="2" height="2" fill="#1e9abe"/>
+            <rect x="12" y="4" width="2" height="2" fill="#1a8aae"/>
+            <rect x="12" y="6" width="2" height="2" fill="#22aace"/>
+            <!-- Coil 2 - Teal (middle) -->
+            <rect x="6" y="14" width="2" height="2" fill="#26bade"/>
+            <rect x="6" y="16" width="2" height="2" fill="#26bade"/>
+            <rect x="8" y="12" width="2" height="2" fill="#26bade"/>
+            <rect x="8" y="18" width="2" height="2" fill="#2ac8e8"/>
+            <rect x="10" y="10" width="2" height="2" fill="#28c2e2"/>
+            <rect x="10" y="20" width="2" height="2" fill="#30d8e8"/>
+            <rect x="12" y="10" width="2" height="2" fill="#2ac8e8"/>
+            <rect x="12" y="20" width="2" height="2" fill="#38e0e0"/>
+            <rect x="14" y="10" width="2" height="2" fill="#2cd0ea"/>
+            <rect x="14" y="20" width="2" height="2" fill="#40e8d8"/>
+            <rect x="16" y="12" width="2" height="2" fill="#30d8e8"/>
+            <rect x="16" y="18" width="2" height="2" fill="#48f0d0"/>
+            <rect x="18" y="14" width="2" height="2" fill="#34e0e4"/>
+            <rect x="18" y="16" width="2" height="2" fill="#50f0c8"/>
+            <!-- Coil 3 - Green (bottom-right) -->
+            <rect x="18" y="24" width="2" height="2" fill="#58e8c0"/>
+            <rect x="18" y="26" width="2" height="2" fill="#58e8c0"/>
+            <rect x="20" y="22" width="2" height="2" fill="#58e8c0"/>
+            <rect x="20" y="28" width="2" height="2" fill="#60e0b8"/>
+            <rect x="22" y="20" width="2" height="2" fill="#5ce4bc"/>
+            <rect x="22" y="30" width="2" height="2" fill="#68d8b0"/>
+            <rect x="24" y="20" width="2" height="2" fill="#60e0b8"/>
+            <rect x="24" y="30" width="2" height="2" fill="#70d0a8"/>
+            <rect x="26" y="20" width="2" height="2" fill="#64dcb4"/>
+            <rect x="26" y="30" width="2" height="2" fill="#78c8a0"/>
+            <rect x="28" y="22" width="2" height="2" fill="#68d8b0"/>
+            <rect x="28" y="28" width="2" height="2" fill="#80c098"/>
+            <rect x="30" y="24" width="2" height="2" fill="#6cd4ac"/>
+            <rect x="30" y="26" width="2" height="2" fill="#88b890"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="0" y="4" width="2" height="2" fill="#0a4a6e"/><rect x="0" y="6" width="2" height="2" fill="#0a4a6e"/><rect x="2" y="2" width="2" height="2" fill="#0a4a6e"/><rect x="2" y="8" width="2" height="2" fill="#0e5a7e"/><rect x="4" y="0" width="2" height="2" fill="#0a4a6e"/><rect x="4" y="10" width="2" height="2" fill="#126a8e"/><rect x="6" y="0" width="2" height="2" fill="#0e5a7e"/><rect x="6" y="10" width="2" height="2" fill="#167a9e"/><rect x="8" y="0" width="2" height="2" fill="#126a8e"/><rect x="8" y="10" width="2" height="2" fill="#1a8aae"/><rect x="10" y="2" width="2" height="2" fill="#167a9e"/><rect x="10" y="8" width="2" height="2" fill="#1e9abe"/><rect x="12" y="4" width="2" height="2" fill="#1a8aae"/><rect x="12" y="6" width="2" height="2" fill="#22aace"/>
+              <rect x="6" y="14" width="2" height="2" fill="#26bade"/><rect x="6" y="16" width="2" height="2" fill="#26bade"/><rect x="8" y="12" width="2" height="2" fill="#26bade"/><rect x="8" y="18" width="2" height="2" fill="#2ac8e8"/><rect x="10" y="10" width="2" height="2" fill="#28c2e2"/><rect x="10" y="20" width="2" height="2" fill="#30d8e8"/><rect x="12" y="10" width="2" height="2" fill="#2ac8e8"/><rect x="12" y="20" width="2" height="2" fill="#38e0e0"/><rect x="14" y="10" width="2" height="2" fill="#2cd0ea"/><rect x="14" y="20" width="2" height="2" fill="#40e8d8"/><rect x="16" y="12" width="2" height="2" fill="#30d8e8"/><rect x="16" y="18" width="2" height="2" fill="#48f0d0"/><rect x="18" y="14" width="2" height="2" fill="#34e0e4"/><rect x="18" y="16" width="2" height="2" fill="#50f0c8"/>
+              <rect x="18" y="24" width="2" height="2" fill="#58e8c0"/><rect x="18" y="26" width="2" height="2" fill="#58e8c0"/><rect x="20" y="22" width="2" height="2" fill="#58e8c0"/><rect x="20" y="28" width="2" height="2" fill="#60e0b8"/><rect x="22" y="20" width="2" height="2" fill="#5ce4bc"/><rect x="22" y="30" width="2" height="2" fill="#68d8b0"/><rect x="24" y="20" width="2" height="2" fill="#60e0b8"/><rect x="24" y="30" width="2" height="2" fill="#70d0a8"/><rect x="26" y="20" width="2" height="2" fill="#64dcb4"/><rect x="26" y="30" width="2" height="2" fill="#78c8a0"/><rect x="28" y="22" width="2" height="2" fill="#68d8b0"/><rect x="28" y="28" width="2" height="2" fill="#80c098"/><rect x="30" y="24" width="2" height="2" fill="#6cd4ac"/><rect x="30" y="26" width="2" height="2" fill="#88b890"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 57. Bold 2-Coil Rainbow -->
+    <div class="card">
+      <h3>57. Bold 2-Coil Rainbow</h3>
+      <p class="description">Just 2 massive coils, super visible</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Coil 1 - Red/Orange/Yellow (top-left, larger) -->
+            <rect x="0" y="6" width="2" height="2" fill="#ff2244"/>
+            <rect x="0" y="8" width="2" height="2" fill="#ff2244"/>
+            <rect x="0" y="10" width="2" height="2" fill="#ff3355"/>
+            <rect x="2" y="4" width="2" height="2" fill="#ff2244"/>
+            <rect x="2" y="12" width="2" height="2" fill="#ff4466"/>
+            <rect x="4" y="2" width="2" height="2" fill="#ff2244"/>
+            <rect x="4" y="14" width="2" height="2" fill="#ff6644"/>
+            <rect x="6" y="0" width="2" height="2" fill="#ff3344"/>
+            <rect x="6" y="16" width="2" height="2" fill="#ff8822"/>
+            <rect x="8" y="0" width="2" height="2" fill="#ff4433"/>
+            <rect x="8" y="16" width="2" height="2" fill="#ffaa00"/>
+            <rect x="10" y="0" width="2" height="2" fill="#ff5522"/>
+            <rect x="10" y="16" width="2" height="2" fill="#ffcc00"/>
+            <rect x="12" y="0" width="2" height="2" fill="#ff6611"/>
+            <rect x="12" y="14" width="2" height="2" fill="#ffdd00"/>
+            <rect x="14" y="2" width="2" height="2" fill="#ff7700"/>
+            <rect x="14" y="12" width="2" height="2" fill="#eeee00"/>
+            <rect x="16" y="4" width="2" height="2" fill="#ff8800"/>
+            <rect x="16" y="10" width="2" height="2" fill="#ddee00"/>
+            <rect x="18" y="6" width="2" height="2" fill="#ff9900"/>
+            <rect x="18" y="8" width="2" height="2" fill="#ccdd00"/>
+            <!-- Coil 2 - Green/Cyan/Blue/Purple (bottom-right, larger) -->
+            <rect x="12" y="22" width="2" height="2" fill="#44dd44"/>
+            <rect x="12" y="24" width="2" height="2" fill="#44dd44"/>
+            <rect x="12" y="26" width="2" height="2" fill="#33cc55"/>
+            <rect x="14" y="20" width="2" height="2" fill="#44dd44"/>
+            <rect x="14" y="28" width="2" height="2" fill="#22bb66"/>
+            <rect x="16" y="18" width="2" height="2" fill="#44dd44"/>
+            <rect x="16" y="30" width="2" height="2" fill="#00aa88"/>
+            <rect x="18" y="16" width="2" height="2" fill="#33dd55"/>
+            <rect x="18" y="30" width="2" height="2" fill="#0099aa"/>
+            <rect x="20" y="16" width="2" height="2" fill="#22dd77"/>
+            <rect x="20" y="30" width="2" height="2" fill="#0088cc"/>
+            <rect x="22" y="16" width="2" height="2" fill="#00dd99"/>
+            <rect x="22" y="30" width="2" height="2" fill="#0066dd"/>
+            <rect x="24" y="16" width="2" height="2" fill="#00ddbb"/>
+            <rect x="24" y="28" width="2" height="2" fill="#2244ee"/>
+            <rect x="26" y="18" width="2" height="2" fill="#00dddd"/>
+            <rect x="26" y="26" width="2" height="2" fill="#4422ff"/>
+            <rect x="28" y="20" width="2" height="2" fill="#00ccee"/>
+            <rect x="28" y="24" width="2" height="2" fill="#6600ff"/>
+            <rect x="30" y="22" width="2" height="2" fill="#00bbff"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="0" y="6" width="2" height="2" fill="#ff2244"/><rect x="0" y="8" width="2" height="2" fill="#ff2244"/><rect x="0" y="10" width="2" height="2" fill="#ff3355"/><rect x="2" y="4" width="2" height="2" fill="#ff2244"/><rect x="2" y="12" width="2" height="2" fill="#ff4466"/><rect x="4" y="2" width="2" height="2" fill="#ff2244"/><rect x="4" y="14" width="2" height="2" fill="#ff6644"/><rect x="6" y="0" width="2" height="2" fill="#ff3344"/><rect x="6" y="16" width="2" height="2" fill="#ff8822"/><rect x="8" y="0" width="2" height="2" fill="#ff4433"/><rect x="8" y="16" width="2" height="2" fill="#ffaa00"/><rect x="10" y="0" width="2" height="2" fill="#ff5522"/><rect x="10" y="16" width="2" height="2" fill="#ffcc00"/><rect x="12" y="0" width="2" height="2" fill="#ff6611"/><rect x="12" y="14" width="2" height="2" fill="#ffdd00"/><rect x="14" y="2" width="2" height="2" fill="#ff7700"/><rect x="14" y="12" width="2" height="2" fill="#eeee00"/><rect x="16" y="4" width="2" height="2" fill="#ff8800"/><rect x="16" y="10" width="2" height="2" fill="#ddee00"/><rect x="18" y="6" width="2" height="2" fill="#ff9900"/><rect x="18" y="8" width="2" height="2" fill="#ccdd00"/>
+              <rect x="12" y="22" width="2" height="2" fill="#44dd44"/><rect x="12" y="24" width="2" height="2" fill="#44dd44"/><rect x="12" y="26" width="2" height="2" fill="#33cc55"/><rect x="14" y="20" width="2" height="2" fill="#44dd44"/><rect x="14" y="28" width="2" height="2" fill="#22bb66"/><rect x="16" y="18" width="2" height="2" fill="#44dd44"/><rect x="16" y="30" width="2" height="2" fill="#00aa88"/><rect x="18" y="16" width="2" height="2" fill="#33dd55"/><rect x="18" y="30" width="2" height="2" fill="#0099aa"/><rect x="20" y="16" width="2" height="2" fill="#22dd77"/><rect x="20" y="30" width="2" height="2" fill="#0088cc"/><rect x="22" y="16" width="2" height="2" fill="#00dd99"/><rect x="22" y="30" width="2" height="2" fill="#0066dd"/><rect x="24" y="16" width="2" height="2" fill="#00ddbb"/><rect x="24" y="28" width="2" height="2" fill="#2244ee"/><rect x="26" y="18" width="2" height="2" fill="#00dddd"/><rect x="26" y="26" width="2" height="2" fill="#4422ff"/><rect x="28" y="20" width="2" height="2" fill="#00ccee"/><rect x="28" y="24" width="2" height="2" fill="#6600ff"/><rect x="30" y="22" width="2" height="2" fill="#00bbff"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 58. Bold 2-Coil Teal -->
+    <div class="card">
+      <h3>58. Bold 2-Coil Teal</h3>
+      <p class="description">2 massive teal coils</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- Coil 1 - Deep Blue to Teal (top-left) -->
+            <rect x="0" y="6" width="2" height="2" fill="#064273"/>
+            <rect x="0" y="8" width="2" height="2" fill="#064273"/>
+            <rect x="0" y="10" width="2" height="2" fill="#0a5283"/>
+            <rect x="2" y="4" width="2" height="2" fill="#064273"/>
+            <rect x="2" y="12" width="2" height="2" fill="#0e6293"/>
+            <rect x="4" y="2" width="2" height="2" fill="#0a5283"/>
+            <rect x="4" y="14" width="2" height="2" fill="#1272a3"/>
+            <rect x="6" y="0" width="2" height="2" fill="#0e6293"/>
+            <rect x="6" y="16" width="2" height="2" fill="#1682b3"/>
+            <rect x="8" y="0" width="2" height="2" fill="#1272a3"/>
+            <rect x="8" y="16" width="2" height="2" fill="#1a92c3"/>
+            <rect x="10" y="0" width="2" height="2" fill="#1682b3"/>
+            <rect x="10" y="16" width="2" height="2" fill="#1ea2d3"/>
+            <rect x="12" y="0" width="2" height="2" fill="#1a92c3"/>
+            <rect x="12" y="14" width="2" height="2" fill="#22b2e3"/>
+            <rect x="14" y="2" width="2" height="2" fill="#1ea2d3"/>
+            <rect x="14" y="12" width="2" height="2" fill="#26c2e8"/>
+            <rect x="16" y="4" width="2" height="2" fill="#22b2e3"/>
+            <rect x="16" y="10" width="2" height="2" fill="#2ad2e8"/>
+            <rect x="18" y="6" width="2" height="2" fill="#26c2e8"/>
+            <rect x="18" y="8" width="2" height="2" fill="#2ee2e8"/>
+            <!-- Coil 2 - Cyan to Green (bottom-right) -->
+            <rect x="12" y="22" width="2" height="2" fill="#32e8e0"/>
+            <rect x="12" y="24" width="2" height="2" fill="#32e8e0"/>
+            <rect x="12" y="26" width="2" height="2" fill="#36e4d8"/>
+            <rect x="14" y="20" width="2" height="2" fill="#32e8e0"/>
+            <rect x="14" y="28" width="2" height="2" fill="#3ae0d0"/>
+            <rect x="16" y="18" width="2" height="2" fill="#34e6dc"/>
+            <rect x="16" y="30" width="2" height="2" fill="#3edcc8"/>
+            <rect x="18" y="16" width="2" height="2" fill="#36e4d8"/>
+            <rect x="18" y="30" width="2" height="2" fill="#42d8c0"/>
+            <rect x="20" y="16" width="2" height="2" fill="#38e2d4"/>
+            <rect x="20" y="30" width="2" height="2" fill="#46d4b8"/>
+            <rect x="22" y="16" width="2" height="2" fill="#3ae0d0"/>
+            <rect x="22" y="30" width="2" height="2" fill="#4ad0b0"/>
+            <rect x="24" y="16" width="2" height="2" fill="#3cdccc"/>
+            <rect x="24" y="28" width="2" height="2" fill="#4ecca8"/>
+            <rect x="26" y="18" width="2" height="2" fill="#3ed8c8"/>
+            <rect x="26" y="26" width="2" height="2" fill="#52c8a0"/>
+            <rect x="28" y="20" width="2" height="2" fill="#40d4c4"/>
+            <rect x="28" y="24" width="2" height="2" fill="#56c498"/>
+            <rect x="30" y="22" width="2" height="2" fill="#42d0c0"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="0" y="6" width="2" height="2" fill="#064273"/><rect x="0" y="8" width="2" height="2" fill="#064273"/><rect x="0" y="10" width="2" height="2" fill="#0a5283"/><rect x="2" y="4" width="2" height="2" fill="#064273"/><rect x="2" y="12" width="2" height="2" fill="#0e6293"/><rect x="4" y="2" width="2" height="2" fill="#0a5283"/><rect x="4" y="14" width="2" height="2" fill="#1272a3"/><rect x="6" y="0" width="2" height="2" fill="#0e6293"/><rect x="6" y="16" width="2" height="2" fill="#1682b3"/><rect x="8" y="0" width="2" height="2" fill="#1272a3"/><rect x="8" y="16" width="2" height="2" fill="#1a92c3"/><rect x="10" y="0" width="2" height="2" fill="#1682b3"/><rect x="10" y="16" width="2" height="2" fill="#1ea2d3"/><rect x="12" y="0" width="2" height="2" fill="#1a92c3"/><rect x="12" y="14" width="2" height="2" fill="#22b2e3"/><rect x="14" y="2" width="2" height="2" fill="#1ea2d3"/><rect x="14" y="12" width="2" height="2" fill="#26c2e8"/><rect x="16" y="4" width="2" height="2" fill="#22b2e3"/><rect x="16" y="10" width="2" height="2" fill="#2ad2e8"/><rect x="18" y="6" width="2" height="2" fill="#26c2e8"/><rect x="18" y="8" width="2" height="2" fill="#2ee2e8"/>
+              <rect x="12" y="22" width="2" height="2" fill="#32e8e0"/><rect x="12" y="24" width="2" height="2" fill="#32e8e0"/><rect x="12" y="26" width="2" height="2" fill="#36e4d8"/><rect x="14" y="20" width="2" height="2" fill="#32e8e0"/><rect x="14" y="28" width="2" height="2" fill="#3ae0d0"/><rect x="16" y="18" width="2" height="2" fill="#34e6dc"/><rect x="16" y="30" width="2" height="2" fill="#3edcc8"/><rect x="18" y="16" width="2" height="2" fill="#36e4d8"/><rect x="18" y="30" width="2" height="2" fill="#42d8c0"/><rect x="20" y="16" width="2" height="2" fill="#38e2d4"/><rect x="20" y="30" width="2" height="2" fill="#46d4b8"/><rect x="22" y="16" width="2" height="2" fill="#3ae0d0"/><rect x="22" y="30" width="2" height="2" fill="#4ad0b0"/><rect x="24" y="16" width="2" height="2" fill="#3cdccc"/><rect x="24" y="28" width="2" height="2" fill="#4ecca8"/><rect x="26" y="18" width="2" height="2" fill="#3ed8c8"/><rect x="26" y="26" width="2" height="2" fill="#52c8a0"/><rect x="28" y="20" width="2" height="2" fill="#40d4c4"/><rect x="28" y="24" width="2" height="2" fill="#56c498"/><rect x="30" y="22" width="2" height="2" fill="#42d0c0"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 59. Mega Thick Rainbow Coil -->
+    <div class="card">
+      <h3>59. Mega Thick Rainbow</h3>
+      <p class="description">Super chunky single coil</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- One giant thick coil filling the space -->
+            <!-- Outer arc - red to orange -->
+            <rect x="0" y="8" width="2" height="2" fill="#ff2244"/>
+            <rect x="0" y="10" width="2" height="2" fill="#ff2244"/>
+            <rect x="0" y="12" width="2" height="2" fill="#ff3344"/>
+            <rect x="0" y="14" width="2" height="2" fill="#ff4433"/>
+            <rect x="2" y="6" width="2" height="2" fill="#ff2244"/>
+            <rect x="2" y="16" width="2" height="2" fill="#ff5522"/>
+            <rect x="4" y="4" width="2" height="2" fill="#ff3344"/>
+            <rect x="4" y="18" width="2" height="2" fill="#ff6611"/>
+            <rect x="6" y="2" width="2" height="2" fill="#ff4433"/>
+            <rect x="6" y="20" width="2" height="2" fill="#ff8800"/>
+            <rect x="8" y="0" width="2" height="2" fill="#ff5522"/>
+            <rect x="8" y="22" width="2" height="2" fill="#ffaa00"/>
+            <rect x="10" y="0" width="2" height="2" fill="#ff6611"/>
+            <rect x="10" y="22" width="2" height="2" fill="#ffcc00"/>
+            <rect x="12" y="0" width="2" height="2" fill="#ff8800"/>
+            <rect x="12" y="22" width="2" height="2" fill="#dddd00"/>
+            <rect x="14" y="0" width="2" height="2" fill="#ffaa00"/>
+            <rect x="14" y="22" width="2" height="2" fill="#aadd00"/>
+            <rect x="16" y="0" width="2" height="2" fill="#ffcc00"/>
+            <rect x="16" y="20" width="2" height="2" fill="#77dd22"/>
+            <rect x="18" y="2" width="2" height="2" fill="#dddd00"/>
+            <rect x="18" y="18" width="2" height="2" fill="#44dd44"/>
+            <rect x="20" y="4" width="2" height="2" fill="#aadd00"/>
+            <rect x="20" y="16" width="2" height="2" fill="#22dd66"/>
+            <rect x="22" y="6" width="2" height="2" fill="#77dd22"/>
+            <rect x="22" y="14" width="2" height="2" fill="#00dd88"/>
+            <rect x="24" y="8" width="2" height="2" fill="#44dd44"/>
+            <rect x="24" y="10" width="2" height="2" fill="#00ddaa"/>
+            <rect x="24" y="12" width="2" height="2" fill="#00ddcc"/>
+            <!-- Inner arc - lighter shades -->
+            <rect x="4" y="8" width="2" height="2" fill="#ff5566"/>
+            <rect x="4" y="10" width="2" height="2" fill="#ff6655"/>
+            <rect x="4" y="12" width="2" height="2" fill="#ff7744"/>
+            <rect x="6" y="6" width="2" height="2" fill="#ff5566"/>
+            <rect x="6" y="14" width="2" height="2" fill="#ff8833"/>
+            <rect x="8" y="4" width="2" height="2" fill="#ff6655"/>
+            <rect x="8" y="16" width="2" height="2" fill="#ff9922"/>
+            <rect x="10" y="4" width="2" height="2" fill="#ff8833"/>
+            <rect x="10" y="16" width="2" height="2" fill="#ffbb22"/>
+            <rect x="12" y="4" width="2" height="2" fill="#ffaa22"/>
+            <rect x="12" y="16" width="2" height="2" fill="#ddcc22"/>
+            <rect x="14" y="4" width="2" height="2" fill="#ddbb22"/>
+            <rect x="14" y="16" width="2" height="2" fill="#aadd33"/>
+            <rect x="16" y="6" width="2" height="2" fill="#bbcc22"/>
+            <rect x="16" y="14" width="2" height="2" fill="#77dd44"/>
+            <rect x="18" y="8" width="2" height="2" fill="#88dd33"/>
+            <rect x="18" y="10" width="2" height="2" fill="#55dd55"/>
+            <rect x="18" y="12" width="2" height="2" fill="#33dd77"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="0" y="8" width="2" height="2" fill="#ff2244"/><rect x="0" y="10" width="2" height="2" fill="#ff2244"/><rect x="0" y="12" width="2" height="2" fill="#ff3344"/><rect x="0" y="14" width="2" height="2" fill="#ff4433"/><rect x="2" y="6" width="2" height="2" fill="#ff2244"/><rect x="2" y="16" width="2" height="2" fill="#ff5522"/><rect x="4" y="4" width="2" height="2" fill="#ff3344"/><rect x="4" y="18" width="2" height="2" fill="#ff6611"/><rect x="6" y="2" width="2" height="2" fill="#ff4433"/><rect x="6" y="20" width="2" height="2" fill="#ff8800"/><rect x="8" y="0" width="2" height="2" fill="#ff5522"/><rect x="8" y="22" width="2" height="2" fill="#ffaa00"/><rect x="10" y="0" width="2" height="2" fill="#ff6611"/><rect x="10" y="22" width="2" height="2" fill="#ffcc00"/><rect x="12" y="0" width="2" height="2" fill="#ff8800"/><rect x="12" y="22" width="2" height="2" fill="#dddd00"/><rect x="14" y="0" width="2" height="2" fill="#ffaa00"/><rect x="14" y="22" width="2" height="2" fill="#aadd00"/><rect x="16" y="0" width="2" height="2" fill="#ffcc00"/><rect x="16" y="20" width="2" height="2" fill="#77dd22"/><rect x="18" y="2" width="2" height="2" fill="#dddd00"/><rect x="18" y="18" width="2" height="2" fill="#44dd44"/><rect x="20" y="4" width="2" height="2" fill="#aadd00"/><rect x="20" y="16" width="2" height="2" fill="#22dd66"/><rect x="22" y="6" width="2" height="2" fill="#77dd22"/><rect x="22" y="14" width="2" height="2" fill="#00dd88"/><rect x="24" y="8" width="2" height="2" fill="#44dd44"/><rect x="24" y="10" width="2" height="2" fill="#00ddaa"/><rect x="24" y="12" width="2" height="2" fill="#00ddcc"/>
+              <rect x="4" y="8" width="2" height="2" fill="#ff5566"/><rect x="4" y="10" width="2" height="2" fill="#ff6655"/><rect x="4" y="12" width="2" height="2" fill="#ff7744"/><rect x="6" y="6" width="2" height="2" fill="#ff5566"/><rect x="6" y="14" width="2" height="2" fill="#ff8833"/><rect x="8" y="4" width="2" height="2" fill="#ff6655"/><rect x="8" y="16" width="2" height="2" fill="#ff9922"/><rect x="10" y="4" width="2" height="2" fill="#ff8833"/><rect x="10" y="16" width="2" height="2" fill="#ffbb22"/><rect x="12" y="4" width="2" height="2" fill="#ffaa22"/><rect x="12" y="16" width="2" height="2" fill="#ddcc22"/><rect x="14" y="4" width="2" height="2" fill="#ddbb22"/><rect x="14" y="16" width="2" height="2" fill="#aadd33"/><rect x="16" y="6" width="2" height="2" fill="#bbcc22"/><rect x="16" y="14" width="2" height="2" fill="#77dd44"/><rect x="18" y="8" width="2" height="2" fill="#88dd33"/><rect x="18" y="10" width="2" height="2" fill="#55dd55"/><rect x="18" y="12" width="2" height="2" fill="#33dd77"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 60. Mega Thick Teal Coil -->
+    <div class="card">
+      <h3>60. Mega Thick Teal</h3>
+      <p class="description">Super chunky teal single coil</p>
+      <div class="preview-row">
+        <div class="large-preview" style="background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 50% / 8px 8px;">
+          <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+            <!-- One giant thick teal coil -->
+            <!-- Outer arc -->
+            <rect x="0" y="8" width="2" height="2" fill="#053a5e"/>
+            <rect x="0" y="10" width="2" height="2" fill="#053a5e"/>
+            <rect x="0" y="12" width="2" height="2" fill="#084a6e"/>
+            <rect x="0" y="14" width="2" height="2" fill="#0b5a7e"/>
+            <rect x="2" y="6" width="2" height="2" fill="#053a5e"/>
+            <rect x="2" y="16" width="2" height="2" fill="#0e6a8e"/>
+            <rect x="4" y="4" width="2" height="2" fill="#084a6e"/>
+            <rect x="4" y="18" width="2" height="2" fill="#117a9e"/>
+            <rect x="6" y="2" width="2" height="2" fill="#0b5a7e"/>
+            <rect x="6" y="20" width="2" height="2" fill="#148aae"/>
+            <rect x="8" y="0" width="2" height="2" fill="#0e6a8e"/>
+            <rect x="8" y="22" width="2" height="2" fill="#179abe"/>
+            <rect x="10" y="0" width="2" height="2" fill="#117a9e"/>
+            <rect x="10" y="22" width="2" height="2" fill="#1aaace"/>
+            <rect x="12" y="0" width="2" height="2" fill="#148aae"/>
+            <rect x="12" y="22" width="2" height="2" fill="#1dbadd"/>
+            <rect x="14" y="0" width="2" height="2" fill="#179abe"/>
+            <rect x="14" y="22" width="2" height="2" fill="#20cae8"/>
+            <rect x="16" y="0" width="2" height="2" fill="#1aaace"/>
+            <rect x="16" y="20" width="2" height="2" fill="#28dae8"/>
+            <rect x="18" y="2" width="2" height="2" fill="#1dbadd"/>
+            <rect x="18" y="18" width="2" height="2" fill="#30e8e0"/>
+            <rect x="20" y="4" width="2" height="2" fill="#20cae8"/>
+            <rect x="20" y="16" width="2" height="2" fill="#38e8d8"/>
+            <rect x="22" y="6" width="2" height="2" fill="#28dae8"/>
+            <rect x="22" y="14" width="2" height="2" fill="#40e8d0"/>
+            <rect x="24" y="8" width="2" height="2" fill="#30e8e0"/>
+            <rect x="24" y="10" width="2" height="2" fill="#48e8c8"/>
+            <rect x="24" y="12" width="2" height="2" fill="#50e8c0"/>
+            <!-- Inner arc -->
+            <rect x="4" y="8" width="2" height="2" fill="#0a5a78"/>
+            <rect x="4" y="10" width="2" height="2" fill="#0d6a88"/>
+            <rect x="4" y="12" width="2" height="2" fill="#107a98"/>
+            <rect x="6" y="6" width="2" height="2" fill="#0a5a78"/>
+            <rect x="6" y="14" width="2" height="2" fill="#138aa8"/>
+            <rect x="8" y="4" width="2" height="2" fill="#0d6a88"/>
+            <rect x="8" y="16" width="2" height="2" fill="#169ab8"/>
+            <rect x="10" y="4" width="2" height="2" fill="#138aa8"/>
+            <rect x="10" y="16" width="2" height="2" fill="#19aac8"/>
+            <rect x="12" y="4" width="2" height="2" fill="#169ab8"/>
+            <rect x="12" y="16" width="2" height="2" fill="#1cbad8"/>
+            <rect x="14" y="4" width="2" height="2" fill="#19aac8"/>
+            <rect x="14" y="16" width="2" height="2" fill="#1fcae8"/>
+            <rect x="16" y="6" width="2" height="2" fill="#1cbad8"/>
+            <rect x="16" y="14" width="2" height="2" fill="#27dae8"/>
+            <rect x="18" y="8" width="2" height="2" fill="#1fcae8"/>
+            <rect x="18" y="10" width="2" height="2" fill="#2fe8e0"/>
+            <rect x="18" y="12" width="2" height="2" fill="#37e8d8"/>
+          </svg>
+        </div>
+        <div class="tab-preview">
+          <span class="tab-preview-label">Tab preview</span>
+          <div class="fake-tab">
+            <svg viewBox="0 0 32 32" fill="none" style="image-rendering: pixelated;">
+              <rect x="0" y="8" width="2" height="2" fill="#053a5e"/><rect x="0" y="10" width="2" height="2" fill="#053a5e"/><rect x="0" y="12" width="2" height="2" fill="#084a6e"/><rect x="0" y="14" width="2" height="2" fill="#0b5a7e"/><rect x="2" y="6" width="2" height="2" fill="#053a5e"/><rect x="2" y="16" width="2" height="2" fill="#0e6a8e"/><rect x="4" y="4" width="2" height="2" fill="#084a6e"/><rect x="4" y="18" width="2" height="2" fill="#117a9e"/><rect x="6" y="2" width="2" height="2" fill="#0b5a7e"/><rect x="6" y="20" width="2" height="2" fill="#148aae"/><rect x="8" y="0" width="2" height="2" fill="#0e6a8e"/><rect x="8" y="22" width="2" height="2" fill="#179abe"/><rect x="10" y="0" width="2" height="2" fill="#117a9e"/><rect x="10" y="22" width="2" height="2" fill="#1aaace"/><rect x="12" y="0" width="2" height="2" fill="#148aae"/><rect x="12" y="22" width="2" height="2" fill="#1dbadd"/><rect x="14" y="0" width="2" height="2" fill="#179abe"/><rect x="14" y="22" width="2" height="2" fill="#20cae8"/><rect x="16" y="0" width="2" height="2" fill="#1aaace"/><rect x="16" y="20" width="2" height="2" fill="#28dae8"/><rect x="18" y="2" width="2" height="2" fill="#1dbadd"/><rect x="18" y="18" width="2" height="2" fill="#30e8e0"/><rect x="20" y="4" width="2" height="2" fill="#20cae8"/><rect x="20" y="16" width="2" height="2" fill="#38e8d8"/><rect x="22" y="6" width="2" height="2" fill="#28dae8"/><rect x="22" y="14" width="2" height="2" fill="#40e8d0"/><rect x="24" y="8" width="2" height="2" fill="#30e8e0"/><rect x="24" y="10" width="2" height="2" fill="#48e8c8"/><rect x="24" y="12" width="2" height="2" fill="#50e8c0"/>
+              <rect x="4" y="8" width="2" height="2" fill="#0a5a78"/><rect x="4" y="10" width="2" height="2" fill="#0d6a88"/><rect x="4" y="12" width="2" height="2" fill="#107a98"/><rect x="6" y="6" width="2" height="2" fill="#0a5a78"/><rect x="6" y="14" width="2" height="2" fill="#138aa8"/><rect x="8" y="4" width="2" height="2" fill="#0d6a88"/><rect x="8" y="16" width="2" height="2" fill="#169ab8"/><rect x="10" y="4" width="2" height="2" fill="#138aa8"/><rect x="10" y="16" width="2" height="2" fill="#19aac8"/><rect x="12" y="4" width="2" height="2" fill="#169ab8"/><rect x="12" y="16" width="2" height="2" fill="#1cbad8"/><rect x="14" y="4" width="2" height="2" fill="#19aac8"/><rect x="14" y="16" width="2" height="2" fill="#1fcae8"/><rect x="16" y="6" width="2" height="2" fill="#1cbad8"/><rect x="16" y="14" width="2" height="2" fill="#27dae8"/><rect x="18" y="8" width="2" height="2" fill="#1fcae8"/><rect x="18" y="10" width="2" height="2" fill="#2fe8e0"/><rect x="18" y="12" width="2" height="2" fill="#37e8d8"/>
+            </svg>
+            System Builder
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
