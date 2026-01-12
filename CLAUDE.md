@@ -304,7 +304,7 @@ All import and export functionality is handled by a single unified `ImportExport
 | Select all | ⌘A |
 | Search | ⌘F |
 | Quick add | ⌘K |
-| Toggle sidebar | ⌘/ |
+| Toggle sidebar | ⌘\ |
 | New system | ⇧⌘N |
 | System tab | ⌘1 |
 | Database tab | ⌘2 |

@@ -125,9 +125,9 @@ export default function DiagramPage({ params }: PageProps) {
         setQuickAddOpen(false);
       }
 
-      // Cmd/Ctrl + /: Toggle sidebar
-      // Check multiple ways to detect the slash key for cross-platform compatibility
-      if (hasModifier && (e.key === "/" || e.code === "Slash" || e.code === "NumpadDivide")) {
+      // Cmd/Ctrl + \: Toggle sidebar
+      // Check multiple ways to detect the backslash key for cross-platform compatibility
+      if (hasModifier && (e.key === "\\" || e.code === "Backslash")) {
         e.preventDefault();
         e.stopPropagation();
         toggleSidebar();
