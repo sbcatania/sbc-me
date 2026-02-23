@@ -33,7 +33,7 @@
   .bio-page h1,
   .bio-page p,
   .bio-page span {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath fill='white' shape-rendering='crispEdges' d='M9,0h6v3h-6zM18,0h3v3h-3zM24,0h6v3h-6zM15,3h3v3h-3zM21,3h3v3h-3zM18,6h3v36h-3zM15,42h3v3h-3zM21,42h3v3h-3zM9,45h6v3h-6zM18,45h3v3h-3zM24,45h6v3h-6z'/%3E%3C/svg%3E") 18 24, text;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath fill='black' shape-rendering='crispEdges' d='M6,0h3v3h-3zM15,0h3v3h-3zM21,0h3v3h-3zM30,0h3v3h-3zM9,3h6v3h-6zM18,3h3v3h-3zM24,3h6v3h-6zM15,6h3v36h-3zM21,6h3v36h-3zM9,42h6v3h-6zM18,42h3v3h-3zM24,42h6v3h-6zM6,45h3v3h-3zM15,45h3v3h-3zM21,45h3v3h-3zM30,45h3v3h-3z'/%3E%3Cpath fill='white' shape-rendering='crispEdges' d='M9,0h6v3h-6zM18,0h3v3h-3zM24,0h6v3h-6zM15,3h3v3h-3zM21,3h3v3h-3zM18,6h3v36h-3zM15,42h3v3h-3zM21,42h3v3h-3zM9,45h6v3h-6zM18,45h3v3h-3zM24,45h6v3h-6z'/%3E%3C/svg%3E") 18 24, text;
   }
 
   .bio-page a {
