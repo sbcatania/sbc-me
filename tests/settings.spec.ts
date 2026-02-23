@@ -9,7 +9,7 @@ import {
 
 test.describe("Settings", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/systems");
     await waitForCanvas(page);
   });
 

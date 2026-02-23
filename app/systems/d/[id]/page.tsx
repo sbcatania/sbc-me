@@ -77,7 +77,7 @@ export default function DiagramPage({ params }: PageProps) {
       if (!diagram) {
         // Diagram not found, create new or redirect
         const newId = createDiagram("New System");
-        router.replace(`/d/${newId}`);
+        router.replace(`/systems/d/${newId}`);
       }
 
       setLoading(false);
@@ -137,7 +137,7 @@ export default function DiagramPage({ params }: PageProps) {
       if (e.shiftKey && hasModifier && e.key.toLowerCase() === "n") {
         e.preventDefault();
         const newId = createDiagram("New System");
-        router.push(`/d/${newId}`);
+        router.push(`/systems/d/${newId}`);
       }
 
       // Cmd/Ctrl + 1: System tab

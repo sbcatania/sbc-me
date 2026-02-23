@@ -32,7 +32,7 @@ export function Sidebar({ className, onSearchOpen }: SidebarProps) {
 
   const handleCreateDiagram = () => {
     const id = createDiagram("New System");
-    router.push(`/d/${id}`);
+    router.push(`/systems/d/${id}`);
   };
 
   const sortedDiagrams = React.useMemo(() => {
@@ -104,7 +104,7 @@ export function Sidebar({ className, onSearchOpen }: SidebarProps) {
         {/* Return to main site */}
         <div className="flex justify-center py-3">
           <SidebarTooltip label="Return to Sam's main site">
-            <Button variant="ghost" size="icon" className="h-8 w-8">
+            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => router.push("/")}>
               <ArrowLeft className="h-4 w-4" />
             </Button>
           </SidebarTooltip>
@@ -205,7 +205,10 @@ export function Sidebar({ className, onSearchOpen }: SidebarProps) {
 
       {/* Bottom link */}
       <div className="border-t border-border p-2">
-        <button className="flex w-full items-center gap-3 rounded px-2 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
+        <button
+          onClick={() => router.push("/")}
+          className="flex w-full items-center gap-3 rounded px-2 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+        >
           <ArrowLeft className="h-4 w-4" />
           <span>Return to Sam&apos;s main site</span>
         </button>

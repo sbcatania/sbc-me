@@ -15,8 +15,8 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "System Builder",
-  description: "Local-first systems diagram editor with stocks and flows",
+  title: "Sam Catania",
+  description: "Sam Catania's personal site",
 };
 
 export default function RootLayout({
