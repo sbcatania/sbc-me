@@ -84,7 +84,7 @@ export function Breadcrumb() {
   return (
     <div className="flex items-center gap-1 px-4 py-2 text-sm border-b border-border bg-muted/30">
       <button
-        onClick={() => router.push(`/d/${breadcrumbs[0]?.id}`)}
+        onClick={() => router.push(`/systems/d/${breadcrumbs[0]?.id}`)}
         className="flex items-center gap-1 text-muted-foreground hover:text-foreground"
       >
         <Home className="h-3 w-3" />
@@ -94,7 +94,7 @@ export function Breadcrumb() {
         <React.Fragment key={item.id}>
           <ChevronRight className="h-3 w-3 text-muted-foreground" />
           <button
-            onClick={() => router.push(`/d/${item.id}`)}
+            onClick={() => router.push(`/systems/d/${item.id}`)}
             className={`hover:text-foreground ${
               index === breadcrumbs.length - 1
                 ? "text-foreground font-medium"

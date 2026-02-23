@@ -15,7 +15,7 @@ import {
 test.describe("Canvas Interactions", () => {
   test.beforeEach(async ({ page }) => {
     // Clear IndexedDB to ensure clean test state
-    await page.goto("/");
+    await page.goto("/systems");
     await clearIndexedDB(page);
     await page.reload();
     await waitForCanvas(page);

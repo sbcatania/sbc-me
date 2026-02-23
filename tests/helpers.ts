@@ -69,7 +69,7 @@ export async function importFixture(page: Page, fixtureName: string): Promise<vo
   await page.click('[data-testid="import-export-modal-import-button"]');
 
   // Wait for navigation to new diagram
-  await page.waitForURL(/\/d\//);
+  await page.waitForURL(/\/systems\/d\//);
 
   // Wait for canvas to be ready
   await page.waitForSelector('[data-testid="canvas-svg"]', { timeout: 5000 });

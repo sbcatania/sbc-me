@@ -78,7 +78,7 @@ export function SearchPanel({ open, onClose }: SearchPanelProps) {
   };
 
   const handleSelect = (result: SearchResult) => {
-    router.push(`/d/${result.id}`);
+    router.push(`/systems/d/${result.id}`);
     onClose();
   };
 

@@ -12,7 +12,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useDiagramStore } from "@/lib/store/diagrams";
-import { DiagramDocSchema } from "@/lib/model/schema";
+import { DiagramDocSchema, DiagramDocSchema as SingleDiagramSchema, UserPrefsSchema } from "@/lib/model/schema";
+import { z } from "zod";
+
+// Schema for full backup format (exported via Settings > Full Backup)
+const FullBackupSchema = z.object({
+  version: z.literal(1),
+  exportedAt: z.number(),
+  preferences: UserPrefsSchema.optional(),
+  diagrams: z.array(DiagramDocSchema),
+});
 
 interface ImportExportModalProps {
   open: boolean;
@@ -90,20 +99,53 @@ export function ImportExportModal({
       setError(null);
       try {
         const parsed = JSON.parse(text);
-        const validated = DiagramDocSchema.parse(parsed);
 
-        const newId = createDiagram(validated.title, undefined, {
-          nodes: validated.nodes,
-          edges: validated.edges,
-          frames: validated.frames,
-          notes: validated.notes,
-          viewport: validated.viewport,
-          ui: validated.ui,
-        });
+        // Try single diagram format first
+        const singleResult = SingleDiagramSchema.safeParse(parsed);
+        if (singleResult.success) {
+          const validated = singleResult.data;
+          const newId = createDiagram(validated.title, undefined, {
+            nodes: validated.nodes,
+            edges: validated.edges,
+            frames: validated.frames,
+            notes: validated.notes,
+            viewport: validated.viewport,
+            ui: validated.ui,
+          });
 
-        onClose();
-        setPasteValue("");
-        router.push(`/d/${newId}`);
+          onClose();
+          setPasteValue("");
+          router.push(`/systems/d/${newId}`);
+          return;
+        }
+
+        // Try full backup format (multiple diagrams)
+        const backupResult = FullBackupSchema.safeParse(parsed);
+        if (backupResult.success) {
+          const backup = backupResult.data;
+          let lastId: string | null = null;
+
+          for (const diagram of backup.diagrams) {
+            lastId = createDiagram(diagram.title, undefined, {
+              nodes: diagram.nodes,
+              edges: diagram.edges,
+              frames: diagram.frames,
+              notes: diagram.notes,
+              viewport: diagram.viewport,
+              ui: diagram.ui,
+            });
+          }
+
+          onClose();
+          setPasteValue("");
+          if (lastId) {
+            router.push(`/systems/d/${lastId}`);
+          }
+          return;
+        }
+
+        // Neither format matched — show the single diagram error (more likely intent)
+        DiagramDocSchema.parse(parsed);
       } catch (err) {
         console.error("Failed to import diagram:", err);
         setError(

@@ -48,7 +48,7 @@ export function SystemListItem({ diagram, isActive }: SystemListItemProps) {
 
   const handleClick = () => {
     if (!isEditing) {
-      router.push(`/d/${diagram.id}`);
+      router.push(`/systems/d/${diagram.id}`);
     }
   };
 
@@ -78,7 +78,7 @@ export function SystemListItem({ diagram, isActive }: SystemListItemProps) {
 
   const handleDuplicate = async () => {
     const newId = await duplicateDiagram(diagram.id);
-    router.push(`/d/${newId}`);
+    router.push(`/systems/d/${newId}`);
   };
 
   const handleDelete = async () => {
@@ -90,10 +90,10 @@ export function SystemListItem({ diagram, isActive }: SystemListItemProps) {
     if (wasActive) {
       const remainingDiagrams = diagramIds.filter((id) => id !== diagram.id);
       if (remainingDiagrams.length > 0) {
-        router.push(`/d/${remainingDiagrams[0]}`);
+        router.push(`/systems/d/${remainingDiagrams[0]}`);
       } else {
         const newId = createDiagram("My System");
-        router.push(`/d/${newId}`);
+        router.push(`/systems/d/${newId}`);
       }
     }
   };
