@@ -12,6 +12,11 @@
   --accent-foreground: 0 0% 9%;
 }
 
+/* Scale bio page up 10% — like browser zoom */
+.bio-page {
+  zoom: 1.1;
+}
+
 /* Dark mode — scoped to bio page only */
 @media (prefers-color-scheme: dark) {
   .bio-page {
