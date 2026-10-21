@@ -10,7 +10,7 @@ A local-first, beautiful systems diagram editor with stocks and flows, Muse-like
 |----------|---------|---------------------|
 | `/docs/edge-routing.md` | Edge/flow connection logic, bezier curves, collision avoidance | Modifying edge rendering, fixing connection bugs |
 | `/docs/testing.md` | Playwright test suite, fixtures, helpers | Running tests, adding test cases |
-| `CLAUDE.md` (this file) | Project overview, architecture, constraints | Starting work, major changes |
+| `AGENTS.md` (this file) | Project overview, architecture, constraints | Starting work, major changes |
 
 ### Development Workflow
 

@@ -73,7 +73,7 @@ docs/                  # Technical documentation
 
 ## Documentation
 
-- `CLAUDE.md` - Project overview and engineering constraints
+- `AGENTS.md` - Project overview and engineering constraints
 - `docs/edge-routing.md` - Edge routing algorithm specification
 - `docs/testing.md` - Testing guide and fixtures
 
