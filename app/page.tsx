@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Home() {
   return (
     <main className="bio-page flex min-h-screen items-center justify-center px-6 font-mono bg-background text-foreground">
@@ -34,13 +32,6 @@ export default function Home() {
           <p>I live in San Francisco and grew up in Philadelphia.</p>
         </div>
         <div className="flex items-center gap-2 text-sm">
-          <Link
-            href="/projects"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            projects
-          </Link>
-          <span className="text-muted-foreground/50">{"\u30FB"}</span>
           <a
             href="https://x.com/sbcatania"
             target="_blank"
