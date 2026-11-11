@@ -2,6 +2,14 @@
 
 A local-first, beautiful systems diagram editor with stocks and flows, Muse-like drill-down navigation, auto-layout with circular cycle support, and import/export capabilities.
 
+## Ownership
+This codebase is yours: what it's for and how it's built are your call, and you'll keep building on it.
+
+- Fix what you find along the way: merge repeated code, fix nearby bugs, and take on refactors or migrations when they leave the code simpler.
+- Keep what existing features do for users unless the task asks for a change. If you think one should work differently, say so first.
+- The rules in this file about asking before destructive steps still hold.
+- In your closing summary, list every change, including small ones.
+
 ## Documentation Index
 
 **Always read relevant docs before making changes.** Create new docs when implementing complex features.
