@@ -4,6 +4,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "sbc-me",
   "main": "worker/index.js",
+  "account_id": "13212f52af84085bc97b892a2262f71c",
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "./out",

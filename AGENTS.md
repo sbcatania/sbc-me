@@ -351,3 +351,6 @@ npx playwright test
   - `prefs`: User preferences JSON
 
 - **Auto-save**: Changes are debounced and saved after 500ms of inactivity
+
+## Hosting
+sbc.me is served by Cloudflare Workers (static files), moved off Vercel on 2026-11-15 after a crawler used up the Vercel Hobby account's CPU and Vercel paused every site. Deploy with `npm run build && npx wrangler deploy`; config is in `wrangler.jsonc`. Pushing to GitHub does not deploy to Cloudflare. The Vercel project still exists as a fallback but no longer receives traffic: the DNS record is proxied by Cloudflare and a Worker route sends every request to the Worker.
