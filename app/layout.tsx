@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -28,7 +28,13 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased" suppressHydrationWarning>
         {children}
-        <Analytics />
+        {/* Cloudflare Web Analytics: page views without cookies. The token is public. */}
+        <Script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "41e2d4e55271462a9cbf04965c3208e1"}'
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
