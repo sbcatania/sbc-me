@@ -1,0 +1,17 @@
+{
+  // Static export served by Cloudflare Workers (moved from Vercel, Nov 2026).
+  // Deploy: npm run build && npx wrangler deploy
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sbc-me",
+  "main": "worker/index.js",
+  "account_id": "13212f52af84085bc97b892a2262f71c",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/systems/d/*"]
+  },
+  "workers_dev": true,
+  "preview_urls": false
+}
