@@ -111,7 +111,7 @@ export const NodeSchema = z.object({
   color: ColorSchema,
   childDiagramId: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  attributes: z.record(z.any()).optional(),
+  attributes: z.record(z.string(), z.any()).optional(),
   ontology: OntologySchema.optional(),
 });
 
@@ -130,7 +130,7 @@ export const EdgeSchema = z.object({
   directionality: z.enum(["directed", "undirected"]).optional(),
   relationshipType: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  attributes: z.record(z.any()).optional(),
+  attributes: z.record(z.string(), z.any()).optional(),
 });
 
 export type Edge = z.infer<typeof EdgeSchema>;
@@ -162,7 +162,7 @@ export type Note = z.infer<typeof NoteSchema>;
 // UI settings per diagram
 export const DiagramUISchema = z.object({
   labelMode: z.enum(["hover", "always"]).optional(),
-  themeOverride: z.record(z.any()).optional(),
+  themeOverride: z.record(z.string(), z.any()).optional(),
   hasRunInitialAutoLayout: z.boolean().optional(),
   hasManualLayoutEdits: z.boolean().optional(),
 });
@@ -187,10 +187,10 @@ export const DiagramDocSchema = z.object({
   parent: ParentRefSchema.optional(),
   viewport: ViewportSchema.optional(),
   ui: DiagramUISchema.optional(),
-  nodes: z.record(NodeSchema),
-  edges: z.record(EdgeSchema),
-  frames: z.record(FrameSchema).optional(),
-  notes: z.record(NoteSchema).optional(),
+  nodes: z.record(z.string(), NodeSchema),
+  edges: z.record(z.string(), EdgeSchema),
+  frames: z.record(z.string(), FrameSchema).optional(),
+  notes: z.record(z.string(), NoteSchema).optional(),
   propertySchema: DiagramPropertySchemaSchema.optional(),
 });
 
